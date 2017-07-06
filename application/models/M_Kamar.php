@@ -1,0 +1,178 @@
+<?php defined('BASEPATH')OR exit('no direct script access allowed');
+/**
+ * 
+ */
+ class M_Kamar extends CI_model
+ {
+ 	
+ 	function __construct()
+ 	{
+ 		parent::__construct();
+ 	}
+
+ 	public function semuaKamar()
+ 	{
+ 		$result =  $this->db->get('kamar_pondok');
+ 		if ($result->num_rows()>0) {
+ 			return $result->result();
+ 		}else{
+ 			return false;
+ 		}
+ 	}
+
+ 	public function kamarPutra()
+ 	{
+ 		$this->db->where('ket_kamar=1');
+ 		$result= $this->db->get('kamar_pondok');
+ 		if ($result->num_rows()>0) {
+ 			return $result->result();
+ 		}else{
+ 			return false;
+ 		}
+ 	}
+
+ 	public function kamarPutri()
+ 	{
+ 		$this->db->where('ket_kamar=0');
+ 		$result= $this->db->get('kamar_pondok');
+ 		if ($result->num_rows()>0) {
+ 			return $result->result();
+ 		}else{
+ 			return false;
+ 		}
+ 	}
+
+ 	public function tambahKamar($db_kamar)
+ 	{
+ 		$this->db->query("INSERT into kamar_pondok(id_kamar,nama_kamar,kuota_kamar,ket_kamar) values(?,?,?,?)", array($db_kamar['idkmr'],$db_kamar['nmkmr'],$db_kamar['kuota'],$db_kamar['ketkmr']));
+ 		unset($db_kamar);
+ 	}
+
+ 	public function editKamar()
+ 	{
+ 		$idKamar = $this->input->get('id');
+ 		$this->db->where('id_kamar', $idKamar);
+ 		$datakmr = $this->db->get('kamar_pondok');
+ 		if ($datakmr->num_rows()>0) {
+ 			return $datakmr->row();
+ 		}else{
+ 			return false;
+ 		}
+ 	}
+
+ 	public function updateKamar($id_kamar, $data)
+ 	{
+ 	$this->db->query("UPDATE kamar_pondok set nama_kamar=?,kuota_kamar=?,ket_kamar=? where id_kamar=?",array($data['nama'], $data['kuota'],$data['modul'], $id_kamar));
+ 	unset($id_kamar, $data);
+ 	}
+
+ 	public function hapusKamar($idkamar)
+ 	{
+ 		$this->db->where('id_kamar', $idkamar);
+ 		$this->db->delete('kamar_pondok');
+ 		if ($this->db->affected_rows()>0) {
+ 			return true;
+ 		}else{
+ 			return false;
+ 		}
+ 	}
+
+ 	public function tambahPersonil($data)
+ 	{
+ 		$this->db->query("INSERT into trans_kamar(id_trans,id_kamar,id_santri,keterangan)values(?,?,?,?)",array($data['idtrans'],$data['idkmr'],$data['idstr'],$data['ket']));
+ 		unset($data);
+ 	}
+
+ 	public function semuaPersonil()
+ 	{
+ 		$this->db->select("trans_kamar.id_trans,trans_kamar.keterangan,kamar_pondok.id_kamar,kamar_pondok.nama_kamar,master_santri.nama_santri,master_santri.noTelpon_santri");
+ 		$this->db->from("trans_kamar");
+ 		$this->db->join("kamar_pondok",'trans_kamar.id_kamar=kamar_pondok.id_kamar');
+ 		$this->db->join('master_santri','trans_kamar.id_santri=master_santri.id_santri');
+ 		$data = $this->db->get();
+ 		return $data->result_array();
+ 		unset($data);
+ 	}
+
+ 	public function editPersonil()
+ 	{
+ 		$id = $this->input->get('id');
+ 		$this->db->where('id_trans', $id);
+ 		$data= $this->db->get('trans_kamar');
+ 		if ($data->num_rows()>0) {
+ 			return $data->row();
+ 		}else{
+ 			return false;
+ 		}
+ 	}
+
+ 	public function ambilKuota($id)
+ 	{
+		$datakuota = $this->db->query("SELECT kuota_kamar from kamar_pondok where id_kamar=?", array($id));
+		if ($datakuota) {
+			return $datakuota->result_array();
+		}else{
+			return false;
+		}
+
+ 	}
+
+ 	public function updateKuotaKamar($idkamar, $data)
+ 	{
+ 		$this->db->query("UPDATE kamar_pondok set kuota_kamar=? where id_kamar=?", array($data['kuota'], $idkamar));
+ 		unset($idKamar, $data);
+ 	}
+
+ 	public function hapusPersonil($id)
+ 	{
+ 		$this->db->where('id_trans', $id);
+ 		$this->db->delete('trans_kamar');
+ 		if ($this->db->affected_rows()>0) {
+ 			return true;
+ 		}else{
+ 			return false;
+ 		}
+ 	}
+
+ 	public function cekAnggota($id)
+ 	{
+ 		$this->db->where('id_santri',$id);
+ 		$data = $this->db->get('trans_kamar');
+ 		if ($data->affected_rows()>0) {
+ 			return count($data->row());
+ 		}else{
+ 			return false;
+ 		}
+ 	}
+
+ 	public function updatePersonil($id, $data)
+ 	{
+ 		$this->db->query("UPDATE trans_kamar set id_kamar=?, id_santri=?, keterangan=? where id_trans=?",array($data['idkamar'], $data['idsantri'], $data['ket'], $id));
+ 		unset($id,$data);
+ 	}
+
+ 	public function PersonilPutra()
+ 	{
+ 		$this->db->select("trans_kamar.id_trans,trans_kamar.keterangan,kamar_pondok.id_kamar,kamar_pondok.nama_kamar,master_santri.nama_santri,master_santri.noTelpon_santri");
+ 		$this->db->from("trans_kamar");
+ 		$this->db->join("kamar_pondok",'trans_kamar.id_kamar=kamar_pondok.id_kamar');
+ 		$this->db->join('master_santri','trans_kamar.id_santri=master_santri.id_santri');
+ 		$this->db->where('master_santri.jenis_kelamin=1');
+ 		$data = $this->db->get();
+ 		return $data->result_array();
+ 		unset($data);
+ 	}
+
+ 	public function PersonilPutri()
+ 	{
+ 		$this->db->select("trans_kamar.id_trans,trans_kamar.keterangan,kamar_pondok.id_kamar,kamar_pondok.nama_kamar,master_santri.nama_santri,master_santri.noTelpon_santri");
+ 		$this->db->from("trans_kamar");
+ 		$this->db->join("kamar_pondok",'trans_kamar.id_kamar=kamar_pondok.id_kamar');
+ 		$this->db->join('master_santri','trans_kamar.id_santri=master_santri.id_santri');
+ 		$this->db->where('master_santri.jenis_kelamin=0');
+ 		$data = $this->db->get();
+ 		return $data->result_array();
+ 		unset($data);
+ 	}
+
+ } ?>
