@@ -40,6 +40,18 @@
  		unset($query);
  	}
 
+ 	public function jadikanPengurus($id)
+ 	{
+ 		$this->db->query("UPDATE master_santri set level=2 where id_santri=?", array($id));
+ 		unset($id);
+ 	}
+
+ 	public function lepaskanPengurus($id)
+ 	{
+ 		$this->db->query("UPDATE master_santri set level=1 where id_santri=?", array($id));
+ 		unset($id);
+ 	}
+
  	public function update_santri($id_santri, $data)
  	{
  		$this->db->query("UPDATE master_santri SET nama_santri= ?,nama_panggilan=?, tempat_lahir=?,tanggal_lahir=?,jenis_kelamin=?,alamat_santri=?, noTelpon_santri=?, email_santri=?, facebook_santri=?,tahun_masuk=?, tahun_boyong=? where id_santri = ? ", array($data['nama'], $data['panggilan'],$data['kelahiran'], $data['tgl_lahir'], $data['kelamin'],$data['alamat'],$data['telpon'], $data['email'], $data['facebook'], $data['tahun_masuk'], $data['tahun_boyong'], $id_santri));
@@ -55,6 +67,7 @@
  		}else{
  			return false;
  		}
+ 		unset($data);
  	}
 
  } ?>

@@ -40,6 +40,7 @@
  			$data['page']='dataKamar';
  			$data['db_kamar']=$this->M_Kamar->semuaKamar();
  			$this->load->view('dashboard', $data);
+ 			unset($data);
  		}
  	}
  	public function personilKamar()
@@ -50,6 +51,9 @@
  			$data['list_santri']=$this->M_santri->semua_santri();
  			$data['list_personil']=$this->M_Kamar->semuaPersonil();
  			$this->load->view('dashboard', $data);
+ 			unset($data);
+ 		}else{
+ 			redirect('C_landing');
  		}
  	}
 
@@ -57,6 +61,7 @@
  	{
  		$detilKamar = $this->M_Kamar->editKamar();
  		echo json_encode($detilKamar);
+ 		unset($detilKamar);
  	}
 
  	public function updateKamar()
@@ -77,6 +82,7 @@
  		if ($datakmr) {
  			$this->session->set_flashdata('sukses','Data Kamar berhasil dihapus');
  			redirect('Admin/Kamar/dataKamar');
+ 			unset($datakmr);
  		}
  	}
 
@@ -109,6 +115,7 @@
  			$this->session->set_flashdata('gagal','Data tidak bisa dimasukan, kuota kamar tidak memenuhi syarat');
  			redirect('Admin/Kamar/personilKamar');
  		}
+ 		unset($personil, $idkamar, $kuota, $sisa, $data, $datakuota);
  		
  	}
 
@@ -119,6 +126,7 @@
  		if ($datapersonil) {
  			$this->session->set_flashdata('sukses','data personil berhasil di hapus');
  			redirect('Admin/Kamar/personilKamar');
+ 			unset($datapersonil);
  		}
  	}
  } ?>

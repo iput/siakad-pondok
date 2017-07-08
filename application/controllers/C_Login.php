@@ -137,6 +137,7 @@
  			$this->session->set_flashdata('gagal','Data tidak sesuai');
  			redirect('C_landing/login');
  		}
+ 		unset($username, $password, $newpassword);
  	}
 
  	public function logout()

@@ -26,20 +26,29 @@
   <![endif]-->
   <style type="text/css">
     .login-page{
-      background-image: url('<?php echo base_url('landing/img/pengurus.jpg') ?>');
+      background-image: url('<?php echo base_url('landing/img/bg.jpg') ?>');
       background-size: cover;
       background-repeat: no-repeat;
+    }
+    #teks{
+      color: #FF717A;
+    }
+    .login-box-body{
+      border-radius: 10px;
+    }
+    #pagename{
+      color: white;
     }
   </style>
 </head>
 <body class="hold-transition login-page">
 <div class="login-box">
   <div class="login-logo">
-    <a href="<?php echo base_url() ?>assets/index2.html"><b>Admin</b>Gasek</a>
+    <a href="<?php echo base_url('C_landing') ?>" id="pagename"><b>Admin</b>Gasek</a>
   </div>
   <!-- /.login-logo -->
   <div class="login-box-body">
-    <p class="login-box-msg">Gunakan nama panggilan sebagai username Dan nomor telepon sebagai password</p>
+    <p class="login-box-msg" id="teks">Gunakan nama panggilan sebagai username Dan nomor telepon sebagai password</p>
     <div class="alert alert-danger" style="display: none;"></div>
 
     <form action="<?php echo base_url('C_login/cek_login') ?>" method="post">

@@ -198,7 +198,7 @@
 				<div class="row">
 					<div class="col-md-4">
 						<div class="team-member">
-							<img src="<?php echo base_url() ?>landing/img/person2.jpg" class="img-responsive img-circle" alt="Person">
+							<img src="<?php echo base_url() ?>landing/img/person2.jpg" class="img-responsive img-circle" alt="Person" style="width: 175px;height: 175px;">
 							<div class="member-info">
 								<h3 class="name">Tajuddin Zahrou</h3>
 								<span class="title text-muted">SEO gasek multimedia</span>
@@ -214,7 +214,7 @@
 					</div>
 					<div class="col-md-4">
 						<div class="team-member">
-							<img src="<?php echo base_url() ?>landing/img/person2.jpg" class="img-responsive img-circle" alt="Person">
+							<img src="<?php echo base_url() ?>landing/img/person2.jpg" class="img-responsive img-circle" alt="Person" style="width: 175px;height: 175px;">
 							<div class="member-info">
 								<h3 class="name">Teguh</h3>
 								<span class="title text-muted">Pengelola sistem(Putra)</span>
@@ -230,7 +230,7 @@
 					</div>
 					<div class="col-md-4">
 						<div class="team-member">
-							<img src="<?php echo base_url() ?>landing/img/mbak.png" class="img-responsive img-circle" alt="Person">
+							<img src="<?php echo base_url() ?>landing/img/mbak.png" class="img-responsive img-circle" alt="Person" style="width: 175px;height: 175px;">
 							<div class="member-info">
 								<h3 class="name">Mbak Indy</h3>
 								<span class="title text-muted">Pengelola Sistem (Putri)</span>
@@ -266,7 +266,7 @@
 						<p>
 							<strong><i class="icon icon_phone"></i> KONTAK TELEPON</strong>
 							<br>
-							<span>Mbak: 1-(558) 968-0400 (Quotation)</span>
+							<span>Indy : 085855214895</span>
 							<br>
 							<span>Mahfud : 085735209127</span>
 						</p>

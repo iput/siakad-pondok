@@ -73,7 +73,7 @@ CREATE TABLE `master_santri` (
 
 /*Data for the table `master_santri` */
 
-insert  into `master_santri`(`id_santri`,`nama_santri`,`nama_panggilan`,`tempat_lahir`,`tanggal_lahir`,`jenis_kelamin`,`alamat_santri`,`noTelpon_santri`,`email_santri`,`facebook_santri`,`tahun_masuk`,`tahun_boyong`,`password_santri`,`status`,`level`) values ('STR00021','makhfud zamhari','mahfud','ngawi','2017-07-06','1','ngawi','085735209127','makhfudzamhari@gmail.com','makhfud','2015-12-31','2018-12-31','bWFoZnVk',1,'2'),('STR00223','maulidah fithriyah','fitri','gresik','1996-07-29','0','gresik','08977655644','fithriyah.fm@gmail.com','fitri maulidah','2015-08-31','0000-00-00','MDg5Nzc2NTU2NDQ=',1,'2'),('STR00315','zainul rofiqi','zainul',NULL,NULL,NULL,'ngawi','085735209127',NULL,NULL,NULL,NULL,'MDg1NzM1MjA5MTI3',1,'1'),('STR00432','zainul rofiqi','zainul','ngawi','1996-06-29','1','desa tanon kecamatan kendal kabupaten ngawi','085735209127','zainul@gmail.com','zainul rofiqi','2017-07-06','2017-07-06','emFpbnVs',1,'1'),('STR00441','tarekh aziz','tarekh',NULL,NULL,NULL,'gresik','085735209127',NULL,NULL,NULL,NULL,'MDg1NzM1MjA5MTI3',1,'1'),('STR00480','penguruspusat','penguruspusat',NULL,NULL,NULL,'pengurus pusat','penguruspusat',NULL,NULL,NULL,NULL,'cGVuZ3VydXNwdXNhdA==',1,'3'),('STR00498','superadmin','superadmin',NULL,NULL,NULL,'admin','085735209127',NULL,NULL,NULL,NULL,'MDg1NzM1MjA5MTI3',1,'3'),('STR00717','ali mahmud','mahmud',NULL,NULL,NULL,'lamongan','085735209127',NULL,NULL,NULL,NULL,'MDg1NzM1MjA5MTI3',0,'0'),('STR00754','siti susanti','susanti',NULL,NULL,NULL,'plaosan','0857735209127',NULL,NULL,NULL,NULL,'MDg1NzczNTIwOTEyNw==',1,'1'),('STR00793','na\'imatur rofiah','rofiah','magetan','1998-07-13','0','desa kasan','085735209127','fithriyah.fm@gmail.com','naima vich','2017-07-08','2017-07-08','cm9maWFo',1,'1'),('STR00909','farchana hayumeinanda','farchan',NULL,NULL,NULL,'magetan','085735209127',NULL,NULL,NULL,NULL,'MDg1NzM1MjA5MTI3',0,'0');
+insert  into `master_santri`(`id_santri`,`nama_santri`,`nama_panggilan`,`tempat_lahir`,`tanggal_lahir`,`jenis_kelamin`,`alamat_santri`,`noTelpon_santri`,`email_santri`,`facebook_santri`,`tahun_masuk`,`tahun_boyong`,`password_santri`,`status`,`level`) values ('STR00021','makhfud zamhari','mahfud','ngawi','2017-07-06','1','ngawi','085735209127','makhfudzamhari@gmail.com','makhfud','2015-12-31','2018-12-31','bWFoZnVk',1,'2'),('STR00223','maulidah fithriyah','fitri','gresik','1996-07-29','0','gresik','08977655644','fithriyah.fm@gmail.com','fitri maulidah','2015-08-31','0000-00-00','MDg5Nzc2NTU2NDQ=',1,'2'),('STR00298','zainal arifin','zainal','ngawi','1996-07-13',NULL,'desa Paron kecamatan paron kabupaten ngawi','085735209127','zainal@gmail.com','zainal arifin','2015-07-13','2017-07-07','YmlzbWlsbGFo',1,'1'),('STR00315','zainul rofiqi','zainul',NULL,NULL,NULL,'ngawi','085735209127',NULL,NULL,NULL,NULL,'MDg1NzM1MjA5MTI3',1,'1'),('STR00432','zainul rofiqi','zainul','ngawi','1996-06-29','1','desa tanon kecamatan kendal kabupaten ngawi','085735209127','zainul@gmail.com','zainul rofiqi','2017-07-06','2017-07-06','emFpbnVs',1,'1'),('STR00480','penguruspusat','penguruspusat',NULL,NULL,NULL,'pengurus pusat','penguruspusat',NULL,NULL,NULL,NULL,'cGVuZ3VydXNwdXNhdA==',1,'3'),('STR00489','zainal arifin','zainal',NULL,NULL,NULL,'paron','085735209127',NULL,NULL,NULL,NULL,'MDg1NzM1MjA5MTI3',1,'1'),('STR00498','superadmin','superadmin',NULL,NULL,NULL,'admin','085735209127',NULL,NULL,NULL,NULL,'MDg1NzM1MjA5MTI3',1,'3'),('STR00754','siti susanti','susanti',NULL,NULL,NULL,'plaosan','0857735209127',NULL,NULL,NULL,NULL,'MDg1NzczNTIwOTEyNw==',1,'1'),('STR00793','na\'imatur rofiah','rofiah','magetan','1998-07-13','0','desa kasan','085735209127','fithriyah.fm@gmail.com','naima vich','2017-07-08','2017-07-08','cm9maWFo',1,'1'),('STR00811','farchana hayumeinanda','farchan','magetan','1996-07-20',NULL,'KPR selosari permai','085735209127','farchana@gmail.com','farchana','0000-00-00','0000-00-00','MDg1NzM1MjA5MTI3',0,'0');
 
 /*Table structure for table `masukan_saran` */
 
@@ -92,6 +92,8 @@ CREATE TABLE `masukan_saran` (
 
 /*Data for the table `masukan_saran` */
 
+insert  into `masukan_saran`(`id_masukan`,`nama_pengirim`,`email_pengirim`,`tentang`,`konten_saran`,`tanggal_masuk`,`status`) values ('SARAN958','zainal','zainal@gmail.com','perbaikan kamar mandi','jedinge wancine nguras','2017-07-07',0);
+
 /*Table structure for table `pelanggaran` */
 
 DROP TABLE IF EXISTS `pelanggaran`;
@@ -108,6 +110,35 @@ CREATE TABLE `pelanggaran` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 /*Data for the table `pelanggaran` */
+
+/*Table structure for table `riwayat_pendidikan` */
+
+DROP TABLE IF EXISTS `riwayat_pendidikan`;
+
+CREATE TABLE `riwayat_pendidikan` (
+  `id_edu` varchar(8) NOT NULL,
+  `nama_sd` varchar(100) DEFAULT NULL,
+  `alamat_sd` text,
+  `tahun_lulus_sd` date DEFAULT NULL,
+  `nama_smp` varchar(100) DEFAULT NULL,
+  `alamat_smp` text,
+  `tahun_lulus_smp` date DEFAULT NULL,
+  `nama_sma` varchar(100) DEFAULT NULL,
+  `alamat_sma` text,
+  `tahun_lulus_sma` date DEFAULT NULL,
+  `nama_pt` varchar(100) DEFAULT NULL,
+  `jurusan_pt` varchar(100) DEFAULT NULL,
+  `alamat_pt` text,
+  `tahun_lulus_pt` date DEFAULT NULL,
+  `id_santri` varchar(8) DEFAULT NULL,
+  PRIMARY KEY (`id_edu`),
+  KEY `fk_edu` (`id_santri`),
+  CONSTRAINT `fk_edu` FOREIGN KEY (`id_santri`) REFERENCES `master_santri` (`id_santri`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+/*Data for the table `riwayat_pendidikan` */
+
+insert  into `riwayat_pendidikan`(`id_edu`,`nama_sd`,`alamat_sd`,`tahun_lulus_sd`,`nama_smp`,`alamat_smp`,`tahun_lulus_smp`,`nama_sma`,`alamat_sma`,`tahun_lulus_sma`,`nama_pt`,`jurusan_pt`,`alamat_pt`,`tahun_lulus_pt`,`id_santri`) values ('EDU00341',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'STR00489'),('EDU00618','','','0000-00-00','','','0000-00-00','MAN Panekan','Jalan Joso Turi ','2014-12-30','IAIN Surakarta','','','0000-00-00','STR00811'),('EDU00667','MIN Sukorejo','desa sukorejo kendal ngawi','2017-07-07','MTsN Panekan','desa joso turi','2011-12-12','MAN Panekan','desa joso turi','2014-12-12','UIN Malang','Teknik Informatika','malang','2018-07-30','STR00298');
 
 /*Table structure for table `tabel_kitab` */
 
@@ -200,7 +231,7 @@ CREATE TABLE `wali_santri` (
 
 /*Data for the table `wali_santri` */
 
-insert  into `wali_santri`(`id_wali`,`nama_ayah`,`pekerjaan_ayah`,`alamat_ayah`,`notelpon_ayah`,`nama_ibu`,`pekerjaan_ibu`,`alamat_ibu`,`notelpon_ibu`,`id_santri`) values ('WALI0068','',NULL,NULL,NULL,NULL,NULL,NULL,NULL,'STR00315');
+insert  into `wali_santri`(`id_wali`,`nama_ayah`,`pekerjaan_ayah`,`alamat_ayah`,`notelpon_ayah`,`nama_ibu`,`pekerjaan_ibu`,`alamat_ibu`,`notelpon_ibu`,`id_santri`) values ('WALI0068','sugiran',NULL,NULL,NULL,NULL,NULL,NULL,NULL,'STR00315'),('WALI0369','',NULL,NULL,NULL,NULL,NULL,NULL,NULL,'STR00811'),('WALI0372','lanjar','petani','petani','085735209127','sutirah','ibu rumah tangga','kendal ngawi','085735209127','STR00298'),('WALI0865','',NULL,NULL,NULL,NULL,NULL,NULL,NULL,'STR00489');
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
 /*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;

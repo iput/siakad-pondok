@@ -35,6 +35,7 @@
  		}else{
  			return false;
  		}
+ 		unset($query);
  	}
 
  	public function update_santri($id_santri, $data)
@@ -52,5 +53,6 @@
  		}else{
  			return false;
  		}
+ 		unset($id);
  	}
  } ?>

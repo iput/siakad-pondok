@@ -38,13 +38,10 @@
  		$data['password']=base64_encode($this->input->post('tambahPanggilan'));
  		$data['status']='1';
  		$data['level']='1';
-
  		$this->M_santri->tambah_santri($data);
  		$this->session->set_flashdata('sukses','santri baru berhasil ditambahkan');
  		redirect('Dashboard/santri_baru');
- 		
- 		unset($data);
- 		unset($result);
+ 		unset($id_santri, $data);
 
  	}
 
@@ -53,6 +50,7 @@
  		$data['page'] = 'ubah_santri';
  		$data['ubah_str'] = $this->M_santri->edit_santri($id_santri)->row();
  		$this->load->view('Dashboard', $data);
+ 		unset($id_santri, $data);
  	}
 
  	public function UpdateSantri()
@@ -75,6 +73,22 @@
  		unset($idSantri, $data);
  	}
 
+ 	public function ubahStatus($id)
+ 	{
+ 		$this->M_santri->jadikanPengurus($id);
+ 		$this->session->set_flashdata('sukses','Data santri berhasil dijadikan pengurus');
+ 		redirect('Dashboard/santri_baru');
+ 		unset($id);
+ 	}
+
+ 	public function lepasPengurus($id)
+ 	{
+ 		$this->M_santri->lepaskanPengurus($id);
+ 		$this->session->set_flashdata('sukses','Data santri telah diberhentikan sebagai pengurus');
+ 		redirect('Dashboard/santri_baru');
+ 		unset($id);
+ 	}
+
  	public function hapusSantri($id)
  	{
  		$data = $this->M_santri->hapus_santri($id);
@@ -85,6 +99,6 @@
  			$this->session->set_flashdata('gagal','terjadi kesalahan pada proses hapus data');
  			redirect('Dashboard/santri_baru');
  		}
- 		unset($data);
+ 		unset($data, $id);
  	}
  } ?>

@@ -23,7 +23,8 @@
 
  	public function tambahPendidikan($data)
  	{
- 		
+ 		$this->db->query("INSERT into riwayat_pendidikan(id_edu, id_santri) values(?,?)", array($data['edu'], $data['santri']));
+ 		unset($data);	
  	}
 
  	public function add_saran($data)
@@ -40,6 +41,7 @@
  		}else{
  			return false;
  		}
+ 		unset($data);
  	}
 
  } ?>

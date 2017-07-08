@@ -55,7 +55,7 @@
           <li class="dropdown messages-menu">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
               <i class="fa fa-envelope-o"></i>
-              <span class="label label-success">4</span>
+              <span class="label label-success"></span>
             </a>
             <ul class="dropdown-menu">
               <li class="header">You have 4 messages</li>
@@ -65,7 +65,7 @@
                   <li><!-- start message -->
                     <a href="#">
                       <div class="pull-left">
-                        <img src="<?php echo base_url()?>assets/dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
+                        <img src="<?php echo base_url()?>landing/img/pondok.png" class="img-circle" alt="User Image">
                       </div>
                       <h4>
                         Support Team
@@ -82,33 +82,18 @@
           <!-- User Account: style can be found in dropdown.less -->
           <li class="dropdown user user-menu">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-              <img src="<?php echo base_url()?>assets/dist/img/user2-160x160.jpg" class="user-image" alt="User Image">
+              <img src="<?php echo base_url()?>landing/img/pondok.png" class="user-image" alt="User Image">
               <span class="hidden-xs"><?php echo $this->session->userdata('username') ?></span>
             </a>
             <ul class="dropdown-menu">
               <!-- User image -->
               <li class="user-header">
-                <img src="<?php echo base_url()?>assets/dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
+                <img src="<?php echo base_url()?>landing/img/pondok.png" class="img-circle" alt="User Image">
 
                 <p>
                   <?php echo $this->session->userdata('username') ?> - <?php echo $this->session->userdata('iduser') ?>
-                  <small>Member since Nov. 2012</small>
+                  <small><?php echo $this->session->userdata('username') ?></small>
                 </p>
-              </li>
-              <!-- Menu Body -->
-              <li class="user-body">
-                <div class="row">
-                  <div class="col-xs-4 text-center">
-                    <a href="#">Followers</a>
-                  </div>
-                  <div class="col-xs-4 text-center">
-                    <a href="#">Sales</a>
-                  </div>
-                  <div class="col-xs-4 text-center">
-                    <a href="#">Friends</a>
-                  </div>
-                </div>
-                <!-- /.row -->
               </li>
               <!-- Menu Footer-->
               <li class="user-footer">
@@ -132,7 +117,7 @@
       <!-- Sidebar user panel -->
       <div class="user-panel">
         <div class="pull-left image">
-          <img src="<?php echo base_url()?>assets/dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
+          <img src="<?php echo base_url()?>landing/img/pondok.png" class="img-circle" alt="User Image">
         </div>
         <div class="pull-left info">
           <p><?php echo $this->session->userdata('username') ?></p>
@@ -186,7 +171,7 @@
             <li><a href="#"><i class="fa fa-circle-o"></i> Kelas Santri</a></li>
           </ul>
         </li>
-        <li><a href=""><i class="fa fa-envelope-o"></i>&nbsp;Kotak Saran</a></li>
+        <li class="treeview"><a href=""><i class="fa fa-envelope-o"></i><span> Kotak Saran</span></a></li>
         <li class="header">LABELS</li>
         <li><a href="#"><i class="fa fa-circle-o text-red"></i> <span>Setting</span></a></li>
       </ul>
@@ -226,13 +211,11 @@
                 <td>ID</td>
                 <td>Nama</td>
                 <td>Alamat</td>
-                <td>Kelahiran</td>
                 <td>NO HP</td>
                 <td>Email</td>
                 <td>Status</td>
-                <td>
-                  <span class="fa fa-gears"></span>
-                </td>
+                <td><span class="fa fa-gears"></span></td>
+                <td><i class="fa fa-key"></i></td>
               </tr>
             </thead>
             <tbody>
@@ -245,14 +228,16 @@
                   <td><?php echo $rows['id_santri'] ?></td>
                   <td><?php echo $rows['nama_santri'] ?></td>
                   <td><?php echo $rows['alamat_santri'] ?></td>
-                  <td><?php echo $rows['tempat_lahir'] ?></td>
                   <td><?php echo $rows['noTelpon_santri'] ?></td>
                   <td><?php echo $rows['email_santri'] ?></td>
                   <td><span class="label label-success"><?php echo $stats ?></span></td>
                   <td>
-                    <a href="<?php echo base_url('Admin/Santri/ubahStatus/'.$rows['id_santri']) ?>" class="btn btn-flat btn-xs btn-success"><span class="fa fa-check-square-o"></span></a>
                     <a href="<?php echo base_url('Admin/Santri/editSantri/'.$rows['id_santri']) ?>" class="btn btn-info btn-flat btn-xs"><span class="fa fa-pencil"></span></a>
                     <a href="<?php echo base_url('Admin/Santri/hapusSantri/'.$rows['id_santri']) ?>" class="btn btn-danger btn-flat btn-xs" onclick="return confirm('apakah anda yakin akan menghapus data ini ?')"><span class="fa fa-trash"></span></a>
+                  </td>
+                  <td>
+                    <a href="<?php echo base_url('Admin/Santri/ubahStatus/'.$rows['id_santri']) ?>" class="btn btn-flat btn-xs btn-success" onclick="return confirm('Apakah anda yakin akan menjadikan <?php echo $rows['nama_santri'] ?> sebagai pengurus ?')"><span class="fa fa-unlock-alt"></span></a>
+                    <a href="<?php echo base_url('Admin/Santri/lepasPengurus/'.$rows['id_santri']) ?>" class="btn btn-flat btn-xs btn-warning" onclick="return confirm('Apakah anda yakin akan menghapus <?php echo $rows['nama_santri'] ?> sebagai pengurus ?')"><span class="fa fa-lock"></span></a>
                   </td>
                 </tr>
               <?php endforeach ?>
@@ -965,6 +950,71 @@
         <li><a href="#"><i class="fa fa-dashboard"></i> Beranda</a></li>
         <li class="active">Dashboard</li>
       </ol>
+    </section>
+    <section class="content">
+      <div class="row">
+        <div class="col-lg-3 col-xs-6">
+          <!-- small box -->
+          <div class="small-box bg-aqua">
+            <div class="inner">
+              <h3>150</h3>
+
+              <p>Santri</p>
+            </div>
+            <div class="icon">
+              <i class="fa fa-users"></i>
+            </div>
+            <a href="<?php echo base_url('Dashboard/santri_baru') ?>" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+          </div>
+        </div>
+        <!-- ./col -->
+        <div class="col-lg-3 col-xs-6">
+          <!-- small box -->
+          <div class="small-box bg-green">
+            <div class="inner">
+              <h3>53<sup style="font-size: 20px">%</sup></h3>
+
+              <p>Alumni</p>
+            </div>
+            <div class="icon">
+              <i class="fa fa-users"></i>
+            </div>
+            <a href="<?php echo base_url('Dashboard/alumni') ?>" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+          </div>
+        </div>
+        <!-- ./col -->
+        <div class="col-lg-3 col-xs-6">
+          <!-- small box -->
+          <div class="small-box bg-yellow">
+            <div class="inner">
+              <h3>44</h3>
+
+              <p>Kamar</p>
+            </div>
+            <div class="icon">
+              <i class="fa fa-home"></i>
+            </div>
+            <a href="<?php echo base_url('Admin/Kamar/dataKamar') ?>" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+          </div>
+        </div>
+        <!-- ./col -->
+        <div class="col-lg-3 col-xs-6">
+          <!-- small box -->
+          <div class="small-box bg-red">
+            <div class="inner">
+              <h3>65</h3>
+
+              <p>Personil Kamar</p>
+            </div>
+            <div class="icon">
+              <i class="fa fa-users"></i>
+            </div>
+            <a href="#" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+          </div>
+        </div>
+        <!-- ./col -->
+      </div>
+      <!-- /.row -->
     </section>
     
     <?php } ?>

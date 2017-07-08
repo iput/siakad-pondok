@@ -18,6 +18,7 @@
  		}else{
  			return false;
  		}
+ 		unset($result);
  	}
 
  	public function kamarPutra()
@@ -29,6 +30,7 @@
  		}else{
  			return false;
  		}
+ 		unset($result);
  	}
 
  	public function kamarPutri()
@@ -40,6 +42,7 @@
  		}else{
  			return false;
  		}
+ 		unset($result);
  	}
 
  	public function tambahKamar($db_kamar)
@@ -58,6 +61,7 @@
  		}else{
  			return false;
  		}
+ 		unset($idKamar, $datakmr);
  	}
 
  	public function updateKamar($id_kamar, $data)
@@ -75,6 +79,7 @@
  		}else{
  			return false;
  		}
+ 		unset($idkamar);
  	}
 
  	public function tambahPersonil($data)
@@ -104,6 +109,7 @@
  		}else{
  			return false;
  		}
+ 		unset($id, $data);
  	}
 
  	public function ambilKuota($id)
@@ -114,6 +120,7 @@
 		}else{
 			return false;
 		}
+		unset($datakuota, $id);
 
  	}
 
@@ -132,6 +139,7 @@
  		}else{
  			return false;
  		}
+ 		unset($id);
  	}
 
  	public function cekAnggota($id)
@@ -143,6 +151,7 @@
  		}else{
  			return false;
  		}
+ 		unset($data);
  	}
 
  	public function updatePersonil($id, $data)

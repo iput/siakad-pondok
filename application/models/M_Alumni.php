@@ -18,6 +18,7 @@
  		}else{
  			return false;
  		}
+ 		unset($data);
  	}
 
  	public function tambah_alumni($data)
@@ -52,6 +53,7 @@
  		}else{
  			return false;
  		}
+ 		unset($id_santri);
  	}
 
  } ?>

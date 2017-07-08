@@ -25,6 +25,9 @@
  		if (($this->session->userdata('iduser'))AND($this->session->userdata('username'))) {
  			$data['page']='tambah_alumni';
  			$this->load->view('dashboard', $data);
+ 			unset($data);
+ 		}else{
+ 			redirect('C_landing');
  		}
  	}
 
@@ -58,6 +61,7 @@
  			$data['page']='edit_alumni';
  			$data['edit_almn']=$this->M_Alumni->edit_alumni($id)->row();
  			$this->load->view('Dashboard',$data);
+ 			unset($data);
  		}
  	}
 
@@ -88,6 +92,6 @@
  			$this->session->set_flashdata('sukses','data alumni berhasil dihapus');
  			redirect('Dashboard/alumni');
  		}
- 		unset($hapus);
+ 		unset($hapus, $id);
  	}
  } ?>

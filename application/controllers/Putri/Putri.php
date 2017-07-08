@@ -36,6 +36,7 @@
  			$data['module']='datasantri';
  			$data['santriputri']=$this->M_putri->semuaSantri();
  			$this->load->view('Putri/PengurusPutri', $data);
+ 			unset($data);
  		}
  		
  	}
@@ -44,6 +45,7 @@
  		if (($this->session->userdata('iduser'))AND($this->session->userdata('username'))) {
  			$data['module']='tambahsantri';
  			$this->load->view('Putri/PengurusPutri', $data);
+ 			unset($data);
  		}
  	}
 
@@ -69,6 +71,7 @@
  		$this->M_putri->santriBaru($data);
  		$this->session->set_flashdata('sukses','santri baru berhasil ditambahkan');
  		redirect('Putri/Putri/dataSantri');
+ 		unset($data, $id_santri);
  	}
 
  	public function editDataSantri($id_santri)
@@ -77,6 +80,7 @@
  			$data['module']='editdatasantri';
  			$data['detailsantri']=$this->M_putri->editSantri($id_santri)->row();
  			$this->load->view('Putri/PengurusPutri', $data);
+ 			unset($data);
  		}else{
  			redirect('C_landing/login');
  		}
@@ -108,6 +112,7 @@
  		if ($data) {
  			$this->session->set_flashdata('sukses','Data santri berhasil dihapus');
  			redirect('Putri/Putri/dataSantri');
+ 			unset($data);
  		}
  	}
  	public function AnggotaKamar()
@@ -118,6 +123,7 @@
  			$data['personilputri']= $this->M_Kamar->personilPutri();
  			$data['detailkamar']=$this->M_Kamar->kamarPutri();
  			$this->load->view('Putri/PengurusPutri', $data);
+ 			unset($data);
  		}else{
  			redirect('C_landing/login');
  		}	
@@ -152,12 +158,14 @@
  			$this->session->set_flashdata('gagal','Data tidak bisa dimasukan, kuota kamar tidak memenuhi syarat');
  			redirect('Putra/Putra/AnggotaKamar');
  		}
+ 		unset($data, $personil, $idKamar, $sisa, $k, $datakuota);
  	}
 
  	public function editPersonilKamar()
  	{
  		$dataPersonil = $this->M_Kamar->editPersonil();
  		echo json_encode($dataPersonil);
+ 		unset($dataPersonil);
  	}
 
  	public function updatePersonil()
@@ -169,12 +177,13 @@
  		$this->M_Kamar->updatePersonil($idtransaksi, $data);
  		$this->session->set_flashdata('sukses','Data Personil kamar berhasil diperarui');
  		redirect('Putri/Putri/AnggotaKamar');
+ 		unset($data, $idtransaksi);
  	}
 
  	public function hapuspersonilKamar($id)
  	{
- 		$data = $this->M_Kamar->hapusPersonil($id);
- 		if ($data) {
+ 		$data1 = $this->M_Kamar->hapusPersonil($id);
+ 		if ($data1) {
  			$idkamar = $this->input->post('idKamar');
  			$datakuota = $this->M_Kamar->ambilKuota($idkamar);
  			$kuota='';
@@ -187,6 +196,7 @@
  			$this->session->set_flashdata('sukses','Data personil Kamar berhasil dihapus.');
  			redirect('Putri/Putri/AnggotaKamar');
  		}
+ 		unset($data, $data1, $idkamar, $datakuota, $row, $newkuota);
  	}
 
  	public function saranMasukan()
@@ -195,6 +205,7 @@
  			$data['module']='saranmasukan';
  			$data['saranmasuk']=$this->M_register->saranmasuk();
  			$this->load->view('Putri/PengurusPutri', $data);
+ 			unset($data);
  		}else{
  			redirect('C_landing/login');
  		}
@@ -213,5 +224,6 @@
  		$this->M_register->add_saran($data);
  		$this->session->set_flashdata('sukses','Data saran berhasil dimasukan, terimakasih atas perhatian demi kemajuan pondok ');
  		redirect('Putri/Putri/saranMasukan');
+ 		unset($data, $idsaran);
  	}
  } ?>

@@ -51,11 +51,17 @@
  		$data['level']=$level;
 
  		$this->M_register->add_register($data);
+ 		
  		$wali['wali']="WALI0".$this->random(3);
  		$wali['santri']=$idreg;
  		$this->M_register->tambahWali($wali);
+
+ 		$edu['edu']="EDU00".$this->random(3);
+ 		$edu['santri']=$idreg;
+		$this->M_register->tambahPendidikan($edu);
  		$this->session->set_flashdata('sukses','Data anda berhasil terdaftar kedalam sistem, gunakan nama panggilan sebagai username dan  nomor telepon sebagai password untuk login');
  		redirect('C_landing');
+ 		unset($idreg, $modul, $data, $edu, $wali);
  	}
 
  	public function tambahkan_saran()
@@ -71,5 +77,6 @@
  		$this->M_register->add_saran($data);
  		$this->session->set_flashdata('sukses','Terima kasih atas saran yang anda berikan. semoga Allah SWT membalas kebaikan anda');
  		redirect('C_landing');
+ 		unset($data, $idsaran);
  	}
  } ?>

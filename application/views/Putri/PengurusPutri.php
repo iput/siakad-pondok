@@ -96,21 +96,6 @@
                   <small><?php echo $this->session->userdata('email') ?></small>
                 </p>
               </li>
-              <!-- Menu Body -->
-              <li class="user-body">
-                <div class="row">
-                  <div class="col-xs-4 text-center">
-                    <a href="#">Followers</a>
-                  </div>
-                  <div class="col-xs-4 text-center">
-                    <a href="#">Sales</a>
-                  </div>
-                  <div class="col-xs-4 text-center">
-                    <a href="#">Friends</a>
-                  </div>
-                </div>
-                <!-- /.row -->
-              </li>
               <!-- Menu Footer-->
               <li class="user-footer">
                 <div class="pull-left">
@@ -148,9 +133,9 @@
             <i class="fa fa-dashboard"></i> <span>Beranda</span>
           </a>
         </li>
-        <li><a href="<?php echo base_url('Putri/Putri/dataSantri') ?>"><i class="fa fa-users"></i>&nbsp;Data Santri</a></li>
-        <li><a href="<?php echo base_url('Putri/Putri/anggotaKamar') ?>"><i class="fa fa-home"></i>&nbsp;Anggota Kamar</a></li>
-        <li><a href="<?php echo base_url('Putri/Putri/saranMasukan') ?>"><i class="fa fa-envelope-o"></i>&nbsp;Saran & Masukan</a></li>
+        <li><a href="<?php echo base_url('Putri/Putri/dataSantri') ?>"><i class="fa fa-users"></i><span> Data Santri</span></a></li>
+        <li><a href="<?php echo base_url('Putri/Putri/anggotaKamar') ?>"><i class="fa fa-home"></i><span> Anggota Kamar</span></a></li>
+        <li><a href="<?php echo base_url('Putri/Putri/saranMasukan') ?>"><i class="fa fa-envelope-o"></i><span> Saran & Masukan</span></a></li>
         <li class="header">LABELS</li>
         <li><a href="#"><i class="fa fa-circle-o text-red"></i> <span>Setting</span></a></li>
       </ul>
@@ -213,6 +198,7 @@
         </div>
       </div>
     </section>
+    <?php unset($santriputri, $rputri); ?>
     <?php }else if ((isset($module))AND ($module=='tambahsantri')) {?>
     <section class="content-header">
       <h4>Tambah Data Santri</h4>
@@ -407,6 +393,7 @@
         </div>
       </div>
     </section>
+    <?php unset($detailsantri); ?>
     <?php }else if ((isset($module))AND ($module=='personilkamar')){ ?>
     <section class="content-header">
       <h4>Anggota Kamar</h4>
@@ -531,6 +518,7 @@
         </div>
       </div>
     </div>
+    <?php unset($dataputri, $personilputri, $detailkamar, $lkamar, $santriPutri, $lSantri); ?>
     <?php }else if((isset($module))AND ($module=='saranmasukan')){ ?>
     <section class="content-header">
       <h4>Kotak Saran Dan Masukan</h4>
@@ -615,6 +603,7 @@
         </div>
       </div>
     </div>
+    <?php unset($saranmasukan, $rowsaran); ?>
     <?php }else{ ?>
     <section class="content-header">
       <h4>Beranda</h4>
@@ -623,16 +612,71 @@
       </ol>
     </section>
     <section class="content">
-      <div class="box">
-        <div class="box-header with-border">
-          
+         <div class="row">
+        <div class="col-lg-3 col-xs-6">
+          <!-- small box -->
+          <div class="small-box bg-aqua">
+            <div class="inner">
+              <h3>150</h3>
+
+              <p>Santri</p>
+            </div>
+            <div class="icon">
+              <i class="fa fa-users"></i>
+            </div>
+            <a href="<?php echo base_url('Putri/Putri/dataSantri') ?>" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+          </div>
         </div>
-        <div class="box-body">
-          
+        <!-- ./col -->
+        <div class="col-lg-3 col-xs-6">
+          <!-- small box -->
+          <div class="small-box bg-green">
+            <div class="inner">
+              <h3>53<sup style="font-size: 20px">%</sup></h3>
+
+              <p>Saran</p>
+            </div>
+            <div class="icon">
+              <i class="fa fa-envelope-o"></i>
+            </div>
+            <a href="<?php echo base_url('Putri/Putri/saranMasukan') ?>" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+          </div>
         </div>
+        <!-- ./col -->
+        <div class="col-lg-3 col-xs-6">
+          <!-- small box -->
+          <div class="small-box bg-yellow">
+            <div class="inner">
+              <h3>44</h3>
+
+              <p>Kamar</p>
+            </div>
+            <div class="icon">
+              <i class="fa fa-home"></i>
+            </div>
+            <a href="<?php echo base_url('Putri/Putri/anggotaKamar') ?>" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+          </div>
+        </div>
+        <!-- ./col -->
+        <div class="col-lg-3 col-xs-6">
+          <!-- small box -->
+          <div class="small-box bg-red">
+            <div class="inner">
+              <h3>65</h3>
+
+              <p>Personil Kamar</p>
+            </div>
+            <div class="icon">
+              <i class="fa fa-users"></i>
+            </div>
+            <a href="#" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+          </div>
+        </div>
+        <!-- ./col -->
       </div>
     </section>
     <?php } ?>
+    <?php unset($module); ?>
     </fieldset>
     <!-- /.content -->
   </div>
