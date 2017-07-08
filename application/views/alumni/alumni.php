@@ -34,7 +34,7 @@
 
   <header class="main-header">
     <!-- Logo -->
-    <a href="index2.html" class="logo">
+    <a href="<?php echo base_url('Alumni/Alumni') ?>" class="logo">
       <!-- mini logo for sidebar mini 50x50 pixels -->
       <span class="logo-mini"><b>A</b>PSR</span>
       <!-- logo for regular state and mobile devices -->
@@ -101,7 +101,7 @@
                   <a href="#" class="btn btn-default btn-flat">Profile</a>
                 </div>
                 <div class="pull-right">
-                  <a href="<?php echo base_url('C_Login/logout') ?>" class="btn btn-default btn-flat">Sign out</a>
+                  <a href="<?php echo base_url('C_Login/Logout') ?>" class="btn btn-default btn-flat">Sign out</a>
                 </div>
               </li>
             </ul>
@@ -134,8 +134,8 @@
         </li>
         <li><a href="<?php echo base_url('Alumni/Alumni/DetilDiri') ?>"><i class="fa fa-user-secret"></i><span> Data Diri</span></a></li>
         <li><a href="<?php echo base_url('Alumni/Alumni/WaliSantri') ?>"><i class="fa fa-users"></i><span> Data Wali</span></a></li>
-        <li><a href="<?php echo base_url('Alumni/Alumni/riwayatPendidikan') ?>"><i class="fa fa-trophy"></i><span> Riwayat Pendidikan</span></a></li>
-        <li><a href="<?php echo base_url('Alumni/Alumni/kotakSaran') ?>"><i class="fa fa-envelope-o"></i><span> Saran dan Masukan</span></a></li>
+        <li><a href="<?php echo base_url('Alumni/Alumni/RiwayatPendidikan') ?>"><i class="fa fa-trophy"></i><span> Riwayat Pendidikan</span></a></li>
+        <li><a href="<?php echo base_url('Alumni/Alumni/KotakSaran') ?>"><i class="fa fa-envelope-o"></i><span> Saran dan Masukan</span></a></li>
         <li class="header">LABELS</li>
         <li><a href="#"><i class="fa fa-circle-o text-red"></i> <span>Setting</span></a></li>
       </ul>
@@ -162,7 +162,7 @@
           <h4 class="box-title">Detail informasi diri</h4>
         </div>
         <div class="box-body">
-          <form class="form-horizontal" method="POST" action="<?php echo base_url('Alumni/Alumni/updateDataSantri') ?>">
+          <form class="form-horizontal" method="POST" action="<?php echo base_url('Alumni/Alumni/UpdateDataSantri') ?>">
             <div class="form-group">
               <label class="control-label col-md-2">ID Anda</label>
               <div class="col-md-6">
@@ -196,12 +196,21 @@
             <div class="form-group">
               <label class="control-label col-md-2">Jenis Kelamin</label>
               <div class="col-md-8">
-                <label class="radio-inline">
-                  <input type="radio" name="detilgender" value="1">Laki-laki
+                <?php if ($dataku->jenis_kelamin==1): ?>
+                  <label class="radio-inline">
+                  <input type="radio" name="detilgender" value="1" checked>Laki-laki
                 </label>
                 <label class="radio-inline">
                   <input type="radio" name="detilgender" value="0">Perempuan
                 </label>
+                <?php else: ?>
+                  <label class="radio-inline">
+                  <input type="radio" name="detilgender" value="1">Laki-laki
+                </label>
+                <label class="radio-inline">
+                  <input type="radio" name="detilgender" value="0" checked>Perempuan
+                </label>
+                <?php endif ?>
               </div>
             </div>
             <div class="form-group">
@@ -272,7 +281,7 @@
           <h4 class="box-title">Data informasi Wali santri</h4>
         </div>
         <div class="box-body">
-          <form class="form-horizontal" method="POST" action="<?php echo base_url('Alumni/Alumni/updateDataWali') ?>">
+          <form class="form-horizontal" method="POST" action="<?php echo base_url('Alumni/Alumni/UpdateDataWali') ?>">
             <div class="form-group">
               <label class="control-label col-md-2">Nama Ayah</label>
               <div class="col-md-8">
@@ -289,7 +298,7 @@
             <div class="form-group">
               <label class="control-label col-md-2">Alamat Ayah</label>
               <div class="col-md-8">
-                <textarea class="form-control" name="almtAyah"  rows="6"><?php echo $wali->pekerjaan_ayah ?></textarea>
+                <textarea class="form-control" name="almtAyah"  rows="6"><?php echo $wali->alamat_ayah ?></textarea>
               </div>
             </div>
             <div class="form-group">
@@ -348,7 +357,7 @@
           <h4>Detail riwayat pendidikan</h4>
         </div>
         <div class="box-body">
-          <form class="form-vertical" action="<?php echo base_url('Alumni/Alumni/updateEdukasi') ?>" method="POST">
+          <form class="form-vertical" action="<?php echo base_url('Alumni/Alumni/UpdateEdukasi') ?>" method="POST">
             <div class="form-group">
             <h4>Riwayat sekolah dasar/madrasah ibtida'iyah</h4>
               <div class="row">
@@ -505,7 +514,7 @@
             <h4 class="modal-title">Masukan saran anda</h4>
           </div>
           <div class="modal-body">
-            <form method="POST" action="<?php echo base_url('Alumni/Alumni/tambahSaran') ?>" class="form-vertival">
+            <form method="POST" action="<?php echo base_url('Alumni/Alumni/TambahSaran') ?>" class="form-vertival">
               <div class="form-group">
               <label>Identitas Pengirim : </label>
                 <div class="row">
@@ -723,7 +732,7 @@
                   <li>
                     <i class="fa fa-pencil bg-gray"></i>
                     <div class="timeline-item">
-                      <a href="<?php echo base_url('Alumni/Alumni/riwayatPendidikan') ?>" class="btn btn-success btn-block">Lengkapi Riwayat Pendidikan</a>
+                      <a href="<?php echo base_url('Alumni/Alumni/RiwayatPendidikan') ?>" class="btn btn-success btn-block">Lengkapi Riwayat Pendidikan</a>
                     </div>
                   </li>
                 </ul>
@@ -749,7 +758,7 @@
     <div class="pull-right hidden-xs">
       <b>Version</b> 1.0.0
     </div>
-    <strong>Copyright &copy; 2014-2016 <a href="http://ponpesgasek.com">Gasek Multimedia Studio</a>.</strong>
+    <strong><a href="http://ponpesgasek.com">Gasek Multimedia Studio</a>.</strong>
   </footer>
 
 </div>

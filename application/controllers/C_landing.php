@@ -8,7 +8,7 @@
  	function __construct()
  	{
  		parent::__construct();
- 		$this->load->model('M_register');
+ 		$this->load->model('M_Register');
  	}
  	public function random($panjang) {
         $karakter = '1234567890987654321';
@@ -22,15 +22,15 @@
 
  	public function index()
  	{
- 		$this->load->view('landing');
+ 		$this->load->view('Landing');
  	}
 
  	public function login()
  	{
- 		$this->load->view('login');
+ 		$this->load->view('Login');
  	}
 
- 	public function add_register()
+ 	public function Add_Register()
  	{
  		$idreg  = "STR00".$this->random(3);
  		$modul=$this->input->post('tambahModul');
@@ -50,21 +50,21 @@
  		$data['status']=$this->input->post('tambahModul');
  		$data['level']=$level;
 
- 		$this->M_register->add_register($data);
+ 		$this->M_Register->Add_Register($data);
  		
  		$wali['wali']="WALI0".$this->random(3);
  		$wali['santri']=$idreg;
- 		$this->M_register->tambahWali($wali);
+ 		$this->M_Register->TambahWali($wali);
 
  		$edu['edu']="EDU00".$this->random(3);
  		$edu['santri']=$idreg;
-		$this->M_register->tambahPendidikan($edu);
+		$this->M_Register->TambahPendidikan($edu);
  		$this->session->set_flashdata('sukses','Data anda berhasil terdaftar kedalam sistem, gunakan nama panggilan sebagai username dan  nomor telepon sebagai password untuk login');
- 		redirect('C_landing');
+ 		redirect('C_Landing');
  		unset($idreg, $modul, $data, $edu, $wali);
  	}
 
- 	public function tambahkan_saran()
+ 	public function Tambahkan_Saran()
  	{
  		$idsaran = "SARAN".$this->random(3);
  		$data['id']=$idsaran;
@@ -74,9 +74,9 @@
  		$data['konten'] = $this->input->post('contact_message');
  		$data['tanggal']=date('Y:m:d');
  		$data['status']='0';
- 		$this->M_register->add_saran($data);
+ 		$this->M_Register->Add_Saran($data);
  		$this->session->set_flashdata('sukses','Terima kasih atas saran yang anda berikan. semoga Allah SWT membalas kebaikan anda');
- 		redirect('C_landing');
+ 		redirect('C_Landing');
  		unset($data, $idsaran);
  	}
  } ?>

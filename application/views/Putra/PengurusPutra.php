@@ -36,7 +36,7 @@
 
   <header class="main-header">
     <!-- Logo -->
-    <a href="index2.html" class="logo">
+    <a href="<?php echo base_url('Putra/Putra') ?>" class="logo">
       <!-- mini logo for sidebar mini 50x50 pixels -->
       <span class="logo-mini"><b>A</b>PSR</span>
       <!-- logo for regular state and mobile devices -->
@@ -101,7 +101,7 @@
                   <a href="#" class="btn btn-default btn-flat">Profile</a>
                 </div>
                 <div class="pull-right">
-                  <a href="<?php echo base_url('C_Login/logout') ?>" class="btn btn-default btn-flat">Sign out</a>
+                  <a href="<?php echo base_url('C_Login/Logout') ?>" class="btn btn-default btn-flat">Sign out</a>
                 </div>
               </li>
             </ul>
@@ -132,9 +132,9 @@
             <i class="fa fa-dashboard"></i> <span>Beranda</span>
           </a>
         </li>
-        <li><a href="<?php echo base_url('Putra/Putra/dataSantri') ?>"><i class="fa fa-users"></i><span> Data Santri</span></a></li>
-        <li><a href="<?php echo base_url('Putra/Putra/anggotaKamar') ?>"><i class="fa fa-home"></i><span> Anggota Kamar</span></a></li>
-        <li><a href="<?php echo base_url('Putra/Putra/saranMasukan') ?>"><i class="fa fa-envelope-o"></i><span> Saran & Masukan</span></a></li>
+        <li><a href="<?php echo base_url('Putra/Putra/DataSantri') ?>"><i class="fa fa-users"></i><span> Data Santri</span></a></li>
+        <li><a href="<?php echo base_url('Putra/Putra/AnggotaKamar') ?>"><i class="fa fa-home"></i><span> Anggota Kamar</span></a></li>
+        <li><a href="<?php echo base_url('Putra/Putra/SaranMasukan') ?>"><i class="fa fa-envelope-o"></i><span> Saran & Masukan</span></a></li>
         <li class="header">LABELS</li>
         <li><a href="#"><i class="fa fa-circle-o text-red"></i> <span>Setting</span></a></li>
       </ul>
@@ -187,9 +187,9 @@
                   <td><?php echo $rows['email_santri'] ?></td>
                   <td><?php echo base64_decode($rows['password_santri']) ?></td>
                   <td>
-                    <a href="<?php echo base_url('Putra/Putra/editDataSantri/'.$rows['id_santri']) ?>" class="btn btn-info btn-flat
+                    <a href="<?php echo base_url('Putra/Putra/EditDataSantri/'.$rows['id_santri']) ?>" class="btn btn-info btn-flat
                      btn-xs"><i class="fa fa-pencil"></i></a>
-                     <a href="<?php echo base_url('Putra/Putra/hapusDataSantri/'.$rows['id_santri']) ?>" onclick="return confirm('Apakah anda yakin akan menghapus data <?php echo $rows['nama_santri'] ?>')" class="btn btn-danger btn-flat btn-xs"><i class="fa fa-trash"></i></a>
+                     <a href="<?php echo base_url('Putra/Putra/HapusDataSantri/'.$rows['id_santri']) ?>" onclick="return confirm('Apakah anda yakin akan menghapus data <?php echo $rows['nama_santri'] ?>')" class="btn btn-danger btn-flat btn-xs"><i class="fa fa-trash"></i></a>
                   </td>
                 </tr>
               <?php endforeach ?>
@@ -212,7 +212,7 @@
           <h3 class="box-title">Tambah Data Santri</h3>
         </div>
         <div class="box-body">
-          <form class="form-horizontal" method="POST" action="<?php echo base_url('Putra/Putra/tambahSantriBaru') ?>">
+          <form class="form-horizontal" method="POST" action="<?php echo base_url('Putra/Putra/TambahSantriBaru') ?>">
             <div class="form-group">
               <label class="col-md-2 control-label">Nama lengkap</label>
               <div class="col-md-6">
@@ -281,7 +281,7 @@
             <div class="form-group">
               <div class="col-md-2"></div>
               <div class="col-md-6">
-                <a href="<?php echo base_url('Putra/Putra/dataSantri') ?>" class="btn btn-danger btn-flat"><span class="glyphicon glyphicon-remove"></span>&nbsp;Batal</a>
+                <a href="<?php echo base_url('Putra/Putra/DataSantri') ?>" class="btn btn-danger btn-flat"><span class="glyphicon glyphicon-remove"></span>&nbsp;Batal</a>
                 <button type="submit" class="btn btn-primary btn-flat"><span class="glyphicon glyphicon-save"></span>&nbsp;Simpan</button>
               </div>
             </div>
@@ -384,7 +384,7 @@
             <div class="form-group">
               <div class="col-md-2"></div>
               <div class="col-md-6">
-                <a href="<?php echo base_url('Putra/Putra/dataSantri') ?>" class="btn btn-danger btn-flat"><span class="glyphicon glyphicon-remove"></span>&nbsp;Batal</a>
+                <a href="<?php echo base_url('Putra/Putra/DataSantri') ?>" class="btn btn-danger btn-flat"><span class="glyphicon glyphicon-remove"></span>&nbsp;Batal</a>
                 <button type="submit" class="btn btn-primary btn-flat"><span class="glyphicon glyphicon-refresh"></span>&nbsp;Update</button>
               </div>
             </div>
@@ -429,7 +429,7 @@
                   <td>
                   <input type="hidden" name="idKamar" value="<?php echo $dataputra['id_kamar'] ?>">
                     <a href="javascript:;" class="btn btn-info btn-flat btn-xs btnPersonil" data="<?php echo $dataputra['id_trans'] ?>"><i class="fa fa-pencil"></i></a>
-                    <a href="<?php echo base_url('Putra/Putra/hapuspersonilKamar/'.$dataputra['id_trans']) ?>" class="btn btn-danger btn-flat btn-xs" onclick="return confirm('apakah anda akan menghapus data <?php echo $dataputra['nama_santri'] ?> dari kamar <?php echo $dataputra['nama_kamar'] ?>')"><i class="fa fa-trash"></i></a>
+                    <a href="<?php echo base_url('Putra/Putra/HapusPersonilKamar/'.$dataputra['id_trans']) ?>" class="btn btn-danger btn-flat btn-xs" onclick="return confirm('apakah anda akan menghapus data <?php echo $dataputra['nama_santri'] ?> dari kamar <?php echo $dataputra['nama_kamar'] ?>')"><i class="fa fa-trash"></i></a>
                   </td>
                 </tr>
               <?php endforeach ?>
@@ -446,7 +446,7 @@
             <h3 class="modal-title">Tambahkan data anggota Kamar</h3>
           </div>
           <div class="modal-body">
-            <form class="form-vertical" method="POST" action="<?php echo base_url('Putra/Putra/tambahPersonil') ?>">
+            <form class="form-vertical" method="POST" action="<?php echo base_url('Putra/Putra/TambahPersonil') ?>">
               <div class="form-group">
                 <label>Nama Kamar</label>
                 <select class="form-control" name="listKamar">
@@ -485,7 +485,7 @@
             <h3 class="modal-title">Edit data anggota Kamar</h3>
           </div>
           <div class="modal-body">
-            <form class="form-vertical" method="POST" action="<?php echo base_url('Putra/Putra/updatePersonil') ?>">
+            <form class="form-vertical" method="POST" action="<?php echo base_url('Putra/Putra/UpdatePersonil') ?>">
               <div class="form-group">
                 <label>Nama Kamar</label>
                 <select class="form-control" name="editlistKamar">
@@ -573,7 +573,7 @@
             <h4 class="modal-title">Masukan saran anda</h4>
           </div>
           <div class="modal-body">
-            <form method="POST" action="<?php echo base_url('Putra/Putra/tambahSaran') ?>" class="form-vertival">
+            <form method="POST" action="<?php echo base_url('Putra/Putra/TambahSaran') ?>" class="form-vertival">
               <div class="form-group">
               <label>Identitas Pengirim : </label>
                 <div class="row">
@@ -623,7 +623,7 @@
             <div class="icon">
               <i class="fa fa-users"></i>
             </div>
-            <a href="<?php echo base_url('Putra/Putra/dataSantri') ?>" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+            <a href="<?php echo base_url('Putra/Putra/DataSantri') ?>" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
           </div>
         </div>
         <!-- ./col -->
@@ -638,7 +638,7 @@
             <div class="icon">
               <i class="fa fa-envelope-o"></i>
             </div>
-            <a href="<?php echo base_url('Putra/Putra/saranMasukan') ?>" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+            <a href="<?php echo base_url('Putra/Putra/SaranMasukan') ?>" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
           </div>
         </div>
         <!-- ./col -->
@@ -653,7 +653,7 @@
             <div class="icon">
               <i class="fa fa-home"></i>
             </div>
-            <a href="<?php echo base_url('Putra/Putra/anggotaKamar') ?>" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+            <a href="<?php echo base_url('Putra/Putra/AnggotaKamar') ?>" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
           </div>
         </div>
         <!-- ./col -->
@@ -683,7 +683,7 @@
     <div class="pull-right hidden-xs">
       <b>Version</b> 1.0.0
     </div>
-    <strong>Copyright &copy; 2014-2016 <a href="http://ponpesgasek.com">Gasek Multimedia Studio</a>.</strong> Barokah
+    <strong><a href="http://ponpesgasek.com">Gasek Multimedia Studio</a>.</strong>
   </footer>
 
 </div>
@@ -740,7 +740,7 @@ $('#showPersonil').on('click','.btnPersonil',function(){
   $.ajax({
     type : 'ajax',
     method : 'get',
-    url : '<?php echo base_url('Putra/Putra/editPersonilKamar') ?>',
+    url : '<?php echo base_url('Putra/Putra/EditPersonilKamar') ?>',
     data : {id : id},
     async : false,
     dataType : 'json',

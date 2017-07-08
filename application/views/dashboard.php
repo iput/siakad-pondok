@@ -36,7 +36,7 @@
 
   <header class="main-header">
     <!-- Logo -->
-    <a href="index2.html" class="logo">
+    <a href="<?php echo base_url('Dashboard') ?>" class="logo">
       <!-- mini logo for sidebar mini 50x50 pixels -->
       <span class="logo-mini"><b>A</b>PSR</span>
       <!-- logo for regular state and mobile devices -->
@@ -101,7 +101,7 @@
                   <a href="#" class="btn btn-default btn-flat">Profile</a>
                 </div>
                 <div class="pull-right">
-                  <a href="<?php echo base_url('C_Login/logout') ?>" class="btn btn-default btn-flat">Sign out</a>
+                  <a href="<?php echo base_url('C_Login/Logout') ?>" class="btn btn-default btn-flat">Sign out</a>
                 </div>
               </li>
             </ul>
@@ -141,8 +141,8 @@
             </span>
           </a>
           <ul class="treeview-menu">
-            <li><a href="<?php echo base_url('Dashboard/santri_baru') ?>"><i class="fa fa-circle-o"></i> Santri Baru</a></li>
-            <li><a href="<?php echo base_url('Dashboard/alumni') ?>"><i class="fa fa-circle-o"></i> Alumni</a></li>
+            <li><a href="<?php echo base_url('Dashboard/Santri_Baru') ?>"><i class="fa fa-circle-o"></i> Santri Baru</a></li>
+            <li><a href="<?php echo base_url('Dashboard/Alumni') ?>"><i class="fa fa-circle-o"></i> Alumni</a></li>
           </ul>
         </li>
         <li class="treeview">
@@ -154,8 +154,8 @@
             </span>
           </a>
           <ul class="treeview-menu">
-            <li><a href="<?php echo base_url('Admin/Kamar/dataKamar') ?>"><i class="fa fa-circle-o"></i> Data Kamar</a></li>
-            <li><a href="<?php echo base_url('Admin/Kamar/personilKamar') ?>"><i class="fa fa-circle-o"></i> Penghuni Kamar</a></li>
+            <li><a href="<?php echo base_url('Admin/Kamar/DataKamar') ?>"><i class="fa fa-circle-o"></i> Data Kamar</a></li>
+            <li><a href="<?php echo base_url('Admin/Kamar/PersonilKamar') ?>"><i class="fa fa-circle-o"></i> Penghuni Kamar</a></li>
           </ul>
         </li>
         <li class="treeview">
@@ -232,12 +232,12 @@
                   <td><?php echo $rows['email_santri'] ?></td>
                   <td><span class="label label-success"><?php echo $stats ?></span></td>
                   <td>
-                    <a href="<?php echo base_url('Admin/Santri/editSantri/'.$rows['id_santri']) ?>" class="btn btn-info btn-flat btn-xs"><span class="fa fa-pencil"></span></a>
-                    <a href="<?php echo base_url('Admin/Santri/hapusSantri/'.$rows['id_santri']) ?>" class="btn btn-danger btn-flat btn-xs" onclick="return confirm('apakah anda yakin akan menghapus data ini ?')"><span class="fa fa-trash"></span></a>
+                    <a href="<?php echo base_url('Admin/Santri/EditSantri/'.$rows['id_santri']) ?>" class="btn btn-info btn-flat btn-xs"><span class="fa fa-pencil"></span></a>
+                    <a href="<?php echo base_url('Admin/Santri/HapusSantri/'.$rows['id_santri']) ?>" class="btn btn-danger btn-flat btn-xs" onclick="return confirm('apakah anda yakin akan menghapus data ini ?')"><span class="fa fa-trash"></span></a>
                   </td>
                   <td>
-                    <a href="<?php echo base_url('Admin/Santri/ubahStatus/'.$rows['id_santri']) ?>" class="btn btn-flat btn-xs btn-success" onclick="return confirm('Apakah anda yakin akan menjadikan <?php echo $rows['nama_santri'] ?> sebagai pengurus ?')"><span class="fa fa-unlock-alt"></span></a>
-                    <a href="<?php echo base_url('Admin/Santri/lepasPengurus/'.$rows['id_santri']) ?>" class="btn btn-flat btn-xs btn-warning" onclick="return confirm('Apakah anda yakin akan menghapus <?php echo $rows['nama_santri'] ?> sebagai pengurus ?')"><span class="fa fa-lock"></span></a>
+                    <a href="<?php echo base_url('Admin/Santri/UbahStatus/'.$rows['id_santri']) ?>" class="btn btn-flat btn-xs btn-success" onclick="return confirm('Apakah anda yakin akan menjadikan <?php echo $rows['nama_santri'] ?> sebagai pengurus ?')"><span class="fa fa-unlock-alt"></span></a>
+                    <a href="<?php echo base_url('Admin/Santri/LepasPengurus/'.$rows['id_santri']) ?>" class="btn btn-flat btn-xs btn-warning" onclick="return confirm('Apakah anda yakin akan menghapus <?php echo $rows['nama_santri'] ?> sebagai pengurus ?')"><span class="fa fa-lock"></span></a>
                   </td>
                 </tr>
               <?php endforeach ?>
@@ -266,7 +266,7 @@
         </div>
         <div class="box-body">
         <div class="alert alert-success" style="display: none;"></div>
-        <a href="<?php echo base_url('Admin/Alumni/tambah_alumni') ?>" class="btn btn-primary btn-flat"><span class="glyphicon glyphicon-plus-sign"></span>&nbsp;Alumni Baru</a>
+        <a href="<?php echo base_url('Admin/Alumni/Tambah_Alumni') ?>" class="btn btn-primary btn-flat"><span class="glyphicon glyphicon-plus-sign"></span>&nbsp;Alumni Baru</a>
           <table class="table table-bordered table-striped table-hover" id="tabel_alumni" style="margin-top: 20px;">
             <thead>
               <tr>
@@ -300,8 +300,8 @@
                   <td><?php echo $row_al['tahun_boyong'] ?></td>
                   <td><label class="label label-info"><?php echo $stats_al ?></label></td>
                   <td>
-                    <a href="<?php echo base_url('Admin/Alumni/editAlumni/'.$row_al['id_santri']) ?>" class="btn btn-info btn-flat btn-xs"><i class="fa fa-pencil"></i></a>
-                    <a href="<?php echo base_url('Admin/Alumni/hapusAlumni/'.$row_al['id_santri']) ?>" class="btn btn-danger btn-xs btn-flat" onclick="return confirm('apakah anda yakin akan menghapus data ini ?')"><i class="fa fa-trash"></i></a>
+                    <a href="<?php echo base_url('Admin/Alumni/EditAlumni/'.$row_al['id_santri']) ?>" class="btn btn-info btn-flat btn-xs"><i class="fa fa-pencil"></i></a>
+                    <a href="<?php echo base_url('Admin/Alumni/HapusAlumni/'.$row_al['id_santri']) ?>" class="btn btn-danger btn-xs btn-flat" onclick="return confirm('apakah anda yakin akan menghapus data ini ?')"><i class="fa fa-trash"></i></a>
                   </td>
                 </tr>
               <?php endforeach ?>
@@ -329,7 +329,7 @@
           <h3 class="box-title">Tambah Data Santri</h3>
         </div>
         <div class="box-body">
-          <form class="form-horizontal" method="POST" action="<?php echo base_url('Admin/Santri/tambah_santri') ?>">
+          <form class="form-horizontal" method="POST" action="<?php echo base_url('Admin/Santri/Tambah_Santri') ?>">
             <div class="form-group">
               <label class="col-md-2 control-label">Nama lengkap</label>
               <div class="col-md-6">
@@ -398,7 +398,7 @@
             <div class="form-group">
               <div class="col-md-2"></div>
               <div class="col-md-6">
-                <a href="<?php echo base_url('Dashboard/santri_baru') ?>" class="btn btn-danger btn-flat"><span class="glyphicon glyphicon-remove"></span>&nbsp;Batal</a>
+                <a href="<?php echo base_url('Dashboard/Santri_Baru') ?>" class="btn btn-danger btn-flat"><span class="glyphicon glyphicon-remove"></span>&nbsp;Batal</a>
                 <button type="submit" class="btn btn-primary btn-flat"><span class="glyphicon glyphicon-save"></span>&nbsp;Simpan</button>
               </div>
             </div>
@@ -421,7 +421,7 @@
           <h3 class="box-title">Tambah Data Alumni</h3>
         </div>
         <div class="box-body">
-          <form class="form-horizontal" method="POST" action="<?php echo base_url('Admin/Alumni/alumni_baru') ?>">
+          <form class="form-horizontal" method="POST" action="<?php echo base_url('Admin/Alumni/Alumni_Baru') ?>">
             <div class="form-group">
               <label class="col-md-2 control-label">Nama lengkap</label>
               <div class="col-md-6">
@@ -450,10 +450,10 @@
               <label class="col-md-2 control-label">Jenis Kelamin</label>
               <div class="col-md-6">
                 <label class="radio-inline">
-                  <input type="radio" name="alumniGender" value="laki-laki">&nbsp;Laki-laki
+                  <input type="radio" name="alumniGender" value="1">&nbsp;Laki-laki
                 </label>
                 <label class="radio-inline">
-                  <input type="radio" name="alumniGender" value="perempuan">&nbsp;Perempuan
+                  <input type="radio" name="alumniGender" value="0">&nbsp;Perempuan
                 </label>
               </div>
             </div>
@@ -496,7 +496,7 @@
             <div class="form-group">
               <div class="col-md-2"></div>
               <div class="col-md-6">
-                <a href="<?php echo base_url('Dashboard/alumni') ?>" class="btn btn-danger btn-flat"><span class="glyphicon glyphicon-remove"></span>&nbsp;Batal</a>
+                <a href="<?php echo base_url('Dashboard/Alumni') ?>" class="btn btn-danger btn-flat"><span class="glyphicon glyphicon-remove"></span>&nbsp;Batal</a>
                 <button type="submit" class="btn btn-primary btn-flat"><span class="glyphicon glyphicon-save"></span>&nbsp;Simpan</button>
               </div>
             </div>
@@ -543,18 +543,28 @@
             <div class="form-group">
               <label class="control-label col-md-2">Tanggal Lahir</label>
               <div class="col-md-6">
-                <input type="date" class="form-control" id="editTglLahir" name="alumniTglLahir" value="<?php echo $ubah_str->tanggal_lahir ?>">
+                <input type="date" class="form-control" id="editTglLahir" name="editTglLahir" value="<?php echo $ubah_str->tanggal_lahir ?>">
               </div>
             </div>
             <div class="form-group">
               <label class="col-md-2 control-label">Jenis Kelamin</label>
               <div class="col-md-6">
-                <label class="radio-inline">
-                  <input type="radio" name="editGender" value="laki-laki">&nbsp;Laki-laki
+                <?php if ($ubah_str->jenis_kelamin==1): ?>
+                  <label class="radio-inline">
+                  <input type="radio" name="editGender" value="1" checked="">&nbsp;Laki-laki
                 </label>
                 <label class="radio-inline">
-                  <input type="radio" name="editGender" value="perempuan">&nbsp;Perempuan
+                  <input type="radio" name="editGender" value="0">&nbsp;Perempuan
                 </label>
+                <?php endif ?>
+                <?php if ($ubah_str->jenis_kelamin==0): ?>
+                  <label class="radio-inline">
+                  <input type="radio" name="editGender" value="1">&nbsp;Laki-laki
+                </label>
+                <label class="radio-inline">
+                  <input type="radio" name="editGender" value="0"  checked="">&nbsp;Perempuan
+                </label>
+                <?php endif ?>
               </div>
             </div>
             <div class="form-group">
@@ -596,7 +606,7 @@
             <div class="form-group">
               <div class="col-md-2"></div>
               <div class="col-md-6">
-                <a href="<?php echo base_url('Dashboard/santri_baru') ?>" class="btn btn-danger btn-flat"><span class="glyphicon glyphicon-remove"></span>&nbsp;Batal</a>
+                <a href="<?php echo base_url('Dashboard/Santri_Baru') ?>" class="btn btn-danger btn-flat"><span class="glyphicon glyphicon-remove"></span>&nbsp;Batal</a>
                 <button type="submit" class="btn btn-primary btn-flat"><span class="glyphicon glyphicon-refresh"></span>&nbsp;Update</button>
               </div>
             </div>
@@ -617,7 +627,7 @@
     <section class="content">
       <div class="box">
         <div class="box-body">
-          <form class="form-horizontal" method="POST" action="<?php echo base_url('Admin/Alumni/update_alumni') ?>">
+          <form class="form-horizontal" method="POST" action="<?php echo base_url('Admin/Alumni/Update_Alumni') ?>">
           <div class="form-group">
                 <label class="control-label col-md-2">ID Alumni</label>
                 <div class="col-md-6">
@@ -651,12 +661,22 @@
             <div class="form-group">
               <label class="col-md-2 control-label">Jenis Kelamin</label>
               <div class="col-md-6">
-                <label class="radio-inline">
-                  <input type="radio" name="editalumniGender" value="laki-laki">&nbsp;Laki-laki
+                <?php if ($edit_almn->jenis_kelamin==1): ?>
+                  <label class="radio-inline">
+                  <input type="radio" name="editalumniGender" value="1" checked="">&nbsp;Laki-laki
                 </label>
                 <label class="radio-inline">
-                  <input type="radio" name="editalumniGender" value="perempuan">&nbsp;Perempuan
+                  <input type="radio" name="editalumniGender" value="0">&nbsp;Perempuan
                 </label>
+                <?php endif ?>
+                <?php if($edit_almn->jenis_kelamin==0): ?>
+                  <label class="radio-inline">
+                  <input type="radio" name="editalumniGender" value="1">&nbsp;Laki-laki
+                </label>
+                <label class="radio-inline">
+                  <input type="radio" name="editalumniGender" value="0" checked="">&nbsp;Perempuan
+                </label>
+                <?php endif ?>
               </div>
             </div>
             <div class="form-group">
@@ -698,7 +718,7 @@
             <div class="form-group">
               <div class="col-md-2"></div>
               <div class="col-md-6">
-                <a href="<?php echo base_url('Dashboard/alumni') ?>" class="btn btn-danger btn-flat"><span class="glyphicon glyphicon-remove"></span>&nbsp;Batal</a>
+                <a href="<?php echo base_url('Dashboard/Alumni') ?>" class="btn btn-danger btn-flat"><span class="glyphicon glyphicon-remove"></span>&nbsp;Batal</a>
                 <button type="submit" class="btn btn-primary btn-flat"><span class="glyphicon glyphicon-refresh"></span>&nbsp;Update</button>
               </div>
             </div>
@@ -751,7 +771,7 @@
                   <td><label class="label label-success"><?php echo $keterangan_kmr ?></label></td>
                   <td>
                     <a href="javascript:;" data="<?php echo $rows->id_kamar ?>" class="btn btn-info btn-xs btn-flat btnEditKamar"><i class="fa fa-pencil"></i></a>
-                    <a href="<?php echo base_url('Admin/Kamar/hapusKamar/'.$rows->id_kamar) ?>" class="btn btn-danger btn-flat btn-xs" onclick="return confirm('apakah anda yakin akan menghapus data kamar <?php echo $rows->nama_kamar ?> ?')"><i class="fa fa-trash"></i></a>
+                    <a href="<?php echo base_url('Admin/Kamar/HapusKamar/'.$rows->id_kamar) ?>" class="btn btn-danger btn-flat btn-xs" onclick="return confirm('apakah anda yakin akan menghapus data kamar <?php echo $rows->nama_kamar ?> ?')"><i class="fa fa-trash"></i></a>
                   </td>
                 </tr>
               <?php endforeach ?>
@@ -769,7 +789,7 @@
             <h3 class="modal-title">Tambah Data Kamar</h3>
           </div>
           <div class="modal-body">
-            <form class="form-horizontal" method="POST" action="<?php echo base_url('Admin/Kamar/tambahKamar') ?>">
+            <form class="form-horizontal" method="POST" action="<?php echo base_url('Admin/Kamar/TambahKamar') ?>">
               <div class="form-group">
                 <label class="control-label col-md-3">Nama Kamar</label>
                 <div class="col-md-8">
@@ -813,7 +833,7 @@
             <h3 class="modal-title">Edit Data Kamar</h3>
           </div>
           <div class="modal-body">
-            <form class="form-horizontal" method="POST" action="<?php echo base_url('Admin/Kamar/updateKamar') ?>">
+            <form class="form-horizontal" method="POST" action="<?php echo base_url('Admin/Kamar/UpdateKamar') ?>">
               <div class="form-group">
                 <label class="control-label col-md-3">ID Kamar</label>
                 <div class="col-md-8">
@@ -881,7 +901,7 @@
               <td><i class="fa fa-gears"></i></td>
             </tr>
           </thead>
-          <tbody>
+          <tbody id="tabelPersonil">
             <?php foreach ($list_personil as $lPersonil): ?>
               <tr>
                 <td><?php echo $lPersonil['nama_kamar'] ?></td>
@@ -890,7 +910,7 @@
                 <td><?php echo $lPersonil['keterangan'] ?></td>
                 <td>
                   <a href="javascript:;" class="btn btn-info btn-flat btn-xs btnEditPersonil" data="<?php echo $lPersonil['id_trans'] ?>"><i class="fa fa-pencil"></i></a>
-                  <a href="<?php echo base_url('Admin/Kamar/hapusPersonil/'.$lPersonil['id_trans']) ?>" class="btn btn-danger btn-xs btn-flat" onclick="return confirm('Apakah anda akan menghapus data anggota Kamar ini ?')"><i class="fa fa-trash"></i></a>
+                  <a href="<?php echo base_url('Admin/Kamar/HapusPersonil/'.$lPersonil['id_trans']) ?>" class="btn btn-danger btn-xs btn-flat" onclick="return confirm('Apakah anda akan menghapus data anggota Kamar ini ?')"><i class="fa fa-trash"></i></a>
                 </td>
               </tr>
             <?php endforeach ?>
@@ -907,7 +927,7 @@
             <h4 class="modal-title">Tambah Kuota Kamar</h4>
           </div>
           <div class="modal-body">
-            <form class="form-vertical" method="POST" action="<?php echo base_url('Admin/Kamar/tambahPersonilKamar') ?>">
+            <form class="form-vertical" method="POST" action="<?php echo base_url('Admin/Kamar/TambahPersonilKamar') ?>">
               <div class="form-group">
                 <label>Nama Kamar</label>
                 <select class="form-control" name="listNamaKamar">
@@ -964,7 +984,7 @@
             <div class="icon">
               <i class="fa fa-users"></i>
             </div>
-            <a href="<?php echo base_url('Dashboard/santri_baru') ?>" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+            <a href="<?php echo base_url('Dashboard/Santri_Baru') ?>" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
           </div>
         </div>
         <!-- ./col -->
@@ -979,7 +999,7 @@
             <div class="icon">
               <i class="fa fa-users"></i>
             </div>
-            <a href="<?php echo base_url('Dashboard/alumni') ?>" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+            <a href="<?php echo base_url('Dashboard/Alumni') ?>" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
           </div>
         </div>
         <!-- ./col -->
@@ -994,7 +1014,7 @@
             <div class="icon">
               <i class="fa fa-home"></i>
             </div>
-            <a href="<?php echo base_url('Admin/Kamar/dataKamar') ?>" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+            <a href="<?php echo base_url('Admin/Kamar/DataKamar') ?>" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
           </div>
         </div>
         <!-- ./col -->
@@ -1027,7 +1047,7 @@
     <div class="pull-right hidden-xs">
       <b>Version</b> 1.0.0
     </div>
-    <strong>Copyright &copy; 2014-2016 <a href="http://ponpesgasek.com">Gasek Multimedia Studio</a>.</strong> Barokah
+    <strong><a href="http://ponpesgasek.com">Gasek Multimedia Studio</a>.</strong>
   </footer>
 
 </div>
@@ -1094,7 +1114,7 @@
       $.ajax({
         type : 'ajax',
         method : 'get',
-        url : '<?php echo base_url('Admin/Kamar/editKamar') ?>',
+        url : '<?php echo base_url('Admin/Kamar/EditKamar') ?>',
         data : {id:id},
         async : false,
         dataType : 'json',

@@ -36,7 +36,7 @@
 
   <header class="main-header">
     <!-- Logo -->
-    <a href="index2.html" class="logo">
+    <a href="<?php echo base_url('Putri/Putri') ?>" class="logo">
       <!-- mini logo for sidebar mini 50x50 pixels -->
       <span class="logo-mini"><b>A</b>PSR</span>
       <!-- logo for regular state and mobile devices -->
@@ -102,7 +102,7 @@
                   <a href="#" class="btn btn-default btn-flat">Profile</a>
                 </div>
                 <div class="pull-right">
-                  <a href="<?php echo base_url('C_Login/logout') ?>" class="btn btn-default btn-flat">Sign out</a>
+                  <a href="<?php echo base_url('C_Login/Logout') ?>" class="btn btn-default btn-flat">Sign out</a>
                 </div>
               </li>
             </ul>
@@ -133,9 +133,9 @@
             <i class="fa fa-dashboard"></i> <span>Beranda</span>
           </a>
         </li>
-        <li><a href="<?php echo base_url('Putri/Putri/dataSantri') ?>"><i class="fa fa-users"></i><span> Data Santri</span></a></li>
-        <li><a href="<?php echo base_url('Putri/Putri/anggotaKamar') ?>"><i class="fa fa-home"></i><span> Anggota Kamar</span></a></li>
-        <li><a href="<?php echo base_url('Putri/Putri/saranMasukan') ?>"><i class="fa fa-envelope-o"></i><span> Saran & Masukan</span></a></li>
+        <li><a href="<?php echo base_url('Putri/Putri/DataSantri') ?>"><i class="fa fa-users"></i><span> Data Santri</span></a></li>
+        <li><a href="<?php echo base_url('Putri/Putri/AnggotaKamar') ?>"><i class="fa fa-home"></i><span> Anggota Kamar</span></a></li>
+        <li><a href="<?php echo base_url('Putri/Putri/SaranMasukan') ?>"><i class="fa fa-envelope-o"></i><span> Saran & Masukan</span></a></li>
         <li class="header">LABELS</li>
         <li><a href="#"><i class="fa fa-circle-o text-red"></i> <span>Setting</span></a></li>
       </ul>
@@ -163,7 +163,7 @@
         </div>
         <div class="box-body">
         <div class="alert alert-success" style="display: none;"></div>
-          <a href="<?php echo base_url('Putri/Putri/tambahSantri') ?>" class="btn btn-primary btn-flat"><i class="fa fa-plus"></i>&nbsp;Tambah Data Santri</a>
+          <a href="<?php echo base_url('Putri/Putri/TambahSantri') ?>" class="btn btn-primary btn-flat"><i class="fa fa-plus"></i>&nbsp;Tambah Data Santri</a>
           <table class="table table-responsive table-hover table-striped table-bordered" id="tabelSantriPutri">
             <thead>
               <tr>
@@ -188,8 +188,8 @@
                   <td><?php echo $rputri['email_santri'] ?></td>
                   <td><?php echo base64_decode($rputri['password_santri']) ?></td>
                   <td>
-                    <a href="<?php echo base_url('Putri/Putri/editDataSantri/'.$rputri['id_santri']) ?>" class="btn btn-info btn-flat btn-xs"><i class="fa fa-pencil"></i></a>
-                    <a href="<?php echo base_url('Putri/Putri/hapusDataSantri/'.$rputri['id_santri']) ?>" class="btn btn-danger btn-flat btn-xs" onclick="return confirm('Apakah anda yakin akan menghapus data <?php echo $rputri['nama_santri'] ?>')"><i class="fa fa-trash"></i></a>
+                    <a href="<?php echo base_url('Putri/Putri/EditDataSantri/'.$rputri['id_santri']) ?>" class="btn btn-info btn-flat btn-xs"><i class="fa fa-pencil"></i></a>
+                    <a href="<?php echo base_url('Putri/Putri/HapusDataSantri/'.$rputri['id_santri']) ?>" onclick="return confirm('apakah anda yakin akan mengapus data ini ?')" class="btn btn-danger btn-flat btn-xs" ><i class="fa fa-trash"></i></a>
                   </td>
                 </tr>
               <?php endforeach ?>
@@ -213,7 +213,7 @@
           <h4 class="box-title">Tambah Data Santri</h4>
         </div>
         <div class="box-body">
-          <form class="form-horizontal" method="POST" action="<?php echo base_url('Putri/Putri/tambahSantriBaru') ?>">
+          <form class="form-horizontal" method="POST" action="<?php echo base_url('Putri/Putri/TambahSantriBaru') ?>">
             <div class="form-group">
               <label class="col-md-2 control-label">Nama lengkap</label>
               <div class="col-md-6">
@@ -282,7 +282,7 @@
             <div class="form-group">
               <div class="col-md-2"></div>
               <div class="col-md-6">
-                <a href="<?php echo base_url('Putri/Putri/dataSantri') ?>" class="btn btn-danger btn-flat"><span class="glyphicon glyphicon-remove"></span>&nbsp;Batal</a>
+                <a href="<?php echo base_url('Putri/Putri/DataSantri') ?>" class="btn btn-danger btn-flat"><span class="glyphicon glyphicon-remove"></span>&nbsp;Batal</a>
                 <button type="submit" class="btn btn-primary btn-flat"><span class="glyphicon glyphicon-save"></span>&nbsp;Simpan</button>
               </div>
             </div>
@@ -338,12 +338,21 @@
             <div class="form-group">
               <label class="col-md-2 control-label">Jenis Kelamin</label>
               <div class="col-md-6">
-                <label class="radio-inline">
-                  <input type="radio" name="editGender" value="1">&nbsp;Laki-laki
+                <?php if ($detailsantri->jenis_kelamin==1): ?>
+                  <label class="radio-inline">
+                  <input type="radio" name="editGender" value="1" checked="">&nbsp;Laki-laki
                 </label>
                 <label class="radio-inline">
                   <input type="radio" name="editGender" value="0">&nbsp;Perempuan
                 </label>
+                <?php else: ?>
+                  <label class="radio-inline">
+                  <input type="radio" name="editGender" value="1">&nbsp;Laki-laki
+                </label>
+                <label class="radio-inline">
+                  <input type="radio" name="editGender" value="0" checked="">&nbsp;Perempuan
+                </label>
+                <?php endif ?>
               </div>
             </div>
             <div class="form-group">
@@ -385,7 +394,7 @@
             <div class="form-group">
               <div class="col-md-2"></div>
               <div class="col-md-6">
-                <a href="<?php echo base_url('Putri/Putri/dataSantri') ?>" class="btn btn-danger btn-flat"><span class="glyphicon glyphicon-remove"></span>&nbsp;Batal</a>
+                <a href="<?php echo base_url('Putri/Putri/DataSantri') ?>" class="btn btn-danger btn-flat"><span class="glyphicon glyphicon-remove"></span>&nbsp;Batal</a>
                 <button type="submit" class="btn btn-primary btn-flat"><span class="glyphicon glyphicon-refresh"></span>&nbsp;Update</button>
               </div>
             </div>
@@ -430,7 +439,7 @@
                   <td>
                   <input type="hidden" name="idKamar" value="<?php echo $dataputri['id_kamar'] ?>">
                     <a href="javascript:;" class="btn btn-info btn-flat btn-xs btnPersonil" data="<?php echo $dataputri['id_trans'] ?>"><i class="fa fa-pencil"></i></a>
-                    <a href="<?php echo base_url('Putri/Putri/hapuspersonilKamar/'.$dataputri['id_trans']) ?>" class="btn btn-danger btn-flat btn-xs" onclick="return confirm('apakah anda akan menghapus data <?php echo $dataputri['nama_santri'] ?> dari kamar <?php echo $dataputri['nama_kamar'] ?>')"><i class="fa fa-trash"></i></a>
+                    <a href="<?php echo base_url('Putri/Putri/HapusPersonilKamar/'.$dataputri['id_trans']) ?>" class="btn btn-danger btn-flat btn-xs" onclick="return confirm('apakah anda akan menghapus data <?php echo $dataputri['nama_santri'] ?> dari kamar <?php echo $dataputri['nama_kamar'] ?>')"><i class="fa fa-trash"></i></a>
                   </td>
                 </tr>
               <?php endforeach ?>
@@ -447,7 +456,7 @@
             <h3 class="modal-title">Tambahkan data anggota Kamar</h3>
           </div>
           <div class="modal-body">
-            <form class="form-vertical" method="POST" action="<?php echo base_url('Putri/Putri/tambahPersonil') ?>">
+            <form class="form-vertical" method="POST" action="<?php echo base_url('Putri/Putri/TambahPersonil') ?>">
               <div class="form-group">
                 <label>Nama Kamar</label>
                 <select class="form-control" name="listKamar">
@@ -486,7 +495,7 @@
             <h3 class="modal-title">Edit data anggota Kamar</h3>
           </div>
           <div class="modal-body">
-            <form class="form-vertical" method="POST" action="<?php echo base_url('Putri/Putri/updatePersonil') ?>">
+            <form class="form-vertical" method="POST" action="<?php echo base_url('Putri/Putri/UpdatePersonil') ?>">
               <div class="form-group">
                 <label>Nama Kamar</label>
                 <select class="form-control" name="editlistKamar">
@@ -550,15 +559,17 @@
               <?php foreach ($saranmasuk as $rowsaran): ?>
                 <?php if ($rowsaran['status']==0) {
                   $status='Belum ditanggapi';
+                  $kelas="label-danger";
                 }else if ($rowsaran['status']==1) {
                   $status='Sudah ditanggapi';
+                  $kelas="label-success";
                 } ?>
                 <tr>
                   <td><?php echo $rowsaran['nama_pengirim']; ?></td>
                   <td><?php echo $rowsaran['email_pengirim']; ?></td>
                   <td><?php echo $rowsaran['tentang']; ?></td>
                   <td><?php echo $rowsaran['konten_saran']; ?></td>
-                  <td><label class="label label-success"><?php echo $status ?></label></td>
+                  <td><label class="label <?php echo $kelas ?>"><?php echo $status ?></label></td>
                 </tr>
               <?php endforeach ?>
             </tbody>
@@ -574,7 +585,7 @@
             <h4 class="modal-title">Masukan saran anda</h4>
           </div>
           <div class="modal-body">
-            <form method="POST" action="<?php echo base_url('Putri/Putri/tambahSaran') ?>" class="form-vertival">
+            <form method="POST" action="<?php echo base_url('Putri/Putri/TambahSaran') ?>" class="form-vertival">
               <div class="form-group">
               <label>Identitas Pengirim : </label>
                 <div class="row">
@@ -624,7 +635,7 @@
             <div class="icon">
               <i class="fa fa-users"></i>
             </div>
-            <a href="<?php echo base_url('Putri/Putri/dataSantri') ?>" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+            <a href="<?php echo base_url('Putri/Putri/DataSantri') ?>" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
           </div>
         </div>
         <!-- ./col -->
@@ -639,7 +650,7 @@
             <div class="icon">
               <i class="fa fa-envelope-o"></i>
             </div>
-            <a href="<?php echo base_url('Putri/Putri/saranMasukan') ?>" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+            <a href="<?php echo base_url('Putri/Putri/SaranMasukan') ?>" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
           </div>
         </div>
         <!-- ./col -->
@@ -654,7 +665,7 @@
             <div class="icon">
               <i class="fa fa-home"></i>
             </div>
-            <a href="<?php echo base_url('Putri/Putri/anggotaKamar') ?>" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+            <a href="<?php echo base_url('Putri/Putri/AnggotaKamar') ?>" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
           </div>
         </div>
         <!-- ./col -->
@@ -685,7 +696,7 @@
     <div class="pull-right hidden-xs">
       <b>Version</b> 1.0.0
     </div>
-    <strong>Copyright &copy; 2014-2016 <a href="http://ponpesgasek.com">Gasek Multimedia Studio</a>.</strong> Barokah
+    <strong><a href="http://ponpesgasek.com">Gasek Multimedia Studio</a>.</strong>
   </footer>
 
 </div>
@@ -747,7 +758,7 @@ $('#showPersonil').on('click','.btnPersonil',function(){
   $.ajax({
     type : 'ajax',
     method : 'get',
-    url : '<?php echo base_url('Putra/Putra/editPersonilKamar') ?>',
+    url : '<?php echo base_url('Putra/Putra/EditPersonilKamar') ?>',
     data : {id : id},
     async : false,
     dataType : 'json',

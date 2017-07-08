@@ -34,7 +34,7 @@
 
   <header class="main-header">
     <!-- Logo -->
-    <a href="index2.html" class="logo">
+    <a href="<?php echo base_url('Santri/Santri') ?>" class="logo">
       <!-- mini logo for sidebar mini 50x50 pixels -->
       <span class="logo-mini"><b>San</b>tri</span>
       <!-- logo for regular state and mobile devices -->
@@ -99,7 +99,7 @@
                   <a href="#" class="btn btn-default btn-flat">Profile</a>
                 </div>
                 <div class="pull-right">
-                  <a href="<?php echo base_url('C_Login/logout') ?>" class="btn btn-default btn-flat">Sign out</a>
+                  <a href="<?php echo base_url('C_Login/Logout') ?>" class="btn btn-default btn-flat">Sign out</a>
                 </div>
               </li>
             </ul>
@@ -132,7 +132,7 @@
         </li>
         <li><a href="<?php echo base_url('Santri/Santri/DetilDiri') ?>"><i class="fa fa-leaf"></i><span> Data Diri</span></a></li>
         <li><a href="<?php echo base_url('Santri/Santri/WaliSantri') ?>"><i class="fa fa-users"></i><span> Data Wali</span></a></li>
-        <li><a href="<?php echo base_url('Santri/Santri/riwayatPendidikan') ?>"><i class="fa fa-users"></i><span> Riwayat Pendidikan</span></a></li>
+        <li><a href="<?php echo base_url('Santri/Santri/RiwayatPendidikan') ?>"><i class="fa fa-users"></i><span> Riwayat Pendidikan</span></a></li>
         <li><a href="<?php echo base_url('Santri/Santri/kotakSaran') ?>"><i class="fa fa-users"></i><span> Kotak Saran</span></a></li>
         <li class="header">LAIN-LAIN</li>
         <li><a href="#"><i class="fa fa-circle-o text-red"></i> <span>Setting</span></a></li>
@@ -160,7 +160,7 @@
           <h4 class="box-title">Detail informasi diri</h4>
         </div>
         <div class="box-body">
-          <form class="form-horizontal" method="POST" action="<?php echo base_url('Santri/Santri/updateDataSantri') ?>">
+          <form class="form-horizontal" method="POST" action="<?php echo base_url('Santri/Santri/UpdateDataSantri') ?>">
             <div class="form-group">
               <label class="control-label col-md-2">ID Anda</label>
               <div class="col-md-6">
@@ -194,12 +194,21 @@
             <div class="form-group">
               <label class="control-label col-md-2">Jenis Kelamin</label>
               <div class="col-md-8">
-                <label class="radio-inline">
-                  <input type="radio" name="detilgender" value="1">Laki-laki
+                <?php if ($dataku->jenis_kelamin==1): ?>
+                  <label class="radio-inline">
+                  <input type="radio" name="detilgender" value="1" checked>Laki-laki
                 </label>
                 <label class="radio-inline">
                   <input type="radio" name="detilgender" value="0">Perempuan
                 </label>
+                <?php else: ?>
+                  <label class="radio-inline">
+                  <input type="radio" name="detilgender" value="1">Laki-laki
+                </label>
+                <label class="radio-inline">
+                  <input type="radio" name="detilgender" value="0" checked>Perempuan
+                </label>
+                <?php endif ?>
               </div>
             </div>
             <div class="form-group">
@@ -270,7 +279,7 @@
           <h4 class="box-title">Data informasi Wali santri</h4>
         </div>
         <div class="box-body">
-          <form class="form-horizontal" method="POST" action="<?php echo base_url('Santri/Santri/updateDataWali') ?>">
+          <form class="form-horizontal" method="POST" action="<?php echo base_url('Santri/Santri/UpdateDataWali') ?>">
             <div class="form-group">
               <label class="control-label col-md-2">Nama Ayah</label>
               <div class="col-md-8">
@@ -287,7 +296,7 @@
             <div class="form-group">
               <label class="control-label col-md-2">Alamat Ayah</label>
               <div class="col-md-8">
-                <textarea class="form-control" name="almtAyah"  rows="6"><?php echo $wali->pekerjaan_ayah ?></textarea>
+                <textarea class="form-control" name="almtAyah"  rows="6"><?php echo $wali->alamat_ayah ?></textarea>
               </div>
             </div>
             <div class="form-group">
@@ -722,7 +731,7 @@
                   <li>
                     <i class="fa fa-pencil bg-gray"></i>
                     <div class="timeline-item">
-                      <a href="<?php echo base_url('Santri/Santri/riwayatPendidikan') ?>" class="btn btn-success btn-block">Lengkapi Riwayat Pendidikan</a>
+                      <a href="<?php echo base_url('Santri/Santri/RiwayatPendidikan') ?>" class="btn btn-success btn-block">Lengkapi Riwayat Pendidikan</a>
                     </div>
                   </li>
                 </ul>
@@ -748,7 +757,7 @@
     <div class="pull-right hidden-xs">
       <b>Version</b> 1.0.0
     </div>
-    <strong>Copyright &copy; 2014-2016 <a href="http://ponpesgasek.com">Gasek Multimedia Studio</a>.</strong> Barokah
+    <strong><a href="http://ponpesgasek.com">Gasek Multimedia Studio</a>.</strong>
   </footer>
 
 </div>

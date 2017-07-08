@@ -20,7 +20,7 @@
         }
         return $string;
     }
- 	public function tambah_santri()
+ 	public function Tambah_Santri()
  	{
  		$id_santri = "STR00".$this->random(3);
  		$data['id']=$id_santri;
@@ -40,12 +40,12 @@
  		$data['level']='1';
  		$this->M_santri->tambah_santri($data);
  		$this->session->set_flashdata('sukses','santri baru berhasil ditambahkan');
- 		redirect('Dashboard/santri_baru');
+ 		redirect('Dashboard/Santri_baru');
  		unset($id_santri, $data);
 
  	}
 
- 	public function editSantri($id_santri)
+ 	public function EditSantri($id_santri)
  	{
  		$data['page'] = 'ubah_santri';
  		$data['ubah_str'] = $this->M_santri->edit_santri($id_santri)->row();
@@ -67,37 +67,37 @@
  		$data['facebook']=$this->input->post('editFacebook');
  		$data['tahun_masuk']=$this->input->post('editTahunMasuk');
  		$data['tahun_boyong']=$this->input->post('editTahunBoyong');
- 		$this->M_santri->update_santri($idSantri, $data);
+ 		$this->M_santri->Update_Santri($idSantri, $data);
  		$this->session->set_flashdata('sukses','Data santri berhasil di update');
- 		redirect('Dashboard/santri_baru');
+ 		redirect('Dashboard/Santri_Baru');
  		unset($idSantri, $data);
  	}
 
- 	public function ubahStatus($id)
+ 	public function UbahStatus($id)
  	{
  		$this->M_santri->jadikanPengurus($id);
  		$this->session->set_flashdata('sukses','Data santri berhasil dijadikan pengurus');
- 		redirect('Dashboard/santri_baru');
+ 		redirect('Dashboard/Santri_Baru');
  		unset($id);
  	}
 
- 	public function lepasPengurus($id)
+ 	public function LepasPengurus($id)
  	{
- 		$this->M_santri->lepaskanPengurus($id);
+ 		$this->M_santri->LepaskanPengurus($id);
  		$this->session->set_flashdata('sukses','Data santri telah diberhentikan sebagai pengurus');
- 		redirect('Dashboard/santri_baru');
+ 		redirect('Dashboard/Santri_Baru');
  		unset($id);
  	}
 
- 	public function hapusSantri($id)
+ 	public function HapusSantri($id)
  	{
  		$data = $this->M_santri->hapus_santri($id);
  		if ($data) {
  			$this->session->set_flashdata('sukses','Data santri berhasil dihapus');
- 			redirect('Dashboard/santri_baru');
+ 			redirect('Dashboard/Santri_Baru');
  		}else{
  			$this->session->set_flashdata('gagal','terjadi kesalahan pada proses hapus data');
- 			redirect('Dashboard/santri_baru');
+ 			redirect('Dashboard/Santri_Baru');
  		}
  		unset($data, $id);
  	}

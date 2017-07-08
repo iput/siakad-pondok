@@ -8,52 +8,52 @@
  	function __construct()
  	{
  		parent::__construct();
- 		$this->load->model('M_santri');
+ 		$this->load->model('M_Santri');
  		$this->load->model('M_Alumni');
  	}
 
  	public function index()
  	{
  		if (($this->session->userdata('iduser'))AND($this->session->userdata('username'))) {
- 			$this->load->view('dashboard');
+ 			$this->load->view('Dashboard');
  		}else{
- 			redirect('C_landing');
+ 			redirect('C_Landing');
  		}
  	}
 
- 	public function santri_baru()
+ 	public function Santri_Baru()
  	{
  		if (($this->session->userdata('iduser'))AND($this->session->userdata('username'))) {
  			$data['page']='santri_baru';
- 		$data['data_santri']= $this->M_santri->semua_santri();
+ 		$data['data_santri']= $this->M_Santri->Semua_Santri();
  		$this->load->view('Dashboard', $data);
  		unset($data);
  		}else{
- 			redirect('C_landing');
+ 			redirect('C_Landing');
  		}
  	}
 
- 	public function alumni()
+ 	public function Alumni()
  	{
  		if (($this->session->userdata('iduser'))AND($this->session->userdata('username'))) {
  			$data['page'] = 'data_alumni';
- 			$data['master_alumni']=$this->M_Alumni->data_alumni();
+ 			$data['master_alumni']=$this->M_Alumni->Data_Alumni();
  			$this->load->view('Dashboard', $data);
  			unset($data);	
  		}else{
- 			redirect('C_landing');
+ 			redirect('C_Landing');
  		}
  		
  	}
 
- 	public function tambah_santri()
+ 	public function Tambah_Santri()
  	{
  		if (($this->session->userdata('iduser'))AND($this->session->userdata('username'))) {
  			$data['page'] = 'tambah_santri';
  			$this->load->view('Dashboard', $data);
  			unset($data); 			
  		}else{
- 			redirect('C_landing');
+ 			redirect('C_Landing');
  		}
 
  	}

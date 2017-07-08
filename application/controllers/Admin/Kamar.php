@@ -21,25 +21,25 @@
         return $string;
     }
 
- 	public function tambahKamar()
+ 	public function TambahKamar()
  	{
  		$idkamar = "KMR00".$this->random(3);
  		$db_kamar['idkmr']=$idkamar;
  		$db_kamar['nmkmr']=$this->input->post('namaKamar');
  		$db_kamar['kuota']=$this->input->post('kuotakamar');
  		$db_kamar['ketkmr']=$this->input->post('modulKamar');
- 		$this->M_Kamar->tambahKamar($db_kamar);
+ 		$this->M_Kamar->TambahKamar($db_kamar);
  		unset($idkamar,$db_kamar);
  		$this->session->set_flashdata('sukses','Data Kamar berhasil ditambhakan');
  		redirect('Admin/Kamar/dataKamar');
  	}
 
- 	public function dataKamar()
+ 	public function DataKamar()
  	{
  		if (($this->session->userdata('iduser'))AND($this->session->userdata('username'))) {
  			$data['page']='dataKamar';
- 			$data['db_kamar']=$this->M_Kamar->semuaKamar();
- 			$this->load->view('dashboard', $data);
+ 			$data['db_kamar']=$this->M_Kamar->SemuaKamar();
+ 			$this->load->view('Dashboard', $data);
  			unset($data);
  		}
  	}
@@ -47,46 +47,46 @@
  	{
  		if (($this->session->userdata('iduser'))AND($this->session->userdata('username'))) {
  			$data['page']='datapersonilKamar';
- 			$data['list_kamar']=$this->M_Kamar->semuaKamar();
- 			$data['list_santri']=$this->M_santri->semua_santri();
- 			$data['list_personil']=$this->M_Kamar->semuaPersonil();
- 			$this->load->view('dashboard', $data);
+ 			$data['list_kamar']=$this->M_Kamar->SemuaKamar();
+ 			$data['list_santri']=$this->M_santri->Semua_Santri();
+ 			$data['list_personil']=$this->M_Kamar->SemuaPersonil();
+ 			$this->load->view('Dashboard', $data);
  			unset($data);
  		}else{
- 			redirect('C_landing');
+ 			redirect('C_Landing');
  		}
  	}
 
- 	public function editKamar()
+ 	public function EditKamar()
  	{
  		$detilKamar = $this->M_Kamar->editKamar();
  		echo json_encode($detilKamar);
  		unset($detilKamar);
  	}
 
- 	public function updateKamar()
+ 	public function UpdateKamar()
  	{
  		$id =$this->input->post('editIdKamar');
  		$data['nama']=$this->input->post('editnamaKamar');
  		$data['kuota']=$this->input->post('editkuotakamar');
  		$data['modul']=$this->input->post('editmodulKamar');
- 		$this->M_Kamar->updateKamar($id, $data);
+ 		$this->M_Kamar->UpdateKamar($id, $data);
  		$this->session->set_flashdata('sukses','Data Kamar berhasil di update');
- 		redirect('Admin/Kamar/dataKamar');
+ 		redirect('Admin/Kamar/DataKamar');
  		unset($id,$data);
  	}
 
- 	public function hapusKamar($idkamar)
+ 	public function HapusKamar($idkamar)
  	{
- 		$datakmr= $this->M_Kamar->hapusKamar($idkamar);
+ 		$datakmr= $this->M_Kamar->HapusKamar($idkamar);
  		if ($datakmr) {
  			$this->session->set_flashdata('sukses','Data Kamar berhasil dihapus');
- 			redirect('Admin/Kamar/dataKamar');
+ 			redirect('Admin/Kamar/DataKamar');
  			unset($datakmr);
  		}
  	}
 
- 	public function tambahPersonilKamar()
+ 	public function TambahPersonilKamar()
  	{
  		$personil = $this->input->post('cb_personil');
  		$idkamar = $this->input->post('listNamaKamar');
@@ -104,28 +104,28 @@
  			$data['idkmr']=$this->input->post('listNamaKamar');
  			$data['idstr']=$personil[$i];
  			$data['ket']=$this->input->post('ketPersonil');
- 			$this->M_Kamar->tambahPersonil($data);
+ 			$this->M_Kamar->TambahPersonil($data);
  		}
  		$kuotabaru = $sisa - $kurangiKuota;
  		$datakuota['kuota']=$kuotabaru;
- 		$this->M_Kamar->updateKuotaKamar($idkamar, $datakuota);
+ 		$this->M_Kamar->UpdateKuotaKamar($idkamar, $datakuota);
  		$this->session->set_flashdata('sukses','Data personil Kamar Berhasil Di tambahkan');
- 		redirect('Admin/Kamar/personilKamar');
+ 		redirect('Admin/Kamar/PersonilKamar');
  		}else if ($sisa<=0) {
  			$this->session->set_flashdata('gagal','Data tidak bisa dimasukan, kuota kamar tidak memenuhi syarat');
- 			redirect('Admin/Kamar/personilKamar');
+ 			redirect('Admin/Kamar/PersonilKamar');
  		}
  		unset($personil, $idkamar, $kuota, $sisa, $data, $datakuota);
  		
  	}
 
 
- 	public function hapusPersonil($id)
+ 	public function HapusPersonil($id)
  	{
- 		$datapersonil = $this->M_Kamar->hapusPersonil($id);
+ 		$datapersonil = $this->M_Kamar->HapusPersonil($id);
  		if ($datapersonil) {
  			$this->session->set_flashdata('sukses','data personil berhasil di hapus');
- 			redirect('Admin/Kamar/personilKamar');
+ 			redirect('Admin/Kamar/PersonilKamar');
  			unset($datapersonil);
  		}
  	}

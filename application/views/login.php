@@ -44,16 +44,16 @@
 <body class="hold-transition login-page">
 <div class="login-box">
   <div class="login-logo">
-    <a href="<?php echo base_url('C_landing') ?>" id="pagename"><b>Admin</b>Gasek</a>
+    <a href="<?php echo base_url('C_Landing') ?>" id="pagename"><b>Admin</b>Gasek</a>
   </div>
   <!-- /.login-logo -->
   <div class="login-box-body">
     <p class="login-box-msg" id="teks">Gunakan nama panggilan sebagai username Dan nomor telepon sebagai password</p>
     <div class="alert alert-danger" style="display: none;"></div>
 
-    <form action="<?php echo base_url('C_login/cek_login') ?>" method="post">
+    <form action="<?php echo base_url('C_Login/Cek_Login') ?>" method="post">
       <div class="form-group has-feedback">
-        <input type="text" class="form-control" placeholder="username / nama panggilan " name="txtusername">
+        <input type="text" class="form-control" placeholder="username/nama panggilan " name="txtusername">
         <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
       </div>
       <div class="form-group has-feedback">

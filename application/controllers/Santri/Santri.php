@@ -10,7 +10,7 @@
  		parent::__construct();
  		$this->load->model('M_SaBa');
  		$this->load->model('M_Santri');
- 		$this->load->model('M_register');
+ 		$this->load->model('M_Register');
  	}
  	public function random($panjang) {
         $karakter = '1234567890987654321';
@@ -25,13 +25,13 @@
  	public function index()
  	{
  		if (($this->session->userdata('iduser'))AND($this->session->userdata('username'))) {
- 			$data['dataku']=$this->M_SaBa->detailSantri($this->session->userdata('iduser'))->row();
- 			$data['wali']=$this->M_SaBa->detailWali($this->session->userdata('iduser'))->row();
- 			$data['edu']=$this->M_SaBa->detailEdu($this->session->userdata('iduser'))->row();
+ 			$data['dataku']=$this->M_SaBa->DetailSantri($this->session->userdata('iduser'))->row();
+ 			$data['wali']=$this->M_SaBa->DetailWali($this->session->userdata('iduser'))->row();
+ 			$data['edu']=$this->M_SaBa->DetailEdu($this->session->userdata('iduser'))->row();
  			$this->load->view('Santri/Santri', $data);
  			unset($data);
  		}else{
- 			redirect('C_landing');
+ 			redirect('C_Landing/Login');
  		}
  	}
 
@@ -39,11 +39,11 @@
  	{
  		if (($this->session->userdata('iduser'))AND($this->session->userdata('username'))) {
  			$data['module']='detaildiri';
- 			$data['dataku']=$this->M_SaBa->detailSantri($this->session->userdata('iduser'))->row();
+ 			$data['dataku']=$this->M_SaBa->DetailSantri($this->session->userdata('iduser'))->row();
  			$this->load->view('Santri/Santri', $data);
  			unset($data);
  		}else{
- 			redirect('C_landing');
+ 			redirect('C_Landing/Login');
  		}
  	}
 
@@ -51,15 +51,15 @@
  	{
  		if (($this->session->userdata('iduser'))AND ($this->session->userdata('username'))) {
  			$data['module']='walisantri';
- 			$data['wali']=$this->M_SaBa->detailWali($this->session->userdata('iduser'))->row();
+ 			$data['wali']=$this->M_SaBa->DetailWali($this->session->userdata('iduser'))->row();
  			$this->load->view('Santri/Santri', $data);
  			unset($data);
  		}else{
- 			redirect('C_landing');
+ 			redirect('C_Landing/Login');
  		}
  	}
 
- 	public function updateDataSantri()
+ 	public function UpdateDataSantri()
  	{
  		$idSantri = $this->input->post('detailID');
  		$data['nama']=$this->input->post('detilNamaLengkap');
@@ -74,12 +74,12 @@
  		$data['tahun_masuk']=$this->input->post('detilmasuk');
  		$data['tahun_boyong']=$this->input->post('detilboyong');
  		$data['password']=base64_encode($this->input->post('detilpassword'));
- 		$this->M_SaBa->update_santri($idSantri, $data);
+ 		$this->M_SaBa->Update_Santri($idSantri, $data);
  		$this->session->set_flashdata('sukses','Data santri berhasil di update');
  		redirect('Santri/Santri');
  		unset($idSantri, $data);
  	}
- 	public function updateDataWali()
+ 	public function UpdateDataWali()
  	{
  		$idwali = $this->input->post('idwali');
  		$data['nmayah'] = $this->input->post('waliAyah');
@@ -90,33 +90,33 @@
  		$data['pkjibu'] = $this->input->post('pkjIbu');
  		$data['almtibu'] = $this->input->post('almtIbu');
  		$data['tlpibu'] = $this->input->post('hpIbu');
- 		$this->M_SaBa->updateWali($idwali, $data);
+ 		$this->M_SaBa->UpdateWali($idwali, $data);
  		$this->session->set_flashdata('sukses','Data wali berhasil di update');
  		redirect('Santri/Santri');
  		unset($data, $idwali);
  	}
 
- 	public function riwayatPendidikan()
+ 	public function RiwayatPendidikan()
  	{
  		if (($this->session->userdata('iduser'))AND($this->session->userdata('username'))) {
  			$data['module']='detailpendidikan';
- 			$data['dataku']=$this->M_SaBa->detailEdu($this->session->userdata('iduser'))->row();
+ 			$data['dataku']=$this->M_SaBa->DetailEdu($this->session->userdata('iduser'))->row();
  			$this->load->view('Santri/Santri', $data);
  			unset($data);
  		}	
  	}
 
- 	public function kotakSaran()
+ 	public function KotakSaran()
  	{
  		if (($this->session->userdata('iduser'))AND($this->session->userdata('username'))) {
  			$data['module']='saranmasukan';
- 			$data['saranmasuk']=$this->M_register->saranmasuk();
+ 			$data['saranmasuk']=$this->M_Register->SaranMasuk();
  			$this->load->view('Santri/Santri', $data);
  			unset($data);
  		}
  	}
 
- 	public function tambahSaran()
+ 	public function TambahSaran()
  	{
  		$idsaran = "SARAN".$this->random(3);
  		$data['id']=$idsaran;
@@ -126,13 +126,13 @@
  		$data['konten']=$this->input->post('isiSaran');
  		$data['tanggal']=date('Y:m:d');
  		$data['status']='0';
- 		$this->M_register->add_saran($data);
+ 		$this->M_Register->Add_Saran($data);
  		$this->session->set_flashdata('sukses','Data saran berhasil dimasukan, terimakasih atas perhatian demi kemajuan pondok ');
  		redirect('Santri/Santri');
  		unset($data, $idsaran);
  	}
 
- 	public function updateEdukasi()
+ 	public function UpdateEdukasi()
  	{
  		$idedukasi = $this->input->post('idedukasi');
  		$edu['sd']=$this->input->post('namasd');
@@ -148,7 +148,7 @@
  		$edu['jurusanpt']=$this->input->post('jurusanpt');
  		$edu['almtpt']=$this->input->post('alamatpt');
  		$edu['luluspt']=$this->input->post('luluspt');
- 		$this->M_SaBa->updateEdu($idedukasi, $edu);
+ 		$this->M_SaBa->UpdateEdu($idedukasi, $edu);
  		$this->session->set_flashdata('sukses','Data Pendidikan berhasil dipernbarui');
  		redirect('Santri/Santri');	
  		unset($edu, $idedukasi);

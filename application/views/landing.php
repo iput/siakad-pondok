@@ -37,7 +37,7 @@
 					<span class="sr-only">Toggle Navigation</span>
 					<i class="fa fa-bars"></i>
 				</button>
-				<a href="<?php echo base_url('C_landing') ?>" class="navbar-brand">
+				<a href="<?php echo base_url('C_Landing') ?>" class="navbar-brand">
 					<img src="<?php echo base_url() ?>landing/img/g-logo.png" alt="Siakad" >
 				</a>
 				<div id="main-nav-collapse" class="collapse navbar-collapse">
@@ -48,7 +48,7 @@
 						<li><a href="#pricing">Daftar</a></li>
 						<li><a href="#team">Pengembang</a></li>
 						<li><a href="#contact">Kontak</a></li>
-						<li><a href="<?php echo base_url('C_landing/login') ?>">Login</a></li>
+						<li><a href="<?php echo base_url('C_Landing/Login') ?>">Login</a></li>
 					</ul>
 				</div>
 				
@@ -153,7 +153,7 @@
 					</div>
 					<div class="col-md-6">
 					<h3>Form Isian</h3>
-						<form class="form-vertical" method="POST"  action="<?php echo base_url('C_landing/add_register') ?>">
+						<form class="form-vertical" method="POST"  action="<?php echo base_url('C_Landing/Add_Register') ?>">
 							<div class="form-group">
 								<label>Nama Lengkap</label>
 								<input type="text" name="namaLengkap" class="form-control" placeholder="Nama lengkap anda">
@@ -216,7 +216,7 @@
 						<div class="team-member">
 							<img src="<?php echo base_url() ?>landing/img/person2.jpg" class="img-responsive img-circle" alt="Person" style="width: 175px;height: 175px;">
 							<div class="member-info">
-								<h3 class="name">Teguh</h3>
+								<h3 class="name">Irwansyah Ibrahim</h3>
 								<span class="title text-muted">Pengelola sistem(Putra)</span>
 								<p class="short-bio">pengelola pusat data santri putra sistem informasi pesantren sabilurrosyad.</p>
 								<ul class="list-inline social-icons">

@@ -10,7 +10,7 @@
  		parent::__construct();
  	}
 
- 	public function semuaKamar()
+ 	public function SemuaKamar()
  	{
  		$result =  $this->db->get('kamar_pondok');
  		if ($result->num_rows()>0) {
@@ -21,7 +21,7 @@
  		unset($result);
  	}
 
- 	public function kamarPutra()
+ 	public function KamarPutra()
  	{
  		$this->db->where('ket_kamar=1');
  		$result= $this->db->get('kamar_pondok');
@@ -33,7 +33,7 @@
  		unset($result);
  	}
 
- 	public function kamarPutri()
+ 	public function KamarPutri()
  	{
  		$this->db->where('ket_kamar=0');
  		$result= $this->db->get('kamar_pondok');
@@ -45,13 +45,13 @@
  		unset($result);
  	}
 
- 	public function tambahKamar($db_kamar)
+ 	public function TambahKamar($db_kamar)
  	{
  		$this->db->query("INSERT into kamar_pondok(id_kamar,nama_kamar,kuota_kamar,ket_kamar) values(?,?,?,?)", array($db_kamar['idkmr'],$db_kamar['nmkmr'],$db_kamar['kuota'],$db_kamar['ketkmr']));
  		unset($db_kamar);
  	}
 
- 	public function editKamar()
+ 	public function EditKamar()
  	{
  		$idKamar = $this->input->get('id');
  		$this->db->where('id_kamar', $idKamar);
@@ -64,13 +64,13 @@
  		unset($idKamar, $datakmr);
  	}
 
- 	public function updateKamar($id_kamar, $data)
+ 	public function UpdateKamar($id_kamar, $data)
  	{
  	$this->db->query("UPDATE kamar_pondok set nama_kamar=?,kuota_kamar=?,ket_kamar=? where id_kamar=?",array($data['nama'], $data['kuota'],$data['modul'], $id_kamar));
  	unset($id_kamar, $data);
  	}
 
- 	public function hapusKamar($idkamar)
+ 	public function HapusKamar($idkamar)
  	{
  		$this->db->where('id_kamar', $idkamar);
  		$this->db->delete('kamar_pondok');
@@ -82,13 +82,13 @@
  		unset($idkamar);
  	}
 
- 	public function tambahPersonil($data)
+ 	public function TambahPersonil($data)
  	{
  		$this->db->query("INSERT into trans_kamar(id_trans,id_kamar,id_santri,keterangan)values(?,?,?,?)",array($data['idtrans'],$data['idkmr'],$data['idstr'],$data['ket']));
  		unset($data);
  	}
 
- 	public function semuaPersonil()
+ 	public function SemuaPersonil()
  	{
  		$this->db->select("trans_kamar.id_trans,trans_kamar.keterangan,kamar_pondok.id_kamar,kamar_pondok.nama_kamar,master_santri.nama_santri,master_santri.noTelpon_santri");
  		$this->db->from("trans_kamar");
@@ -99,7 +99,7 @@
  		unset($data);
  	}
 
- 	public function editPersonil()
+ 	public function EditPersonil()
  	{
  		$id = $this->input->get('id');
  		$this->db->where('id_trans', $id);
@@ -112,7 +112,7 @@
  		unset($id, $data);
  	}
 
- 	public function ambilKuota($id)
+ 	public function AmbilKuota($id)
  	{
 		$datakuota = $this->db->query("SELECT kuota_kamar from kamar_pondok where id_kamar=?", array($id));
 		if ($datakuota) {
@@ -124,13 +124,13 @@
 
  	}
 
- 	public function updateKuotaKamar($idkamar, $data)
+ 	public function UpdateKuotaKamar($idkamar, $data)
  	{
  		$this->db->query("UPDATE kamar_pondok set kuota_kamar=? where id_kamar=?", array($data['kuota'], $idkamar));
  		unset($idKamar, $data);
  	}
 
- 	public function hapusPersonil($id)
+ 	public function HapusPersonil($id)
  	{
  		$this->db->where('id_trans', $id);
  		$this->db->delete('trans_kamar');
@@ -142,7 +142,7 @@
  		unset($id);
  	}
 
- 	public function cekAnggota($id)
+ 	public function CekAnggota($id)
  	{
  		$this->db->where('id_santri',$id);
  		$data = $this->db->get('trans_kamar');
@@ -154,7 +154,7 @@
  		unset($data);
  	}
 
- 	public function updatePersonil($id, $data)
+ 	public function UpdatePersonil($id, $data)
  	{
  		$this->db->query("UPDATE trans_kamar set id_kamar=?, id_santri=?, keterangan=? where id_trans=?",array($data['idkamar'], $data['idsantri'], $data['ket'], $id));
  		unset($id,$data);
