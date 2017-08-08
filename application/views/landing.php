@@ -1,8 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-	<title>Siakad - Pondok Pesantren Sabilurrosyad Gasek</title>
+	<title>Siakad | Pondok Pesantren Sabilurrosyad Gasek</title>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta name="description" content="Free landing page website template">
@@ -37,7 +36,7 @@
 					<span class="sr-only">Toggle Navigation</span>
 					<i class="fa fa-bars"></i>
 				</button>
-				<a href="<?php echo base_url('C_Landing') ?>" class="navbar-brand">
+				<a href="<?php echo base_url('actLanding') ?>" class="navbar-brand">
 					<img src="<?php echo base_url() ?>landing/img/g-logo.png" alt="Siakad" >
 				</a>
 				<div id="main-nav-collapse" class="collapse navbar-collapse">
@@ -48,7 +47,7 @@
 						<li><a href="#pricing">Daftar</a></li>
 						<li><a href="#team">Pengembang</a></li>
 						<li><a href="#contact">Kontak</a></li>
-						<li><a href="<?php echo base_url('C_Landing/Login') ?>">Login</a></li>
+						<li><a href="<?php echo base_url('actLanding/Login') ?>">Login</a></li>
 					</ul>
 				</div>
 				
@@ -62,9 +61,10 @@
 			<div class="container">
 				<div class="hero-content">
 					<div class="alert alert-success" style="display:  none;"></div>
+					<div class="alert alert-danger" style="display:  none;"></div>
 					<h1 class="hero-heading">SELAMAT DATANG DI LAYANAN SISTEM INFORMASI PONPES SABILURROSYAD</h1>
 					<p class="lead">Gasek is Ours-Gasek Paseduluran-Khidmah Barokah</p>
-					<span class="onepage-links"><a href="#overview" class="btn btn-lg btn-primary"><span class="glyphicon glyphicon-arrow-down"></span>&nbsp;Tentang Siakad&nbsp;<span class="glyphicon glyphicon-arrow-down"></span></a></span>
+					<span class="onepage-links"><a href="#overview" class="btn btn-lg btn-primary">Tentang Siakad</a></span>
 				</div>
 			</div>
 		</section>
@@ -153,7 +153,7 @@
 					</div>
 					<div class="col-md-6">
 					<h3>Form Isian</h3>
-						<form class="form-vertical" method="POST"  action="<?php echo base_url('C_Landing/Add_Register') ?>">
+						<form class="form-vertical" method="POST"  action="<?php echo base_url('actLanding/AddRegister') ?>">
 							<div class="form-group">
 								<label>Nama Lengkap</label>
 								<input type="text" name="namaLengkap" class="form-control" placeholder="Nama lengkap anda">
@@ -165,19 +165,6 @@
 							<div class="form-group">
 								<label>Nomor HP/Telepon</label>
 								<input type="text" name="teleponBaru" class="form-control" placeholder="masukan nomor telepon anda">
-							</div>
-							<div class="form-group">
-								<label>Modul Status&nbsp;</label>
-								<label class="radio-inline">
-                  					<input type="radio" name="tambahModul" value="0">&nbsp;Alumni
-                				</label>
-                				<label class="radio-inline">
-                  					<input type="radio" name="tambahModul" value="1">&nbsp;Santri
-                				</label>
-							</div>
-							<div class="form-group">
-								<label>Alamat Lengkap</label>
-								<textarea name="alamatLengkap" class="form-control" placeholder="Alamat lengkap anda" rows="8" cols="6"></textarea>
 							</div>
 							<div>
 								<button type="submit" class="btn btn-success " id="btn_simpan"><i class="glyphicon glyphicon-save"></i>&nbsp;Daftar</button>
@@ -200,7 +187,7 @@
 						<div class="team-member">
 							<img src="<?php echo base_url() ?>landing/img/person2.jpg" class="img-responsive img-circle" alt="Person" style="width: 175px;height: 175px;">
 							<div class="member-info">
-								<h3 class="name">Tajuddin Zahrou</h3>
+								<h3 class="name">Ahmad Tajuddin Zahrou</h3>
 								<span class="title text-muted">SEO gasek multimedia</span>
 								<p class="short-bio">Penggerak tim gasek multimedia dan pengelola sistem informasi pesantren gasek.</p>
 								<ul class="list-inline social-icons">
@@ -217,7 +204,7 @@
 							<img src="<?php echo base_url() ?>landing/img/person2.jpg" class="img-responsive img-circle" alt="Person" style="width: 175px;height: 175px;">
 							<div class="member-info">
 								<h3 class="name">Irwansyah Ibrahim</h3>
-								<span class="title text-muted">Pengelola sistem(Putra)</span>
+								<span class="title text-muted">Pengelola sistem (Putra)</span>
 								<p class="short-bio">pengelola pusat data santri putra sistem informasi pesantren sabilurrosyad.</p>
 								<ul class="list-inline social-icons">
 									<li><a href="#" class="facebook-bg"><i class="fa fa-facebook"></i></a></li>
@@ -232,7 +219,7 @@
 						<div class="team-member">
 							<img src="<?php echo base_url() ?>landing/img/mbak.png" class="img-responsive img-circle" alt="Person" style="width: 175px;height: 175px;">
 							<div class="member-info">
-								<h3 class="name">Mbak Indy</h3>
+								<h3 class="name">Indy</h3>
 								<span class="title text-muted">Pengelola Sistem (Putri)</span>
 								<p class="short-bio">Pengelola pusat data santri putri sistem informasi pesantren sabilurrosyad.</p>
 								<ul class="list-inline social-icons">
@@ -279,7 +266,7 @@
 					</div>
 					<div class="col-md-8">
 					<h3>Tinggalkan kritik dan saran anda</h3>
-						<form id="contact-form" class="form-horizontal form-minimal" method="POST" action="<?php echo base_url('C_landing/tambahkan_saran') ?>">
+						<form id="contact-form" class="form-horizontal form-minimal" method="POST" action="<?php echo base_url('actLanding/TambahkanSaran') ?>">
 							<div class="row">
 								<div class="col-sm-6">
 									<div class="form-group">
@@ -334,7 +321,7 @@
 					<li><a href="https://www.youtube.com/channel/UCZyQenuT3lIsqPuF_kmxlwQ"><i class="fa fa-youtube-play"></i></a></li>
 					<li><a href="https://www.instagram.com/ponpesgasek/"><i class="fa fa-instagram"></i></a></li>
 				</ul>
-				<p class="copyright-text">Designed &amp; Crafted by <a href="https://www.ponpesgasek.com/" target="_blank">Gasek Multimedia</a></p>
+				<p class="copyright-text">Dikembangkan : <a href="https://www.ponpesgasek.com/" target="_blank">Gasek Multimedia</a></p>
 			</div>
 		</footer>
 		<!-- END FOOTER -->
@@ -353,6 +340,9 @@
 	<script type="text/javascript">
 		<?php if ($this->session->flashdata('sukses')): ?>
 			$('.alert-success').html('<?php echo $this->session->flashdata('sukses') ?>').fadeIn();
+		<?php endif ?>
+		<?php if ($this->session->flashdata('gagal')): ?>
+			$('.alert-danger').html('<?php echo $this->session->flashdata('gagal') ?>').fadeIn();
 		<?php endif ?>
 	</script>
 	

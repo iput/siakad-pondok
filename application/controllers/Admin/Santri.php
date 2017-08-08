@@ -1,14 +1,15 @@
 <?php defined('BASEPATH')OR exit('no direct script access allowed');
 /**
- * 
+ *
  */
  class Santri extends CI_Controller
  {
- 	
+
  	function __construct()
  	{
  		parent::__construct();
- 		$this->load->model('M_santri');
+ 		$this->load->model('ModSantri');
+    $this->load->model('ModRegister');
  	}
 
 	public function random($panjang) {
@@ -20,7 +21,8 @@
         }
         return $string;
     }
- 	public function Tambah_Santri()
+
+ 	public function TambahSantri()
  	{
  		$id_santri = "STR00".$this->random(3);
  		$data['id']=$id_santri;
@@ -34,13 +36,18 @@
  		$data['email']=$this->input->post('tambahEmail');
  		$data['facebook']=$this->input->post('tambahFacebook');
  		$data['tahun_masuk']=$this->input->post('tambahTahunMasuk');
- 		$data['tahun_boyong']=$this->input->post('tambahTahunMasuk');
- 		$data['password']=base64_encode($this->input->post('tambahPanggilan'));
- 		$data['status']='1';
- 		$data['level']='1';
- 		$this->M_santri->tambah_santri($data);
+ 		$this->ModSantri->TambahSantri($data);
+
+    $userlog['idlog']="LOG00".$this->random(3);
+    $userlog['santri']=$id_santri;
+    $userlog['username']=$this->input->post('tambahPanggilan');
+    $userlog['password']=md5($this->input->post('tambahNoTelp'));
+    $userlog['waktu']=date('Y:m:d h:m:i');
+    $userlog['level']='santri';
+    $userlog['key']=$this->input->post('tambahNoTelp');
+    $this->ModSantri->createUserlog($userlog);
  		$this->session->set_flashdata('sukses','santri baru berhasil ditambahkan');
- 		redirect('Dashboard/Santri_baru');
+ 		redirect('Dashboard/SantriBaru');
  		unset($id_santri, $data);
 
  	}
@@ -48,7 +55,7 @@
  	public function EditSantri($id_santri)
  	{
  		$data['page'] = 'ubah_santri';
- 		$data['ubah_str'] = $this->M_santri->edit_santri($id_santri)->row();
+ 		$data['ubah_str'] = $this->ModSantri->EditSantri($id_santri)->row();
  		$this->load->view('Dashboard', $data);
  		unset($id_santri, $data);
  	}
@@ -67,38 +74,76 @@
  		$data['facebook']=$this->input->post('editFacebook');
  		$data['tahun_masuk']=$this->input->post('editTahunMasuk');
  		$data['tahun_boyong']=$this->input->post('editTahunBoyong');
- 		$this->M_santri->Update_Santri($idSantri, $data);
+ 		$this->ModSantri->UpdateSantri($idSantri, $data);
  		$this->session->set_flashdata('sukses','Data santri berhasil di update');
- 		redirect('Dashboard/Santri_Baru');
+ 		redirect('Dashboard/SantriBaru');
  		unset($idSantri, $data);
- 	}
-
- 	public function UbahStatus($id)
- 	{
- 		$this->M_santri->jadikanPengurus($id);
- 		$this->session->set_flashdata('sukses','Data santri berhasil dijadikan pengurus');
- 		redirect('Dashboard/Santri_Baru');
- 		unset($id);
- 	}
-
- 	public function LepasPengurus($id)
- 	{
- 		$this->M_santri->LepaskanPengurus($id);
- 		$this->session->set_flashdata('sukses','Data santri telah diberhentikan sebagai pengurus');
- 		redirect('Dashboard/Santri_Baru');
- 		unset($id);
  	}
 
  	public function HapusSantri($id)
  	{
- 		$data = $this->M_santri->hapus_santri($id);
- 		if ($data) {
- 			$this->session->set_flashdata('sukses','Data santri berhasil dihapus');
- 			redirect('Dashboard/Santri_Baru');
- 		}else{
- 			$this->session->set_flashdata('gagal','terjadi kesalahan pada proses hapus data');
- 			redirect('Dashboard/Santri_Baru');
- 		}
+    $datasantri= count($this->ModSantri->cekRelasi($id)->row());
+    if ($datasantri>0) {
+      $this->session->set_flashdata('gagal','data ini mempunya relasi dengan userlog . harap hapus data dari userlog terlebih dahulu');
+      redirect('Dashboard/SantriBaru');
+    }else{
+      $data = $this->ModSantri->HapusSantri($id);
+      if ($data) {
+     		$this->session->set_flashdata('sukses','Data santri berhasil dihapus');
+     		redirect('Dashboard/SantriBaru');
+      }else{
+        $this->session->set_flashdata('gagal','Data santri gagal berhasil dihapus');
+     		redirect('Dashboard/SantriBaru');
+      }
+    }
  		unset($data, $id);
+    
  	}
+
+
+  public function TambahPengurus()
+  {
+    $idnama =$this->input->post('namaSantriAktif');
+    $level = $this->input->post('Kepengurusan');
+
+    $dataSantri= $this->ModSantri->dataSantri($idnama);
+    foreach ($dataSantri as $data) {
+      $username = $data['nama_panggilan'];
+      $password= $data['noTelpon_santri'];
+    }
+
+    $userlog['idlog']="LOG00".$this->random(3);
+    $userlog['santri']=$idnama;
+    $userlog['username']=$username;
+    $userlog['password']=md5($password);
+    $userlog['waktu']=date('Y:m:d H:m:i');
+    $userlog['level']=$level;
+    $userlog['key']=$password;
+    $this->ModSantri->createUserlog($userlog);
+    $this->session->set_flashdata('sukses','Data Santri berhasil dijadikan pengurus');
+    redirect('Dashboard/Pengurus');
+  }
+
+  public function editSaran()
+  {
+    $data = $this->ModRegister->Tanggapi();
+    echo json_encode($data);
+  }
+
+  public function tanggapiSaran()
+  {
+    $data['tanggapan']=$this->input->post('tanggapan');
+    $id = $this->input->post('idSaran');
+    $this->ModRegister->updateTanggapan($id, $data);
+    $this->session->set_flashdata('sukses','Saran Masuk telah ditanggapi');
+    redirect('Dashboard/kotakSaran');
+  }
+  public function HapusSaran($id)
+  {
+    $data = $this->ModRegister->hapusSaran($id);
+    if ($data) {
+      $this->session->set_flashdata('sukses','Data berhasil dihapus');
+      redirect('Dashboard/kotakSaran');
+    }
+  }
  } ?>

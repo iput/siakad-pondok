@@ -101,7 +101,7 @@
                   <a href="#" class="btn btn-default btn-flat">Profile</a>
                 </div>
                 <div class="pull-right">
-                  <a href="<?php echo base_url('C_Login/Logout') ?>" class="btn btn-default btn-flat">Sign out</a>
+                  <a href="<?php echo base_url('Login/Logout') ?>" class="btn btn-default btn-flat">Sign out</a>
                 </div>
               </li>
             </ul>
@@ -162,6 +162,7 @@
         </div>
         <div class="box-body">
         <div class="alert alert-success" style="display: none;"></div>
+        <div class="alert alert-danger" style="display: none;"></div>
           <a href="<?php echo base_url('Putra/Putra/SantriBaru') ?>" class="btn btn-primary btn-flat"><i class="fa fa-plus"></i>&nbsp;Tambah data santri</a>
           <table class="table table-hover table-striped table-bordered table-responsive" id="tabelsantriPutra">
             <thead>
@@ -172,7 +173,6 @@
                 <td>Nomor HP</td>
                 <td>Nama Facebook</td>
                 <td>Alamat Email</td>
-                <td>Kata Sandi</td>
                 <td><i class="fa fa-cogs"></i></td>
               </tr>
             </thead>
@@ -185,7 +185,6 @@
                   <td><?php echo $rows['noTelpon_santri'] ?></td>
                   <td><?php echo $rows['facebook_santri'] ?></td>
                   <td><?php echo $rows['email_santri'] ?></td>
-                  <td><?php echo base64_decode($rows['password_santri']) ?></td>
                   <td>
                     <a href="<?php echo base_url('Putra/Putra/EditDataSantri/'.$rows['id_santri']) ?>" class="btn btn-info btn-flat
                      btn-xs"><i class="fa fa-pencil"></i></a>
@@ -337,12 +336,22 @@
             <div class="form-group">
               <label class="col-md-2 control-label">Jenis Kelamin</label>
               <div class="col-md-6">
-                <label class="radio-inline">
-                  <input type="radio" name="editGender" value="1">&nbsp;Laki-laki
+                <?php if ($detailsantri->jenis_kelamin==1): ?>
+                  <label class="radio-inline">
+                  <input type="radio" name="editGender" value="1" checked>&nbsp;Laki-laki
                 </label>
                 <label class="radio-inline">
                   <input type="radio" name="editGender" value="0">&nbsp;Perempuan
                 </label>
+                <?php endif ?>
+                <?php if ($detailsantri->jenis_kelamin==0): ?>
+                  <label class="radio-inline">
+                  <input type="radio" name="editGender" value="1">&nbsp;Laki-laki
+                </label>
+                <label class="radio-inline">
+                  <input type="radio" name="editGender" value="0" checked>&nbsp;Perempuan
+                </label>
+                <?php endif ?>
               </div>
             </div>
             <div class="form-group">
@@ -373,12 +382,6 @@
               <label class="control-label col-md-2">Tahun masuk</label>
               <div class="col-md-6">
                 <input type="date" name="editTahunMasuk" class="form-control" value="<?php echo $detailsantri->tahun_masuk ?>">
-              </div>
-            </div>
-            <div class="form-group">
-              <label class="control-label col-md-2">Tahun Boyong</label>
-              <div class="col-md-6">
-                <input type="date" name="editTahunBoyong"  class="form-control" value="<?php echo $detailsantri->tahun_boyong ?>">
               </div>
             </div>
             <div class="form-group">
@@ -535,7 +538,7 @@
         <div class="alert alert-success" style="display: none;"></div>
           <button class="btn btn-primary btn-flat" data-toggle="modal" data-target="#tambahSaran"><i class="fa fa-plus"></i>&nbsp;Tambah Saran</button>
           <h4>Saran anda</h4>
-          <table class="table table-bordered table-striped table-hover" id="tabelSaran">
+          <table class="table table-bordered table-striped table-hover table-responsive" id="tabelSaran">
             <thead>
               <tr>
               <td>Pengirim</td>
@@ -549,15 +552,19 @@
               <?php foreach ($saranmasuk as $rowsaran): ?>
                 <?php if ($rowsaran['status']==0) {
                   $status='Belum ditanggapi';
+                  $kelas="label-warning";
+                  $ikon = "fa fa-exclamation-circle";
                 }else if ($rowsaran['status']==1) {
                   $status='Sudah ditanggapi';
+                  $kelas="label-success";
+                  $ikon = "fa fa-check-circle";
                 } ?>
                 <tr>
                   <td><?php echo $rowsaran['nama_pengirim']; ?></td>
                   <td><?php echo $rowsaran['email_pengirim']; ?></td>
                   <td><?php echo $rowsaran['tentang']; ?></td>
                   <td><?php echo $rowsaran['konten_saran']; ?></td>
-                  <td><label class="label label-success"><?php echo $status ?></label></td>
+                  <td><label class="label <?php echo $kelas ?>"><i class="<?php echo $ikon ?>"></i> <?php echo $status ?></label></td>
                 </tr>
               <?php endforeach ?>
             </tbody>
@@ -724,13 +731,13 @@
 <script type="text/javascript">
   $('#tabelsantriPutra').DataTable();
   $('#tabelPersonil').DataTable();
-  $('#datepicker').datepicker({
-      autoclose: true
-    });
-
+  $('#tabelSaran').DataTable();
   $('.select2').select2();
 <?php if ($this->session->flashdata('sukses')): ?>
   $('.alert-success').html('<?php echo $this->session->flashdata('sukses') ?>').fadeIn();
+<?php endif ?>
+<?php if ($this->session->flashdata('gagal')): ?>
+  $('.alert-danger').html('<?php echo $this->session->flashdata('gagal') ?>').fadeIn();
 <?php endif ?>
 
 $('#showPersonil').on('click','.btnPersonil',function(){

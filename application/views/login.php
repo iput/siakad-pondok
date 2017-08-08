@@ -44,14 +44,14 @@
 <body class="hold-transition login-page">
 <div class="login-box">
   <div class="login-logo">
-    <a href="<?php echo base_url('C_Landing') ?>" id="pagename"><b>Admin</b>Gasek</a>
+    <a href="<?php echo base_url('actLanding') ?>" id="pagename"><b>Admin</b>Gasek</a>
   </div>
   <!-- /.login-logo -->
   <div class="login-box-body">
-    <p class="login-box-msg" id="teks">Gunakan nama panggilan sebagai username Dan nomor telepon sebagai password</p>
+    <p class="login-box-msg" id="teks">Gunakan nama panggilan sebagai username Dan nomor telepon sebagai password. Untuk Alumni gunakan akses santri untuk melengkapi data</p>
     <div class="alert alert-danger" style="display: none;"></div>
 
-    <form action="<?php echo base_url('C_Login/Cek_Login') ?>" method="post">
+    <form action="<?php echo base_url('Login/setLogin') ?>" method="post">
       <div class="form-group has-feedback">
         <input type="text" class="form-control" placeholder="username/nama panggilan " name="txtusername">
         <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
@@ -62,17 +62,19 @@
       </div>
       <div class="form-group has-feedback">
         <select class="form-control" name="levelPengguna">
-          <option value="3">Pilih Hak Akses</option>
-          <option value="0">Alumni</option>
-          <option value="1">Santri</option>
-          <option value="2">Pengurus</option>
+          <option>Pilih Hak Akses</option>
+          <option value="superadmin">Pengasuh</option>
+          <option value="pengurusputra">Pengurus Putra</option>
+          <option value="pengurusputri">Pengurus Putri</option>
+          <option value="alumni">Alumni</option>
+          <option value="santri">Santri</option>
         </select>
       </div>
       <div class="row">
         <div class="col-xs-8">
           <div class="checkbox icheck">
             <label>
-              <input type="checkbox"> Remember Me
+              <input type="checkbox"> Ingatkan saya
             </label>
           </div>
         </div>

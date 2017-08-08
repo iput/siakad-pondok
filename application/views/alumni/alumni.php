@@ -101,7 +101,7 @@
                   <a href="#" class="btn btn-default btn-flat">Profile</a>
                 </div>
                 <div class="pull-right">
-                  <a href="<?php echo base_url('C_Login/Logout') ?>" class="btn btn-default btn-flat">Sign out</a>
+                  <a href="<?php echo base_url('Login/Logout') ?>" class="btn btn-default btn-flat">Sign out</a>
                 </div>
               </li>
             </ul>
@@ -132,12 +132,8 @@
             <i class="fa fa-dashboard"></i> <span>Beranda</span>
           </a>
         </li>
-        <li><a href="<?php echo base_url('Alumni/Alumni/DetilDiri') ?>"><i class="fa fa-user-secret"></i><span> Data Diri</span></a></li>
-        <li><a href="<?php echo base_url('Alumni/Alumni/WaliSantri') ?>"><i class="fa fa-users"></i><span> Data Wali</span></a></li>
-        <li><a href="<?php echo base_url('Alumni/Alumni/RiwayatPendidikan') ?>"><i class="fa fa-trophy"></i><span> Riwayat Pendidikan</span></a></li>
         <li><a href="<?php echo base_url('Alumni/Alumni/KotakSaran') ?>"><i class="fa fa-envelope-o"></i><span> Saran dan Masukan</span></a></li>
-        <li class="header">LABELS</li>
-        <li><a href="#"><i class="fa fa-circle-o text-red"></i> <span>Setting</span></a></li>
+        <li><a href="<?php echo base_url('Alumni/Alumni/beritaTerbaru') ?>"><i class="fa fa-newspaper-o"></i><span> Informasi terbaru</span></a></li>
       </ul>
     </section>
     <!-- /.sidebar -->
@@ -244,18 +240,6 @@
               </div>
             </div>
             <div class="form-group">
-              <label class="control-label col-md-2">Tahun Boyong</label>
-              <div class="col-md-8">
-                <input type="date" name="detilboyong" class="form-control"  value="<?php echo $dataku->tahun_boyong ?>">
-              </div>
-            </div>
-            <div class="form-group">
-              <label class="control-label col-md-2">Password</label>
-              <div class="col-md-8">
-                <input type="text" name="detilpassword" class="form-control"  value="<?php echo base64_decode($dataku->password_santri) ?>">
-              </div>
-            </div>
-            <div class="form-group">
             <div class="col-md-2"></div>
               <div class="col-md-8">
                 <button class="btn btn-danger btn-flat"><i class="fa fa-close"></i>&nbsp;Batal</button>
@@ -285,7 +269,7 @@
             <div class="form-group">
               <label class="control-label col-md-2">Nama Ayah</label>
               <div class="col-md-8">
-                <input type="hidden" name="idwali" class="form-control" readonly value="<?php echo $wali->id_wali ?>">
+                <input type="hidden" name="idwali" class="form-control" readonly value="<?php echo $wali->id_santri ?>">
                 <input type="text" name="waliAyah" class="form-control" value="<?php echo $wali->nama_ayah ?>">
               </div>
             </div>
@@ -362,13 +346,13 @@
             <h4>Riwayat sekolah dasar/madrasah ibtida'iyah</h4>
               <div class="row">
                 <div class="col-md-6">
-                <input type="hidden" name="idedukasi" value="<?php echo $dataku->id_edu ?>">
+                <input type="hidden" name="idedukasi" value="<?php echo $dataku->id_santri ?>">
                 <label>Nama Sekolah dasar : </label>
                   <input type="text" name="namasd" class="form-control" placeholder="nama sekolah dasar/ sederajat" value="<?php echo $dataku->nama_sd ?>">
                 </div>
                 <div class="col-md-6">
                 <label>Tahun Kelulusan : </label>
-                  <input type="date" name="lulussd" class="form-control" value="<?php echo $dataku->tahun_lulus_sd ?>">
+                  <input type="date" name="lulussd" class="form-control" value="<?php echo $dataku->lulus_sd ?>">
                 </div>
               </div>
               <hr>
@@ -390,7 +374,7 @@
                 </div>
                 <div class="col-md-6">
                 <label>Tahun Kelulusan sekolah menengah Pertama : </label>
-                  <input type="date" name="lulussmp" class="form-control"  value="<?php echo $dataku->tahun_lulus_smp ?>">
+                  <input type="date" name="lulussmp" class="form-control"  value="<?php echo $dataku->lulus_smp ?>">
                 </div>
               </div>
               <hr>
@@ -412,7 +396,7 @@
                 </div>
                 <div class="col-md-6">
                 <label>Tahun Kelulusan Sekolah menengah akhir : </label>
-                  <input type="date" name="lulussma" class="form-control" value="<?php echo $dataku->tahun_lulus_sma ?>">
+                  <input type="date" name="lulussma" class="form-control" value="<?php echo $dataku->lulus_sma ?>">
                 </div>
               </div>
               <hr>
@@ -434,7 +418,7 @@
                 </div>
                 <div class="col-md-6">
                 <label>Tahun Kelulusan : </label>
-                  <input type="date" name="luluspt" class="form-control" value="<?php echo $dataku->tahun_lulus_pt ?>">
+                  <input type="date" name="luluspt" class="form-control" value="<?php echo $dataku->tahun_wisuda ?>">
                 </div>
               </div>
               <label>Jurusan Perkuliahan : </label>
@@ -487,26 +471,26 @@
               <?php foreach ($saranmasuk as $rowsaran): ?>
                 <?php if ($rowsaran['status']==0) {
                   $status='Belum ditanggapi';
-                  $kelas ="label-danger";
+                  $kelas ="label-warning";
+                  $ikon ="fa fa-exclamation-circle";
                 }else if ($rowsaran['status']==1) {
                   $status='Sudah ditanggapi';
                   $kelas ="label-success";
+                  $ikon ="fa fa-check-circle-o";
                 } ?>
                 <tr>
                   <td><?php echo $rowsaran['nama_pengirim']; ?></td>
                   <td><?php echo $rowsaran['email_pengirim']; ?></td>
                   <td><?php echo $rowsaran['tentang']; ?></td>
                   <td><?php echo $rowsaran['konten_saran']; ?></td>
-                  <td><label class="label <?php echo $kelas ?>"><?php echo $status ?></label></td>
+                  <td><label class="label <?php echo $kelas ?>"><i class="<?php echo $ikon ?>"></i>  <?php echo $status ?></label></td>
                 </tr>
               <?php endforeach ?>
             </tbody>
           </table>
         </div>
       </div>
-    </section>
-    <?php unset($saranmasuk, $rowsaran); ?>
-    <div class="modal fade" tabindex="-1" role="dialog" id="tambahSaran">
+      <div class="modal fade" tabindex="-1" role="dialog" id="tambahSaran">
       <div class="modal-dialog" role="document">
         <div class="modal-content">
           <div class="modal-header bg-primary">
@@ -543,6 +527,49 @@
         </div>
       </div>
     </div>
+    </section>
+    <?php unset($saranmasuk, $rowsaran); ?>
+    <?php }else if((isset($module))AND($module=='beritaTerbaru')){ ?>
+    <section class="content-header">
+      <h4>Berita terbaru</h4>
+      <ol class="breadcrumb">
+        <li><a href="<?php echo base_url('Alumni/Alumni') ?>"><i class="fa fa-dashboard"></i>Beranda</a></li>
+        <li class="active">Berita Terbaru</li>
+      </ol>
+    </section>
+    <section class="content">
+      <?php foreach ($infoBerita as $dataInfo): ?>
+          <div class="box box-success">
+            <div class="box-header">
+              <i class="fa fa-newspaper-o"></i>
+              <h3 class="box-title"><?php echo $dataInfo['judulInfo'] ?></h3>
+            </div>
+              <div class="box-body chat" id="chat-box">
+              <div class="item">
+                <img src="<?php echo base_url('landing/img/pondok.png') ?>" alt="user image" class="online">
+
+                <p class="message">
+                  <a href="#" class="name">
+                    <small class="text-muted pull-right"><i class="fa fa-clock-o"></i> <?php echo $dataInfo['tanggalInput'] ?></small>
+                    <?php echo $dataInfo['penulisInfo'] ?>
+                  </a>
+                  <?php echo $dataInfo['kontentInfo'] ?>
+                </p>
+              </div>
+            </div>
+            <div class="box-footer">
+              <form method="POST" action="">
+                <div class="input-group">
+                <input class="form-control" placeholder="Tinggalkan Komentar">
+                <div class="input-group-btn">
+                  <button type="button" class="btn btn-success"><i class="fa fa-comment"></i></button>
+                </div>
+              </div>
+              </form>
+            </div>
+          </div>
+      <?php endforeach ?>
+    </section>
     <?php }else{ ?>
     <section class="content-header">
       <h4>Beranda</h4>
@@ -667,7 +694,7 @@
                     <i class="fa fa-graduation-cap bg-blue"></i>
 
                     <div class="timeline-item">
-                      <span class="time"><i class="fa fa-clock-o"></i> Kelulusan :  <?php echo $edu->tahun_lulus_sd ?></span>
+                      <span class="time"><i class="fa fa-clock-o"></i> Kelulusan :  <?php echo $edu->lulus_sd ?></span>
 
                       <h3 class="timeline-header"><a href="#">Nama Sekolah : <?php echo $edu->nama_sd ?></a></h3>
 
@@ -682,7 +709,7 @@
                     <i class="fa fa-graduation-cap bg-aqua"></i>
 
                     <div class="timeline-item">
-                      <span class="time"><i class="fa fa-clock-o"></i> Kelulusan :  <?php echo $edu->tahun_lulus_smp ?></span>
+                      <span class="time"><i class="fa fa-clock-o"></i> Kelulusan :  <?php echo $edu->lulus_smp ?></span>
 
                       <h3 class="timeline-header"><a href="#">Nama Sekolah : <?php echo $edu->nama_smp ?></a></h3>
 
@@ -697,7 +724,7 @@
                     <i class="fa fa-graduation-cap bg-yellow"></i>
 
                     <div class="timeline-item">
-                      <span class="time"><i class="fa fa-clock-o"></i> Kelulusan :  <?php echo $edu->tahun_lulus_sma ?></span>
+                      <span class="time"><i class="fa fa-clock-o"></i> Kelulusan :  <?php echo $edu->lulus_sma ?></span>
 
                       <h3 class="timeline-header"><a href="#">Nama Sekolah : <?php echo $edu->nama_sma ?></a></h3>
 
@@ -719,7 +746,7 @@
                     <i class="fa fa-graduation-cap bg-purple"></i>
 
                     <div class="timeline-item">
-                      <span class="time"><i class="fa fa-clock-o"></i> Kelulusan :  <?php echo $edu->tahun_lulus_pt ?></span>
+                      <span class="time"><i class="fa fa-clock-o"></i> Kelulusan :  <?php echo $edu->tahun_wisuda ?></span>
 
                       <h3 class="timeline-header"><a href="#">Nama Universitas : <?php echo $edu->nama_pt ?> <br>Jurusan : <?php echo $edu->jurusan_pt ?></a></h3>
 
@@ -797,10 +824,6 @@
 <script src="<?php echo base_url() ?>assets/plugins/datepicker/bootstrap-datepicker.js"></script>
 <script type="text/javascript">
   $('#tabel_alumni').DataTable();
-
-  $('#datepicker').datepicker({
-      autoclose: true
-    });
 </script>
 </body>
 </html>

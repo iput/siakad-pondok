@@ -8,9 +8,10 @@
  	function __construct()
  	{
  		parent::__construct();
- 		$this->load->model('M_SaBa');
- 		$this->load->model('M_Santri');
- 		$this->load->model('M_Register');
+ 		$this->load->model('ModSaBa');
+ 		$this->load->model('ModSantri');
+ 		$this->load->model('ModRegister');
+ 		$this->load->model('ModInformasi');
  	}
  	public function random($panjang) {
         $karakter = '1234567890987654321';
@@ -25,9 +26,9 @@
  	public function index()
  	{
  		if (($this->session->userdata('iduser'))AND($this->session->userdata('username'))) {
- 			$data['dataku']=$this->M_SaBa->detailSantri($this->session->userdata('iduser'))->row();
- 			$data['wali']=$this->M_SaBa->detailWali($this->session->userdata('iduser'))->row();
- 			$data['edu']=$this->M_SaBa->detailEdu($this->session->userdata('iduser'))->row();
+ 			$data['dataku']=$this->ModSaBa->detailSantri($this->session->userdata('iduser'))->row();
+ 			$data['wali']=$this->ModSaBa->detailWali($this->session->userdata('iduser'))->row();
+ 			$data['edu']=$this->ModSaBa->detailEdu($this->session->userdata('iduser'))->row();
  			$this->load->view('Alumni/Alumni', $data);
  			unset($data);
  		}
@@ -37,7 +38,7 @@
  	{
  		if (($this->session->userdata('iduser'))AND($this->session->userdata('username'))) {
  			$data['module']='detaildiri';
- 			$data['dataku']=$this->M_SaBa->detailSantri($this->session->userdata('iduser'))->row();
+ 			$data['dataku']=$this->ModSaBa->detailSantri($this->session->userdata('iduser'))->row();
  			$this->load->view('Alumni/Alumni', $data);
  			unset($data);
  		}
@@ -47,7 +48,7 @@
  	{
  		if (($this->session->userdata('iduser'))AND ($this->session->userdata('username'))) {
  			$data['module']='walisantri';
- 			$data['wali']=$this->M_SaBa->DetailWali($this->session->userdata('iduser'))->row();
+ 			$data['wali']=$this->ModSaBa->DetailWali($this->session->userdata('iduser'))->row();
  			$this->load->view('Alumni/Alumni', $data);
  			unset($data);
  		}
@@ -66,9 +67,7 @@
  		$data['email']=$this->input->post('detilemail');
  		$data['facebook']=$this->input->post('detilfacebook');
  		$data['tahun_masuk']=$this->input->post('detilmasuk');
- 		$data['tahun_boyong']=$this->input->post('detilboyong');
- 		$data['password']=base64_encode($this->input->post('detilpassword'));
- 		$this->M_SaBa->Update_Santri($idSantri, $data);
+ 		$this->ModSaBa->UpdateSantri($idSantri, $data);
  		$this->session->set_flashdata('sukses','Data santri berhasil di update');
  		redirect('Alumni/Alumni');
  		unset($idSantri, $data);
@@ -84,7 +83,7 @@
  		$data['pkjibu'] = $this->input->post('pkjIbu');
  		$data['almtibu'] = $this->input->post('almtIbu');
  		$data['tlpibu'] = $this->input->post('hpIbu');
- 		$this->M_SaBa->UpdateWali($idwali, $data);
+ 		$this->ModSaBa->UpdateWali($idwali, $data);
  		$this->session->set_flashdata('sukses','Data santri berhasil di update');
  		redirect('Alumni/Alumni');
  		unset($data, $idwali);
@@ -94,7 +93,7 @@
  	{
  		if (($this->session->userdata('iduser'))AND($this->session->userdata('username'))) {
  			$data['module']='detailpendidikan';
- 			$data['dataku']=$this->M_SaBa->detailEdu($this->session->userdata('iduser'))->row();
+ 			$data['dataku']=$this->ModSaBa->detailEdu($this->session->userdata('iduser'))->row();
  			$this->load->view('Alumni/Alumni', $data);
  			unset($data);
  		}	
@@ -104,7 +103,7 @@
  	{
  		if (($this->session->userdata('iduser'))AND($this->session->userdata('username'))) {
  			$data['module']='saranmasukan';
- 			$data['saranmasuk']=$this->M_Register->saranmasuk();
+ 			$data['saranmasuk']=$this->ModRegister->saranmasuk();
  			$this->load->view('Alumni/Alumni', $data);
  			unset($data);
  		}
@@ -120,7 +119,7 @@
  		$data['konten']=$this->input->post('isiSaran');
  		$data['tanggal']=date('Y:m:d');
  		$data['status']='0';
- 		$this->M_Register->Add_Saran($data);
+ 		$this->ModRegister->AddSaran($data);
  		$this->session->set_flashdata('sukses','Data saran berhasil dimasukan, terimakasih atas perhatian demi kemajuan pondok ');
  		redirect('Alumni/Alumni');
  		unset($data, $idsaran);
@@ -142,8 +141,19 @@
  		$edu['jurusanpt']=$this->input->post('jurusanpt');
  		$edu['almtpt']=$this->input->post('alamatpt');
  		$edu['luluspt']=$this->input->post('luluspt');
- 		$this->M_SaBa->UpdateEdu($idedukasi, $edu);
+ 		$this->ModSaBa->UpdateEdu($idedukasi, $edu);
  		redirect('Alumni/Alumni');	
  		unset($edu, $idedukasi);
+ 	}
+
+ 	public function beritaTerbaru()
+ 	{
+ 		if (($this->session->userdata('iduser'))AND($this->session->userdata('username'))) {
+ 			$data['module']='beritaTerbaru';
+ 			$data['infoBerita']=$this->ModInformasi->semuaInformasi();
+ 			$data['komentar']=$this->ModInformasi->ambilKomentar();
+ 			$this->load->view('Alumni/Alumni', $data);
+ 			unset($data);
+ 		}
  	}
  } ?>

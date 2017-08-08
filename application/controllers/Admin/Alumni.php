@@ -8,7 +8,8 @@
  	function __construct()
  	{
  		parent::__construct();
- 		$this->load->model('M_Alumni');
+ 		$this->load->model('ModAlumni');
+ 		$this->load->model('ModSantri');
  	}
  	public function random($panjang) {
         $karakter = '1234567890987654321';
@@ -20,18 +21,18 @@
         return $string;
     }
 
- 	public function Tambah_Alumni()
+ 	public function TambahAlumni()
  	{
  		if (($this->session->userdata('iduser'))AND($this->session->userdata('username'))) {
  			$data['page']='tambah_alumni';
  			$this->load->view('Dashboard', $data);
  			unset($data);
  		}else{
- 			redirect('C_Landing');
+ 			redirect('actLanding');
  		}
  	}
 
- 	public function alumni_baru()
+ 	public function AlumniBaru()
  	{
  		$id_alumni = "STR00".$this->random(3);
  		$data['id']=$id_alumni;
@@ -45,11 +46,17 @@
  		$data['email']=$this->input->post('alumniEmail');
  		$data['facebook']=$this->input->post('alumniFacebook');
  		$data['tahun_masuk']=$this->input->post('alumniTahunMasuk');
- 		$data['tahun_boyong']=$this->input->post('alumniTahunBoyong');
- 		$data['password']=base64_encode($this->input->post('alumniPanggilan'));
- 		$data['status']='0';
- 		$data['level']='0';
- 		$this->M_Alumni->Tambah_Alumni($data);
+ 		
+ 		$this->ModAlumni->TambahAlumni($data);
+
+ 		$userlog['idlog']="LOG00".$this->random(3);
+    	$userlog['santri']=$id_alumni;
+    	$userlog['username']=$this->input->post('alumniPanggilan');
+    	$userlog['password']=md5($this->input->post('alumniNoTelp'));
+    	$userlog['waktu']=date('Y:m:d h:m:i');
+    	$userlog['level']='alumni';
+    	$userlog['key']=$this->input->post('alumniNoTelp');
+    	$this->ModSantri->createUserlog($userlog);
  		unset($id_alumni, $data);
  		$this->session->set_flashdata('sukses','Data Alumni berhasil ditambahkan');
  		redirect('Dashboard/Alumni');
@@ -59,13 +66,13 @@
  	{
  		if (($this->session->userdata('iduser'))AND($this->session->userdata('username'))) {
  			$data['page']='edit_alumni';
- 			$data['edit_almn']=$this->M_Alumni->edit_alumni($id)->row();
+ 			$data['edit_almn']=$this->ModAlumni->EditAlumni($id)->row();
  			$this->load->view('Dashboard',$data);
  			unset($data);
  		}
  	}
 
- 	public function Update_Alumni()
+ 	public function UpdateAlumni()
  	{
  		$id_alumni = $this->input->post('editIDAlumni');
  		$data['nama']= $this->input->post('editalumniNamaSantri');
@@ -78,8 +85,7 @@
  		$data['email']=$this->input->post('editalumniEmail');
  		$data['facebook']=$this->input->post('editalumniFacebook');
  		$data['tahun_masuk']=$this->input->post('editalumniTahunMasuk');
- 		$data['tahun_boyong']=$this->input->post('editalumniTahunBoyong');	
- 		$this->M_Alumni->Update_Alumni($id_alumni, $data);
+ 		$this->ModAlumni->UpdateAlumni($id_alumni, $data);
  		$this->session->set_flashdata('sukses','Data alumni berhasil diupdate');
  		redirect('Dashboard/Alumni');
  		unset($id_alumni, $data);
@@ -87,7 +93,7 @@
 
  	public function HapusAlumni($id)
  	{
- 		$hapus = $this->M_Alumni->Hapus_Alumni($id);
+ 		$hapus = $this->ModAlumni->HapusAlumni($id);
  		if ($hapus) {
  			$this->session->set_flashdata('sukses','data alumni berhasil dihapus');
  			redirect('Dashboard/Alumni');

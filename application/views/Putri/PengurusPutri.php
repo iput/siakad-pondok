@@ -102,7 +102,7 @@
                   <a href="#" class="btn btn-default btn-flat">Profile</a>
                 </div>
                 <div class="pull-right">
-                  <a href="<?php echo base_url('C_Login/Logout') ?>" class="btn btn-default btn-flat">Sign out</a>
+                  <a href="<?php echo base_url('Login/Logout') ?>" class="btn btn-default btn-flat">Sign out</a>
                 </div>
               </li>
             </ul>
@@ -163,17 +163,15 @@
         </div>
         <div class="box-body">
         <div class="alert alert-success" style="display: none;"></div>
+        <div class="alert alert-danger" style="display: none;"></div>
           <a href="<?php echo base_url('Putri/Putri/TambahSantri') ?>" class="btn btn-primary btn-flat"><i class="fa fa-plus"></i>&nbsp;Tambah Data Santri</a>
           <table class="table table-responsive table-hover table-striped table-bordered" id="tabelSantriPutri">
-            <thead>
+            <thead class="bg-primary">
               <tr>
                 <td>Nama Lengkap</td>
                 <td>Panggilan</td>
                 <td>Alamat</td>
                 <td>Nomor HP</td>
-                <td>Nama Facebook</td>
-                <td>Alamat Email</td>
-                <td>Kata Sandi</td>
                 <td><i class="fa fa-cogs"></i></td>
               </tr>
             </thead>
@@ -184,9 +182,6 @@
                   <td><?php echo $rputri['nama_panggilan'] ?></td>
                   <td><?php echo $rputri['alamat_santri'] ?></td>
                   <td><?php echo $rputri['noTelpon_santri'] ?></td>
-                  <td><?php echo $rputri['facebook_santri'] ?></td>
-                  <td><?php echo $rputri['email_santri'] ?></td>
-                  <td><?php echo base64_decode($rputri['password_santri']) ?></td>
                   <td>
                     <a href="<?php echo base_url('Putri/Putri/EditDataSantri/'.$rputri['id_santri']) ?>" class="btn btn-info btn-flat btn-xs"><i class="fa fa-pencil"></i></a>
                     <a href="<?php echo base_url('Putri/Putri/HapusDataSantri/'.$rputri['id_santri']) ?>" onclick="return confirm('apakah anda yakin akan mengapus data ini ?')" class="btn btn-danger btn-flat btn-xs" ><i class="fa fa-trash"></i></a>
@@ -386,12 +381,6 @@
               </div>
             </div>
             <div class="form-group">
-              <label class="control-label col-md-2">Tahun Boyong</label>
-              <div class="col-md-6">
-                <input type="date" name="editTahunBoyong"  class="form-control" value="<?php echo $detailsantri->tahun_boyong ?>">
-              </div>
-            </div>
-            <div class="form-group">
               <div class="col-md-2"></div>
               <div class="col-md-6">
                 <a href="<?php echo base_url('Putri/Putri/DataSantri') ?>" class="btn btn-danger btn-flat"><span class="glyphicon glyphicon-remove"></span>&nbsp;Batal</a>
@@ -420,7 +409,7 @@
         <div class="alert alert-success" style="display: none;"></div>
           <button class="btn btn-primary btn-flat" data-toggle="modal" data-target="#tambahPersonil"><i class=" fa fa-plus"></i>&nbsp;Tambah Anggota Kamar</button>
           <table class="table table-bordered table-striped table-hover" id="tabelPersonil">
-            <thead>
+            <thead class="bg-primary">
               <tr>
                 <td>ID</td>
                 <td>Nama Kamar</td>
@@ -546,7 +535,7 @@
           <button class="btn btn-primary btn-flat" data-toggle="modal" data-target="#tambahSaran"><i class="fa fa-plus"></i>&nbsp;Tambah Saran</button>
           <h4>Saran anda</h4>
           <table class="table table-bordered table-striped table-hover" id="tabelSaran">
-            <thead>
+            <thead class="bg-primary">
               <tr>
               <td>Pengirim</td>
               <td>Email Pengirim</td>
@@ -559,17 +548,19 @@
               <?php foreach ($saranmasuk as $rowsaran): ?>
                 <?php if ($rowsaran['status']==0) {
                   $status='Belum ditanggapi';
-                  $kelas="label-danger";
+                  $kelas="label-warning";
+                  $ikon = "fa fa-exclamation-circle";
                 }else if ($rowsaran['status']==1) {
                   $status='Sudah ditanggapi';
                   $kelas="label-success";
+                  $ikon = "fa fa-check-circle";
                 } ?>
                 <tr>
                   <td><?php echo $rowsaran['nama_pengirim']; ?></td>
                   <td><?php echo $rowsaran['email_pengirim']; ?></td>
                   <td><?php echo $rowsaran['tentang']; ?></td>
                   <td><?php echo $rowsaran['konten_saran']; ?></td>
-                  <td><label class="label <?php echo $kelas ?>"><?php echo $status ?></label></td>
+                  <td><label class="label <?php echo $kelas ?>"><i class="<?php echo $ikon ?>"></i> <?php echo $status ?></label></td>
                 </tr>
               <?php endforeach ?>
             </tbody>
@@ -738,6 +729,8 @@
 <script src="<?php echo base_url()?>assets/plugins/datatables/js/dataTables.bootstrap.min.js"></script>
 <script type="text/javascript">
   $('#tabel_alumni').DataTable();
+  $('#tabelSantriPutri').DataTable();
+  $('#tabelSaran').DataTable();
 
   $('#datepicker').datepicker({
       autoclose: true
@@ -745,6 +738,10 @@
 
   <?php if ($this->session->flashdata('sukses')): ?>
     $('.alert-success').html('<?php echo $this->session->flashdata('sukses') ?>').fadeIn();
+  <?php endif ?>
+
+  <?php if ($this->session->flashdata('gagal')): ?>
+    $('.alert-danger').html('<?php echo $this->session->flashdata('gagal') ?>').fadeIn();
   <?php endif ?>
 </script>
 <script type="text/javascript">
