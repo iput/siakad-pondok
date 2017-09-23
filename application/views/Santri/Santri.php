@@ -263,7 +263,7 @@
             <div class="form-group">
             <div class="col-md-2"></div>
               <div class="col-md-8">
-                <button class="btn btn-danger btn-flat"><i class="fa fa-close"></i>&nbsp;Batal</button>
+                <button class="btn btn-danger btn-flat" onClick="history.go(-1)"><i class="fa fa-close" ></i>&nbsp;Batal</button>
                 <button type="submit" class="btn btn-info btn-flat"><i class="fa fa-refresh"></i>&nbsp;Perbarui Data</button>
               </div>
             </div>
