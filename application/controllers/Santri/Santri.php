@@ -29,6 +29,8 @@
  			$data['dataku']=$this->ModSaBa->DetailSantri($this->session->userdata('iduser'))->row();
  			$data['wali']=$this->ModSaBa->DetailWali($this->session->userdata('iduser'))->row();
  			$data['edu']=$this->ModSaBa->DetailEdu($this->session->userdata('iduser'))->row();
+
+ 			$data['aktifmenu']="1";
  			$this->load->view('Santri/Santri', $data);
  			unset($data);
  		}else{
@@ -132,6 +134,7 @@
  		if (($this->session->userdata('iduser'))AND($this->session->userdata('username'))) {
  			$data['module']='saranmasukan';
  			$data['saranmasuk']=$this->ModRegister->SaranMasuk();
+ 			$data['aktifmenu']="2";
  			$this->load->view('Santri/Santri', $data);
  			unset($data);
  		}
@@ -180,7 +183,9 @@
  		if (($this->session->userdata('iduser'))AND($this->session->userdata('username'))) {
  			$data['module']='beritaTerbaru';
  			$data['informasi']=$this->ModInformasi->semuaInformasi();
+ 			$data['aktifmenu']=3;
  			$this->load->view('Santri/Santri', $data);
+
  		}else{
  			redirect('actLanding');
  		}

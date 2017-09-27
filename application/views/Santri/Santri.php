@@ -125,13 +125,25 @@
       <!-- sidebar menu: : style can be found in sidebar.less -->
       <ul class="sidebar-menu">
         <li class="header">MENU UTAMA</li>
-        <li class="active treeview">
+        <li class="<?php 
+          if ($aktifmenu==1){
+            echo "active";
+          }
+        ?>">
           <a href="<?php echo base_url('Santri/Santri') ?>">
             <i class="fa fa-dashboard"></i> <span>Beranda</span>
           </a>
         </li>
-        <li><a href="<?php echo base_url('Santri/Santri/kotakSaran') ?>"><i class="fa fa-envelope-o"></i><span> Kotak Saran</span></a></li>
-        <li><a href="<?php echo base_url('Santri/Santri/beritaTerbaru') ?>"><i class="fa fa-newspaper-o"></i><span> informasi Terbaru</span></a></li>
+        <li class="<?php 
+          if ($aktifmenu==2){
+            echo "active";
+          }
+        ?>"><a href="<?php echo base_url('Santri/Santri/kotakSaran') ?>"><i class="fa fa-envelope-o"></i><span> Kotak Saran</span></a></li>
+        <li <li class="<?php 
+          if ($aktifmenu==3){
+            echo "active";
+          }
+        ?>"><a href="<?php echo base_url('Santri/Santri/beritaTerbaru') ?>"><i class="fa fa-newspaper-o"></i><span> informasi Terbaru</span></a></li>
         <li class="header">LAIN-LAIN</li>
         <li><a href="#"><i class="fa fa-circle-o text-red"></i> <span>Setting</span></a></li>
       </ul>
