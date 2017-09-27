@@ -94,9 +94,10 @@
  			$userlog['key']=$this->input->post('detiltelepon');
  			$this->ModSantri->createUserlog($userlog);
 
- 			$this->session->set_flashdata('sukses','Data anda telah diupdate, gunakan akses ketika anda ingin kembali login');
+ 			//$this->session->set_flashdata('sukses','Data anda telah diupdate, gunakan akses ketika anda ingin kembali login');
  			redirect('Santri/Santri');
  		}
+ 		redirect('Santri/Santri');
  		unset($idSantri, $data);
  	}
  	public function UpdateDataWali()
