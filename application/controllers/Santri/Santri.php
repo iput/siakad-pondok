@@ -43,6 +43,7 @@
  		if (($this->session->userdata('iduser'))AND($this->session->userdata('username'))) {
  			$data['module']='detaildiri';
  			$data['dataku']=$this->ModSaBa->DetailSantri($this->session->userdata('iduser'))->row();
+ 			$data['aktifmenu']=1;
  			$this->load->view('Santri/Santri', $data);
  			unset($data);
  		}else{
@@ -55,6 +56,7 @@
  		if (($this->session->userdata('iduser'))AND ($this->session->userdata('username'))) {
  			$data['module']='walisantri';
  			$data['wali']=$this->ModSaBa->DetailWali($this->session->userdata('iduser'))->row();
+ 			$data["aktifmenu"]=1;
  			$this->load->view('Santri/Santri', $data);
  			unset($data);
  		}else{
@@ -124,6 +126,7 @@
  		if (($this->session->userdata('iduser'))AND($this->session->userdata('username'))) {
  			$data['module']='detailpendidikan';
  			$data['dataku']=$this->ModSaBa->DetailEdu($this->session->userdata('iduser'))->row();
+ 			$data['aktifmenu']=1;
  			$this->load->view('Santri/Santri', $data);
  			unset($data);
  		}	
