@@ -127,12 +127,12 @@
       <!-- sidebar menu: : style can be found in sidebar.less -->
       <ul class="sidebar-menu">
         <li class="header">MENU UTAMA</li>
-        <li class="active treeview">
+        <li class="<?php echo $ac1;?>">
           <a href="<?php echo base_url('Dashboard') ?>">
             <i class="fa fa-dashboard"></i> <span>Beranda</span>
           </a>
         </li>
-        <li class="treeview">
+        <li class="treeview <?php echo $ac2;?>">
           <a href="#">
             <i class="fa fa-leaf"></i>
             <span>Santri</span>
@@ -141,12 +141,12 @@
             </span>
           </a>
           <ul class="treeview-menu">
-            <li><a href="<?php echo base_url('Dashboard/SantriBaru') ?>"><i class="fa fa-circle-o"></i> Santri Baru</a></li>
-            <li><a href="<?php echo base_url('Dashboard/Alumni') ?>"><i class="fa fa-circle-o"></i> Alumni</a></li>
-            <li><a href="<?php echo base_url('Dashboard/Pengurus') ?>"><i class="fa fa-circle-o"></i> Pengurus Pusat</a></li>
+            <li class="<?php echo $ac2_1;?>"><a href="<?php echo base_url('Dashboard/SantriBaru') ?>"><i class="fa fa-circle-o"></i> Santri Baru</a></li>
+            <li class="<?php echo $ac2_2;?>"><a href="<?php echo base_url('Dashboard/Alumni') ?>"><i class="fa fa-circle-o"></i> Alumni</a></li>
+            <li class="<?php echo $ac2_3;?>"><a href="<?php echo base_url('Dashboard/Pengurus') ?>"><i class="fa fa-circle-o"></i> Pengurus Pusat</a></li>
           </ul>
         </li>
-        <li class="treeview">
+        <li class="treeview <?php echo $ac3;?>">
           <a href="#">
             <i class="fa fa-pie-chart"></i>
             <span>Master Kamar</span>
@@ -155,11 +155,11 @@
             </span>
           </a>
           <ul class="treeview-menu">
-            <li><a href="<?php echo base_url('Admin/Kamar/DataKamar') ?>"><i class="fa fa-circle-o"></i> Data Kamar</a></li>
-            <li><a href="<?php echo base_url('Admin/Kamar/PersonilKamar') ?>"><i class="fa fa-circle-o"></i> Penghuni Kamar</a></li>
+            <li class="<?php echo $ac3_1;?>"><a href="<?php echo base_url('Admin/Kamar/DataKamar') ?>"><i class="fa fa-circle-o"></i> Data Kamar</a></li>
+            <li class="<?php echo $ac3_2;?>"><a href="<?php echo base_url('Admin/Kamar/PersonilKamar') ?>"><i class="fa fa-circle-o"></i> Penghuni Kamar</a></li>
           </ul>
         </li>
-        <li class="treeview">
+        <li class="treeview <?php echo $ac4;?>">
           <a href="#">
             <i class="fa fa-laptop"></i>
             <span>Diniyah</span>
@@ -168,14 +168,14 @@
             </span>
           </a>
           <ul class="treeview-menu">
-            <li><a href="#"><i class="fa fa-circle-o"></i> Kelas Diniyah</a></li>
-            <li><a href="#"><i class="fa fa-circle-o"></i> Kelas Santri</a></li>
+            <li class="<?php echo $ac4_1;?>"><a href="#"><i class="fa fa-circle-o"></i> Kelas Diniyah</a></li>
+            <li class="<?php echo $ac4_2;?>"><a href="#"><i class="fa fa-circle-o"></i> Kelas Santri</a></li>
           </ul>
         </li>
-        <li><a href="<?php echo base_url('Dashboard/newBerita') ?>"><i class="fa fa-newspaper-o"></i><span> informasi terbaru</span></a></li>
-        <li class="treeview"><a href="<?php echo base_url('Dashboard/kotakSaran') ?>"><i class="fa fa-envelope-o"></i><span> Kotak Saran</span></a></li>
+        <li class="<?php echo $ac7;?>"><a href="<?php echo base_url('Dashboard/newBerita') ?>"><i class="fa fa-newspaper-o"></i><span> informasi terbaru</span></a></li>
+        <li class="<?php echo $ac5;?>"><a href="<?php echo base_url('Dashboard/kotakSaran') ?>"><i class="fa fa-envelope-o"></i><span> Kotak Saran</span></a></li>
         <li class="header">LABELS</li>
-        <li><a href="<?php echo base_url('Dashboard/myProfile')?>"><i class="fa fa-gears text-red"></i> <span>Setting</span></a></li>
+        <li class="<?php echo $ac6;?>"><a href="<?php echo base_url('Dashboard/myProfile')?>"><i class="fa fa-gears text-red"></i> <span>Setting</span></a></li>
       </ul>
     </section>
     <!-- /.sidebar -->
@@ -296,7 +296,7 @@
         <!-- /.box-footer-->
       </div>
     </section>
-    <?php } else if ((isset($page))&& ($page=='tambah_santri')) {?>
+    <?php } else if ((isset($page))AND ($page=='tambah_santri')) {?>
     <section class="content-header">
       <h1><span class="glyphicon glyphicon-list"></span>&nbsp;Santri Baru</h1>
       <ol class="breadcrumb">

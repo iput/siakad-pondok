@@ -27,7 +27,15 @@
  	public function index()
  	{
  		if (($this->session->userdata('iduser'))AND($this->session->userdata('username'))) {
- 			$this->load->view('Dashboard');
+            $data['ac1']="active";
+            $data['ac2']="";
+            $data['ac2_1']="";$data['ac2_2']="";$data['ac2_3']="";
+            $data['ac3']="";
+            $data['ac3_1']="";$data['ac3_2']="";
+            $data['ac4']="";
+            $data['ac4_1']="";$data['ac4_2']="";
+            $data['ac5']="";$data['ac6']="";$data['ac7']="";
+ 			$this->load->view('Dashboard',$data);
  		}else{
  			redirect('actLanding');
  		}
@@ -38,6 +46,14 @@
  		if (($this->session->userdata('iduser'))AND($this->session->userdata('username'))) {
  			$data['page']='santri_baru';
  		$data['data_santri']= $this->ModSantri->SemuaSantri();
+        $data['ac1']="";
+        $data['ac2']="active";
+        $data['ac2_1']="active";$data['ac2_2']="";$data['ac2_3']="";
+        $data['ac3']="";
+        $data['ac3_1']="";$data['ac3_2']="";
+        $data['ac4']="";
+        $data['ac4_1']="";$data['ac4_2']="";
+        $data['ac5']="";$data['ac6']="";$data['ac7']="";
  		$this->load->view('Dashboard', $data);
  		unset($data);
  		}else{
@@ -50,6 +66,14 @@
  		if (($this->session->userdata('iduser'))AND($this->session->userdata('username'))) {
  			$data['page'] = 'data_alumni';
  			$data['master_alumni']=$this->ModAlumni->DataAlumni();
+        $data['ac1']="";
+        $data['ac2']="active";
+        $data['ac2_1']="";$data['ac2_2']="active";$data['ac2_3']="";
+        $data['ac3']="";
+        $data['ac3_1']="";$data['ac3_2']="";
+        $data['ac4']="";
+        $data['ac4_1']="";$data['ac4_2']="";
+        $data['ac5']="";$data['ac6']="";$data['ac7']="";
  			$this->load->view('Dashboard', $data);
  			unset($data);	
  		}else{
@@ -62,6 +86,14 @@
  	{
  		if (($this->session->userdata('iduser'))AND($this->session->userdata('username'))) {
  			$data['page'] = 'tambah_santri';
+        $data['ac1']="";
+        $data['ac2']="active";
+        $data['ac2_1']="active";$data['ac2_2']="";$data['ac2_3']="";
+        $data['ac3']="";
+        $data['ac3_1']="";$data['ac3_2']="";
+        $data['ac4']="";
+        $data['ac4_1']="";$data['ac4_2']="";
+        $data['ac5']="";$data['ac6']="";$data['ac7']="";    
  			$this->load->view('Dashboard', $data);
  			unset($data); 			
  		}else{
@@ -75,6 +107,14 @@
  			$data['page']='dataPengurus';
  			$data['santriaktif']=$this->ModSantri->calonPengurus();
  			$data['pengurus']=$this->ModSantri->semuaPengurus();
+        $data['ac1']="";
+        $data['ac2']="active";
+        $data['ac2_1']="";$data['ac2_2']="";$data['ac2_3']="active";
+        $data['ac3']="";
+        $data['ac3_1']="";$data['ac3_2']="";
+        $data['ac4']="";
+        $data['ac4_1']="";$data['ac4_2']="";
+        $data['ac5']="";$data['ac6']="";$data['ac7']="";
  			$this->load->view('Dashboard', $data);
  		}else{
  			redirect('actLanding');
@@ -87,6 +127,14 @@
             $data['profileku']=$this->ModSaBa->DetailSantri($this->session->userdata('iduser'))->row();
             $data['myWali']=$this->ModSaBa->DetailWali($this->session->userdata('iduser'))->row();
             $data['myEdu']=$this->ModSaBa->DetailEdu($this->session->userdata('iduser'))->row();
+        $data['ac1']="";
+        $data['ac2']="";
+        $data['ac2_1']="";$data['ac2_2']="";$data['ac2_3']="";
+        $data['ac3']="";
+        $data['ac3_1']="";$data['ac3_2']="";
+        $data['ac4']="";
+        $data['ac4_1']="";$data['ac4_2']="";
+        $data['ac5']="";$data['ac6']="active";$data['ac7']="";   
             $this->load->view('Dashboard', $data);
         }else{
             redirect('actLanding');
@@ -99,6 +147,14 @@
      		$this->load->model('ModRegister');
             $data['page']='kotakSaran';
             $data['saranku']=$this->ModRegister->SaranMasuk();
+        $data['ac1']="";
+        $data['ac2']="";
+        $data['ac2_1']="";$data['ac2_2']="";$data['ac2_3']="";
+        $data['ac3']="";
+        $data['ac3_1']="";$data['ac3_2']="";
+        $data['ac4']="";
+        $data['ac4_1']="";$data['ac4_2']="";
+        $data['ac5']="active";$data['ac6']="";$data['ac7']="";
             $this->load->view('Dashboard', $data);
         }else{
             redirect('actLanding');
@@ -110,6 +166,14 @@
          if(($this->session->userdata('iduser'))AND ($this->session->userdata('username'))){
             $data['page']='beritaterbaru';
             $data['datainfo']=$this->ModInformasi->semuaInformasi();
+        $data['ac1']="";
+        $data['ac2']="";
+        $data['ac2_1']="";$data['ac2_2']="";$data['ac2_3']="";
+        $data['ac3']="";
+        $data['ac3_1']="";$data['ac3_2']="";
+        $data['ac4']="";
+        $data['ac4_1']="";$data['ac4_2']="";
+        $data['ac5']="";$data['ac6']="";$data['ac7']="active";  
             $this->load->view('Dashboard', $data);
         }else{
             redirect('actLanding');
@@ -122,8 +186,7 @@
          $data['judul']=$this->input->post('judulInfo');
          $data['penulis']=$this->session->userdata('username');
          $data['tanggal']=date('Y:m:d H:m:i');
-         $data['konten']=$this->input->post('isiInfo');
-
+         $data['konten']=$this->input->post('isiInfo');     
          $this->ModInformasi->tambahInformasi($data);
          $this->session->set_flashdata('sukses','<i class="fa fa-exclamation-circle"></i> Data informasi berhasil didistribusikan');
          redirect('Dashboard/newBerita');

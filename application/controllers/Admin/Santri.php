@@ -56,6 +56,14 @@
  	{
  		$data['page'] = 'ubah_santri';
  		$data['ubah_str'] = $this->ModSantri->EditSantri($id_santri)->row();
+        $data['ac1']="";
+        $data['ac2']="active";
+        $data['ac2_1']="active";$data['ac2_2']="";$data['ac2_3']="";
+        $data['ac3']="";
+        $data['ac3_1']="";$data['ac3_2']="";
+        $data['ac4']="";
+        $data['ac4_1']="";$data['ac4_2']="";
+        $data['ac5']="";$data['ac6']="";$data['ac7']="";
  		$this->load->view('Dashboard', $data);
  		unset($id_santri, $data);
  	}

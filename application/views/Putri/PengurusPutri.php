@@ -128,16 +128,16 @@
       <!-- sidebar menu: : style can be found in sidebar.less -->
       <ul class="sidebar-menu">
         <li class="header">MENU UTAMA</li>
-        <li class="active treeview">
+        <li class="<?php echo $ac1;?>">
           <a href="<?php echo base_url('Putri/Putri') ?>">
             <i class="fa fa-dashboard"></i> <span>Beranda</span>
           </a>
         </li>
-        <li><a href="<?php echo base_url('Putri/Putri/DataSantri') ?>"><i class="fa fa-users"></i><span> Data Santri</span></a></li>
-        <li><a href="<?php echo base_url('Putri/Putri/AnggotaKamar') ?>"><i class="fa fa-home"></i><span> Anggota Kamar</span></a></li>
-        <li><a href="<?php echo base_url('Putri/Putri/SaranMasukan') ?>"><i class="fa fa-envelope-o"></i><span> Saran & Masukan</span></a></li>
+        <li class="<?php echo $ac2;?>"><a href="<?php echo base_url('Putri/Putri/DataSantri') ?>"><i class="fa fa-users"></i><span> Data Santri</span></a></li>
+        <li class="<?php echo $ac3;?>"><a href="<?php echo base_url('Putri/Putri/AnggotaKamar') ?>"><i class="fa fa-home"></i><span> Anggota Kamar</span></a></li>
+        <li class="<?php echo $ac4;?>"><a href="<?php echo base_url('Putri/Putri/SaranMasukan') ?>"><i class="fa fa-envelope-o"></i><span> Saran & Masukan</span></a></li>
         <li class="header">LABELS</li>
-        <li><a href="#"><i class="fa fa-circle-o text-red"></i> <span>Setting</span></a></li>
+        <li class="<?php echo $ac5;?>"><a href="#"><i class="fa fa-circle-o text-red"></i> <span>Setting</span></a></li>
       </ul>
     </section>
     <!-- /.sidebar -->

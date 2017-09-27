@@ -26,7 +26,8 @@
  	public function index()
  	{
  		if (($this->session->userdata('iduser'))AND ($this->session->userdata('username'))) {
- 			$this->load->view('Putra/PengurusPutra');
+ 			$data['ac1']="active";$data['ac2']="";$data['ac3']="";$data['ac4']="";$data['ac5']="";
+ 			$this->load->view('Putra/PengurusPutra',$data);
  		}else{
  			redirect('actLanding/Login');
  		}
@@ -36,6 +37,7 @@
  		if (($this->session->userdata('iduser'))AND($this->session->userdata('username'))) {
  			$data['module']='datasantri';
  			$data['santriPutra']=$this->ModPutra->semuaSantri();
+ 			$data['ac1']="";$data['ac2']="active";$data['ac3']="";$data['ac4']="";$data['ac5']="";
  			$this->load->view('Putra/PengurusPutra', $data);
  			unset($data);
  		}else{
@@ -47,6 +49,7 @@
  	{
  		if (($this->session->userdata('iduser'))AND($this->session->userdata('username'))) {
  			$data['module']='santribaru';
+ 			$data['ac1']="";$data['ac2']="active";$data['ac3']="";$data['ac4']="";$data['ac5']="";
  			$this->load->view('Putra/PengurusPutra', $data);
  			unset($data);
  		}else{
@@ -89,6 +92,7 @@
  		if (($this->session->userdata('iduser'))AND ($this->session->userdata('username'))) {
  			$data['module']='editdatasantri';
  			$data['detailsantri']=$this->ModPutra->EditSantri($id_santri)->row();
+ 			$data['ac1']="";$data['ac2']="active";$data['ac3']="";$data['ac4']="";$data['ac5']="";
  			$this->load->view('Putra/PengurusPutra', $data);
  			unset($data);
  		}else{
@@ -139,6 +143,7 @@
  			$data['santriPutra']=$this->ModPutra->SemuaSantri();
  			$data['personilputra']= $this->ModKamar->PersonilPutra();
  			$data['detailkamar']=$this->ModKamar->KamarPutra();
+ 			$data['ac1']="";$data['ac2']="";$data['ac3']="active";$data['ac4']="";$data['ac5']="";
  			$this->load->view('Putra/PengurusPutra', $data);
  			unset($data);
  		}else{
@@ -221,6 +226,7 @@
  		if (($this->session->userdata('iduser'))AND ($this->session->userdata('username'))) {
  			$data['module']='saranmasukan';
  			$data['saranmasuk']=$this->ModRegister->SaranMasuk();
+ 			$data['ac1']="";$data['ac2']="";$data['ac3']="";$data['ac4']="active";$data['ac5']="";
  			$this->load->view('Putra/PengurusPutra', $data);
  			unset($data);
  		}else{

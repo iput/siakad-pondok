@@ -39,6 +39,14 @@
  		if (($this->session->userdata('iduser'))AND($this->session->userdata('username'))) {
  			$data['page']='dataKamar';
  			$data['db_kamar']=$this->ModKamar->SemuaKamar();
+ 			$data['ac1']="";
+        $data['ac2']="";
+        $data['ac2_1']="";$data['ac2_2']="";$data['ac2_3']="";
+        $data['ac3']="active";
+        $data['ac3_1']="active";$data['ac3_2']="";
+        $data['ac4']="";
+        $data['ac4_1']="";$data['ac4_2']="";
+        $data['ac5']="";$data['ac6']="";$data['ac7']="";
  			$this->load->view('Dashboard', $data);
  			unset($data);
  		}
@@ -50,6 +58,14 @@
  			$data['list_kamar']=$this->ModKamar->SemuaKamar();
  			$data['list_santri']=$this->ModSantri->SemuaSantri();
  			$data['list_personil']=$this->ModKamar->SemuaPersonil();
+ 			$data['ac1']="";
+        $data['ac2']="";
+        $data['ac2_1']="";$data['ac2_2']="";$data['ac2_3']="";
+        $data['ac3']="active";
+        $data['ac3_1']="";$data['ac3_2']="active";
+        $data['ac4']="";
+        $data['ac4_1']="";$data['ac4_2']="";
+        $data['ac5']="";$data['ac6']="";$data['ac7']="";
  			$this->load->view('Dashboard', $data);
  			unset($data);
  		}else{
