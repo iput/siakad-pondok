@@ -29,6 +29,7 @@
  			$data['dataku']=$this->ModSaBa->detailSantri($this->session->userdata('iduser'))->row();
  			$data['wali']=$this->ModSaBa->detailWali($this->session->userdata('iduser'))->row();
  			$data['edu']=$this->ModSaBa->detailEdu($this->session->userdata('iduser'))->row();
+ 			$data['aktifmenu']=1;
  			$this->load->view('Alumni/Alumni', $data);
  			unset($data);
  		}
@@ -39,6 +40,7 @@
  		if (($this->session->userdata('iduser'))AND($this->session->userdata('username'))) {
  			$data['module']='detaildiri';
  			$data['dataku']=$this->ModSaBa->detailSantri($this->session->userdata('iduser'))->row();
+ 			$data['aktifmenu']=1;
  			$this->load->view('Alumni/Alumni', $data);
  			unset($data);
  		}
@@ -49,6 +51,7 @@
  		if (($this->session->userdata('iduser'))AND ($this->session->userdata('username'))) {
  			$data['module']='walisantri';
  			$data['wali']=$this->ModSaBa->DetailWali($this->session->userdata('iduser'))->row();
+ 			$data['aktifmenu']=1;
  			$this->load->view('Alumni/Alumni', $data);
  			unset($data);
  		}
@@ -94,6 +97,7 @@
  		if (($this->session->userdata('iduser'))AND($this->session->userdata('username'))) {
  			$data['module']='detailpendidikan';
  			$data['dataku']=$this->ModSaBa->detailEdu($this->session->userdata('iduser'))->row();
+ 			$data['aktifmenu']=1;
  			$this->load->view('Alumni/Alumni', $data);
  			unset($data);
  		}	
@@ -104,6 +108,7 @@
  		if (($this->session->userdata('iduser'))AND($this->session->userdata('username'))) {
  			$data['module']='saranmasukan';
  			$data['saranmasuk']=$this->ModRegister->saranmasuk();
+ 			$data['aktifmenu']=2;
  			$this->load->view('Alumni/Alumni', $data);
  			unset($data);
  		}
@@ -152,6 +157,7 @@
  			$data['module']='beritaTerbaru';
  			$data['infoBerita']=$this->ModInformasi->semuaInformasi();
  			$data['komentar']=$this->ModInformasi->ambilKomentar();
+ 			$data['aktifmenu']=3;
  			$this->load->view('Alumni/Alumni', $data);
  			unset($data);
  		}

@@ -127,13 +127,25 @@
       <!-- sidebar menu: : style can be found in sidebar.less -->
       <ul class="sidebar-menu">
         <li class="header">MENU UTAMA</li>
-        <li class="active treeview">
+        <li class="<?php 
+          if ($aktifmenu==1){
+            echo "active";
+          }
+        ?>">
           <a href="<?php echo base_url('Alumni/Alumni') ?>">
             <i class="fa fa-dashboard"></i> <span>Beranda</span>
           </a>
         </li>
-        <li><a href="<?php echo base_url('Alumni/Alumni/KotakSaran') ?>"><i class="fa fa-envelope-o"></i><span> Saran dan Masukan</span></a></li>
-        <li><a href="<?php echo base_url('Alumni/Alumni/beritaTerbaru') ?>"><i class="fa fa-newspaper-o"></i><span> Informasi terbaru</span></a></li>
+        <li class="<?php 
+          if ($aktifmenu==2){
+            echo "active";
+          }
+        ?>"><a href="<?php echo base_url('Alumni/Alumni/KotakSaran') ?>"><i class="fa fa-envelope-o"></i><span> Saran dan Masukan</span></a></li>
+        <li class="<?php 
+          if ($aktifmenu==3){
+            echo "active";
+          }
+        ?>"><a href="<?php echo base_url('Alumni/Alumni/beritaTerbaru') ?>"><i class="fa fa-newspaper-o"></i><span> Informasi terbaru</span></a></li>
       </ul>
     </section>
     <!-- /.sidebar -->
