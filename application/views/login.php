@@ -63,7 +63,8 @@
       <div class="form-group has-feedback">
         <select class="form-control" name="levelPengguna">
           <option>Pilih Hak Akses</option>
-          <option value="superadmin">Pengasuh</option>
+          <option value="superadmin">Super Admin</option>
+          <option value="pengasuh">Pengasuh</option>
           <option value="pengurusputra">Pengurus Putra</option>
           <option value="pengurusputri">Pengurus Putri</option>
           <option value="alumni">Alumni</option>

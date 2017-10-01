@@ -47,7 +47,7 @@
     $userlog['key']=$this->input->post('tambahNoTelp');
     $this->ModSantri->createUserlog($userlog);
  		$this->session->set_flashdata('sukses','santri baru berhasil ditambahkan');
- 		redirect('Dashboard/SantriBaru');
+ 		redirect('sa_dashboard/SantriBaru');
  		unset($id_santri, $data);
 
  	}
@@ -64,7 +64,7 @@
         $data['ac4']="";
         $data['ac4_1']="";$data['ac4_2']="";
         $data['ac5']="";$data['ac6']="";$data['ac7']="";
- 		$this->load->view('Dashboard', $data);
+ 		$this->load->view('sa_dashboard', $data);
  		unset($id_santri, $data);
  	}
 
@@ -84,7 +84,7 @@
  		$data['tahun_boyong']=$this->input->post('editTahunBoyong');
  		$this->ModSantri->UpdateSantri($idSantri, $data);
  		$this->session->set_flashdata('sukses','Data santri berhasil di update');
- 		redirect('Dashboard/SantriBaru');
+ 		redirect('sa_dashboard/SantriBaru');
  		unset($idSantri, $data);
  	}
 
@@ -93,15 +93,15 @@
     $datasantri= count($this->ModSantri->cekRelasi($id)->row());
     if ($datasantri>0) {
       $this->session->set_flashdata('gagal','data ini mempunya relasi dengan userlog . harap hapus data dari userlog terlebih dahulu');
-      redirect('Dashboard/SantriBaru');
+      redirect('sa_dashboard/SantriBaru');
     }else{
       $data = $this->ModSantri->HapusSantri($id);
       if ($data) {
      		$this->session->set_flashdata('sukses','Data santri berhasil dihapus');
-     		redirect('Dashboard/SantriBaru');
+     		redirect('sa_dashboard/SantriBaru');
       }else{
         $this->session->set_flashdata('gagal','Data santri gagal berhasil dihapus');
-     		redirect('Dashboard/SantriBaru');
+     		redirect('sa_dashboard/SantriBaru');
       }
     }
  		unset($data, $id);
@@ -129,7 +129,7 @@
     $userlog['key']=$password;
     $this->ModSantri->createUserlog($userlog);
     $this->session->set_flashdata('sukses','Data Santri berhasil dijadikan pengurus');
-    redirect('Dashboard/Pengurus');
+    redirect('sa_dashboard/Pengurus');
   }
 
   public function editSaran()
@@ -144,14 +144,17 @@
     $id = $this->input->post('idSaran');
     $this->ModRegister->updateTanggapan($id, $data);
     $this->session->set_flashdata('sukses','Saran Masuk telah ditanggapi');
-    redirect('Dashboard/kotakSaran');
+    redirect('sa_dashboard/kotakSaran');
   }
   public function HapusSaran($id)
   {
     $data = $this->ModRegister->hapusSaran($id);
     if ($data) {
       $this->session->set_flashdata('sukses','Data berhasil dihapus');
-      redirect('Dashboard/kotakSaran');
+      redirect('sa_dashboard/kotakSaran');
     }
+  }
+  public function hapusPengurus($id){
+    //masih bingung hapus pengurus
   }
  } ?>

@@ -81,7 +81,14 @@
  		}
  		unset($idkamar);
  	}
-
+ 	public function cek_id_s($id_s){
+ 		$cek_id=$this->db->query("select*from trans_kamar where id_santri='$id_s'");
+ 		if($cek_id->num_rows()==1){
+ 			return false;
+ 		}else{
+ 			return true;
+ 		}
+ 	}
  	public function TambahPersonil($data)
  	{
  		$this->db->query("INSERT into trans_kamar(id_trans,id_kamar,id_santri,keterangan)values(?,?,?,?)",array($data['idtrans'],$data['idkmr'],$data['idstr'],$data['ket']));
@@ -111,7 +118,11 @@
  		}
  		unset($id, $data);
  	}
-
+ 	public function cari_nama($id_san){
+ 		$this->db->where('id_santri',$id_san);
+ 		$data_s=$this->db->get('master_santri');
+ 		return $data_s->row();
+ 	}
  	public function AmbilKuota($id)
  	{
 		$datakuota = $this->db->query("SELECT kuota_kamar from kamar_pondok where id_kamar=?", array($id));
@@ -123,7 +134,17 @@
 		unset($datakuota, $id);
 
  	}
-
+ 	public function cek_kamar($id_t){
+ 		$hasil_cek=$this->db->query("select id_kamar from trans_kamar where id_trans='$id_t'");
+ 		return $hasil_cek->row();
+ 	}
+ 	public function ambil_kuota($id_k){
+ 		$hasil_a=$this->db->query("select kuota_kamar from kamar_pondok where id_kamar='$id_k'");
+ 		return $hasil_a->row();
+ 	}
+ 	public function update_kuota_k($id_k, $kuota){
+ 		$this->db->query("update kamar_pondok set kuota_kamar='$kuota' where id_kamar='$id_k'");
+ 	}
  	public function UpdateKuotaKamar($idkamar, $data)
  	{
  		$this->db->query("UPDATE kamar_pondok set kuota_kamar=? where id_kamar=?", array($data['kuota'], $idkamar));
@@ -171,7 +192,13 @@
  		return $data->result_array();
  		unset($data);
  	}
-
+ 	// public function coba()
+ 	// {
+ 	// 	$id=$this->input->get('id');
+ 	// 	$this->db->query("select*from trans_kamar where id_trans='$id'");
+ 	// 	$data=$this->db->get();
+ 	// 	return $data->result_array();
+ 	// }
  	public function PersonilPutri()
  	{
  		$this->db->select("trans_kamar.id_trans,trans_kamar.keterangan,kamar_pondok.id_kamar,kamar_pondok.nama_kamar,master_santri.nama_santri,master_santri.noTelpon_santri");

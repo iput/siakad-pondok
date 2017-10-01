@@ -78,7 +78,9 @@
  		$this->db->query("INSERT into userlog(idLog, id_santri,username,passwordlog,lastLogged,level, decryptCode)values(?,?,?,?,?,?,?)", array($data['idlog'], $data['santri'],$data['username'] ,$data['password'],$data['waktu'] ,$data['level'], $data['key']));
  		unset($data);
  	}
-
+  public function hapus_pengurus(){
+    //masih menjadi bingung hapus pengurus
+  }
   public function cekRelasi($id)
   {
     $query = $this->db->query("SELECT * from userlog where id_santri=? ", array($id));

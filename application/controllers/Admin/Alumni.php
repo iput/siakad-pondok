@@ -33,7 +33,7 @@
         $data['ac4']="";
         $data['ac4_1']="";$data['ac4_2']="";
         $data['ac5']="";$data['ac6']="";$data['ac7']="";
- 			$this->load->view('Dashboard', $data);
+ 			$this->load->view('sa_dashboard', $data);
  			unset($data);
  		}else{
  			redirect('actLanding');
@@ -67,7 +67,7 @@
     	$this->ModSantri->createUserlog($userlog);
  		unset($id_alumni, $data);
  		$this->session->set_flashdata('sukses','Data Alumni berhasil ditambahkan');
- 		redirect('Dashboard/Alumni');
+ 		redirect('sa_dashboard/Alumni');
  	}
 
  	public function EditAlumni($id)
@@ -83,7 +83,7 @@
         $data['ac4']="";
         $data['ac4_1']="";$data['ac4_2']="";
         $data['ac5']="";$data['ac6']="";$data['ac7']="";    
- 			$this->load->view('Dashboard',$data);
+ 			$this->load->view('sa_dashboard',$data);
  			unset($data);
  		}
  	}
@@ -103,7 +103,7 @@
  		$data['tahun_masuk']=$this->input->post('editalumniTahunMasuk');
  		$this->ModAlumni->UpdateAlumni($id_alumni, $data);
  		$this->session->set_flashdata('sukses','Data alumni berhasil diupdate');
- 		redirect('Dashboard/Alumni');
+ 		redirect('sa_dashboard/Alumni');
  		unset($id_alumni, $data);
  	}
 
@@ -112,7 +112,7 @@
  		$hapus = $this->ModAlumni->HapusAlumni($id);
  		if ($hapus) {
  			$this->session->set_flashdata('sukses','data alumni berhasil dihapus');
- 			redirect('Dashboard/Alumni');
+ 			redirect('sa_dashboard/Alumni');
  		}
  		unset($hapus, $id);
  	}

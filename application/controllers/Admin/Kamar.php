@@ -47,7 +47,7 @@
         $data['ac4']="";
         $data['ac4_1']="";$data['ac4_2']="";
         $data['ac5']="";$data['ac6']="";$data['ac7']="";
- 			$this->load->view('Dashboard', $data);
+ 			$this->load->view('sa_dashboard', $data);
  			unset($data);
  		}
  	}
@@ -66,7 +66,7 @@
         $data['ac4']="";
         $data['ac4_1']="";$data['ac4_2']="";
         $data['ac5']="";$data['ac6']="";$data['ac7']="";
- 			$this->load->view('Dashboard', $data);
+ 			$this->load->view('sa_dashboard', $data);
  			unset($data);
  		}else{
  			redirect('actLanding');

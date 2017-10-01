@@ -36,11 +36,11 @@
 
   <header class="main-header">
     <!-- Logo -->
-    <a href="<?php echo base_url('Dashboard') ?>" class="logo">
+    <a href="<?php echo base_url('sa_dashboard') ?>" class="logo">
       <!-- mini logo for sidebar mini 50x50 pixels -->
       <span class="logo-mini"><b>A</b>PSR</span>
       <!-- logo for regular state and mobile devices -->
-      <span class="logo-lg"><b>Admin</b>Gasek</span>
+      <span class="logo-lg"><b>Super Admin</b>Gasek</span>
     </a>
     <!-- Header Navbar: style can be found in header.less -->
     <nav class="navbar navbar-static-top">
@@ -98,7 +98,7 @@
               <!-- Menu Footer-->
               <li class="user-footer">
                 <div class="pull-left">
-                  <a href="<?php echo base_url('Dashboard/myProfile') ?>" class="btn btn-default btn-flat">Profile</a>
+                  <a href="<?php echo base_url('sa_dashboard/myProfile') ?>" class="btn btn-default btn-flat">Profile</a>
                 </div>
                 <div class="pull-right">
                   <a href="<?php echo base_url('Login/Logout') ?>" class="btn btn-default btn-flat">Sign out</a>
@@ -128,7 +128,7 @@
       <ul class="sidebar-menu">
         <li class="header">MENU UTAMA</li>
         <li class="<?php echo $ac1;?>">
-          <a href="<?php echo base_url('Dashboard') ?>">
+          <a href="<?php echo base_url('sa_dashboard') ?>">
             <i class="fa fa-dashboard"></i> <span>Beranda</span>
           </a>
         </li>
@@ -141,9 +141,9 @@
             </span>
           </a>
           <ul class="treeview-menu">
-            <li class="<?php echo $ac2_1;?>"><a href="<?php echo base_url('Dashboard/SantriBaru') ?>"><i class="fa fa-circle-o"></i> Santri Baru</a></li>
-            <li class="<?php echo $ac2_2;?>"><a href="<?php echo base_url('Dashboard/Alumni') ?>"><i class="fa fa-circle-o"></i> Alumni</a></li>
-            <li class="<?php echo $ac2_3;?>"><a href="<?php echo base_url('Dashboard/Pengurus') ?>"><i class="fa fa-circle-o"></i> Pengurus Pusat</a></li>
+            <li class="<?php echo $ac2_1;?>"><a href="<?php echo base_url('sa_dashboard/SantriBaru') ?>"><i class="fa fa-circle-o"></i> Santri Baru</a></li>
+            <li class="<?php echo $ac2_2;?>"><a href="<?php echo base_url('sa_dashboard/Alumni') ?>"><i class="fa fa-circle-o"></i> Alumni</a></li>
+            <li class="<?php echo $ac2_3;?>"><a href="<?php echo base_url('sa_dashboard/Pengurus') ?>"><i class="fa fa-circle-o"></i> Pengurus Pusat</a></li>
           </ul>
         </li>
         <li class="treeview <?php echo $ac3;?>">
@@ -172,10 +172,10 @@
             <li class="<?php echo $ac4_2;?>"><a href="#"><i class="fa fa-circle-o"></i> Kelas Santri</a></li>
           </ul>
         </li>
-        <li class="<?php echo $ac7;?>"><a href="<?php echo base_url('Dashboard/newBerita') ?>"><i class="fa fa-newspaper-o"></i><span> informasi terbaru</span></a></li>
-        <li class="<?php echo $ac5;?>"><a href="<?php echo base_url('Dashboard/kotakSaran') ?>"><i class="fa fa-envelope-o"></i><span> Kotak Saran</span></a></li>
+        <li class="<?php echo $ac7;?>"><a href="<?php echo base_url('sa_dashboard/newBerita') ?>"><i class="fa fa-newspaper-o"></i><span> informasi terbaru</span></a></li>
+        <li class="<?php echo $ac5;?>"><a href="<?php echo base_url('sa_dashboard/kotakSaran') ?>"><i class="fa fa-envelope-o"></i><span> Kotak Saran</span></a></li>
         <li class="header">LABELS</li>
-        <li class="<?php echo $ac6;?>"><a href="<?php echo base_url('Dashboard/myProfile')?>"><i class="fa fa-gears text-red"></i> <span>Setting</span></a></li>
+        <li class="<?php echo $ac6;?>"><a href="<?php echo base_url('sa_dashboard/myProfile')?>"><i class="fa fa-gears text-red"></i> <span>Setting</span></a></li>
       </ul>
     </section>
     <!-- /.sidebar -->
@@ -203,11 +203,11 @@
       <div class="box">
         <div class="box-header with-border">
           <h3 class="box-title">Santri Baru</h3>
+          <a href="<?php echo base_url('sa_dashboard/TambahSantri') ?>" class="btn btn-primary btn-flat pull-right"><span class="glyphicon glyphicon-plus-sign"></span>&nbsp;Santri Baru</a>
         </div>
         <div class="box-body">
         <div class="alert alert-success" style="display: none;"></div>
         <div class="alert alert-warning" style="display: none;"></div>
-          
           <table class="table table-bordered table-striped table-hover display nowrap" style="margin-top: 20px;" id="tabel_santri">
             <thead>
               <tr>
@@ -216,19 +216,23 @@
                 <td>Alamat</td>
                 <td>NO HP</td>
                 <td>Facebook</td>
+                <td><span class="fa fa-gears"></span></td>
               </tr>
             </thead>
             <tbody>
               <?php 
-              $hit=1;
-              foreach ($data_santri as $rows): ?>
+                  $hit=1;
+                  foreach ($data_santri as $rows): ?>
                 <tr>
                   <td><?php echo $hit++?></td>
                   <td><?php echo $rows['nama_santri'] ?></td>
                   <td><?php echo $rows['alamat_santri'] ?></td>
                   <td><?php echo $rows['noTelpon_santri'] ?></td>
                   <td><?php echo $rows['facebook_santri'] ?></td>
-                  
+                  <td>
+                    <a href="<?php echo base_url('Admin/Santri/EditSantri/'.$rows['id_santri']) ?>" class="btn btn-info btn-flat btn-xs"><span class="fa fa-pencil"></span></a>
+                    <a href="<?php echo base_url('Admin/Santri/HapusSantri/'.$rows['id_santri']) ?>" class="btn btn-danger btn-flat btn-xs" onclick="return confirm('apakah anda yakin akan menghapus data ini ?')"><span class="fa fa-trash"></span></a>
+                  </td>
                 </tr>
               <?php endforeach ?>
             </tbody>
@@ -253,6 +257,7 @@
       <div class="box">
         <div class="box-header with-border">
           <h3 class="box-title">Data Alumni</h3>
+        <a href="<?php echo base_url('Admin/Alumni/TambahAlumni') ?>" class="btn btn-primary btn-flat pull-right"><span class="glyphicon glyphicon-plus-sign"></span>&nbsp;Alumni Baru</a>
         </div>
         <div class="box-body">
         <div class="alert alert-success" style="display: none;"></div>
@@ -267,6 +272,7 @@
                 <td>Facebook</td>
                 <td>Tahun Masuk</td>
                 <td>Password</td>
+                <td><span class="fa fa-gears"></span></td>
               </tr>
             </thead>
             <tbody>
@@ -282,6 +288,10 @@
                   <td><?php echo $row_al['facebook_santri'] ?></td>
                   <td><?php echo $row_al['tahun_masuk'] ?></td>
                   <td><?php echo $row_al['noTelpon_santri'] ?></td>
+                  <td>
+                    <a href="<?php echo base_url('Admin/Alumni/EditAlumni/'.$row_al['id_santri']) ?>" class="btn btn-info btn-flat btn-xs"><span class="fa fa-pencil"></span></a>
+                    <a href="<?php echo base_url('Admin/Alumni/HapusAlumni/'.$row_al['id_santri']) ?>" class="btn btn-danger btn-xs btn-flat" onclick="return confirm('apakah anda yakin akan menghapus data ini ?')"><span class="fa fa-trash"></span></a>
+                  </td>
                 </tr>
               <?php endforeach ?>
             </tbody>
@@ -298,7 +308,7 @@
     <section class="content-header">
       <h1><span class="glyphicon glyphicon-list"></span>&nbsp;Santri Baru</h1>
       <ol class="breadcrumb">
-        <li><a href="<?php echo base_url('Dashboard') ?>"><i class="fa fa-dashboard"></i>Beranda</a></li>
+        <li><a href="<?php echo base_url('sa_dashboard') ?>"><i class="fa fa-dashboard"></i>Beranda</a></li>
         <li class="active">Tambah Santri</li>
       </ol>
     </section>
@@ -377,8 +387,8 @@
             <div class="form-group">
               <div class="col-md-2"></div>
               <div class="col-md-6">
-                <a href="<?php echo base_url('Dashboard/SantriBaru') ?>" class="btn btn-danger btn-flat"><span class="glyphicon glyphicon-remove"></span>&nbsp;Batal</a>
                 <button type="submit" class="btn btn-primary btn-flat"><span class="glyphicon glyphicon-save"></span>&nbsp;Simpan</button>
+                <a href="<?php echo base_url('sa_dashboard/SantriBaru') ?>" class="btn btn-danger btn-flat"><span class="glyphicon glyphicon-remove"></span>&nbsp;Batal</a>
               </div>
             </div>
           </form>
@@ -390,7 +400,7 @@
     <section class="content-header">
       <h1><span class="glyphicon glyphicon-list"></span>&nbsp;Tambah Alumni</h1>
       <ol class="breadcrumb">
-        <li><a href="<?php echo base_url('Dashboard') ?>" class="fa fa-dashboard">&nbsp;Beranda</a></li>
+        <li><a href="<?php echo base_url('sa_dashboard') ?>" class="fa fa-dashboard">&nbsp;Beranda</a></li>
         <li>Tambah Alumni</li>
       </ol>
     </section>
@@ -475,8 +485,8 @@
             <div class="form-group">
               <div class="col-md-2"></div>
               <div class="col-md-6">
-                <a href="<?php echo base_url('Dashboard/Alumni') ?>" class="btn btn-danger btn-flat"><span class="glyphicon glyphicon-remove"></span>&nbsp;Batal</a>
                 <button type="submit" class="btn btn-primary btn-flat"><span class="glyphicon glyphicon-save"></span>&nbsp;Simpan</button>
+                <a href="<?php echo base_url('sa_dashboard/Alumni') ?>" class="btn btn-danger btn-flat"><span class="glyphicon glyphicon-remove"></span>&nbsp;Batal</a>
               </div>
             </div>
         </div>
@@ -486,7 +496,7 @@
     <section class="content-header">
       <h1>Ubah Data santri</h1>
       <ol class="breadcrumb">
-        <li><a href="<?php echo base_url('Dashboard') ?>"><span class="fa fa-dashboard"></span>&nbsp;Beranda</a></li>
+        <li><a href="<?php echo base_url('sa_dashboard') ?>"><span class="fa fa-dashboard"></span>&nbsp;Beranda</a></li>
         <li>Santri</li>
         <li>Edit Data Santri</li>
       </ol>
@@ -498,7 +508,7 @@
           <div class="form-group">
             <label class="control-label col-md-2">ID Santri</label>
             <div class="col-md-6">
-              <input type="text" name="editIDSantri" class="form-control" readonly="" value="<?php echo $ubah_str->id_santri ?>">
+              <label class="form-control"><?php echo $ubah_str->id_santri?></label>
             </div>
           </div>
             <div class="form-group">
@@ -576,13 +586,15 @@
                 <input type="date" name="editTahunMasuk" class="form-control" value="<?php echo $ubah_str->tahun_masuk ?>">
               </div>
             </div>
+            <input type="hidden" name="editIDSantri" class="form-control" value="<?php echo $ubah_str->id_santri ?>">
             <div class="form-group">
               <div class="col-md-2"></div>
               <div class="col-md-6">
-                <a href="<?php echo base_url('Dashboard/SantriBaru') ?>" class="btn btn-danger btn-flat"><span class="glyphicon glyphicon-remove"></span>&nbsp;Batal</a>
                 <button type="submit" class="btn btn-primary btn-flat"><span class="glyphicon glyphicon-refresh"></span>&nbsp;Update</button>
+                <a href="<?php echo base_url('sa_dashboard/SantriBaru') ?>" class="btn btn-danger btn-flat"><span class="glyphicon glyphicon-remove"></span>&nbsp;Batal</a>
               </div>
             </div>
+          </form>
         </div>
         </div>
       </div>
@@ -591,7 +603,7 @@
     <section class="content-header">
       <h1><span class="fa fa-pencil"></span>&nbsp;Edit Data Alumni</h1>
       <ol class="breadcrumb">
-        <li><a href="<?php echo base_url('Dashboard') ?>" ><span class="fa fa-dashboard"></span>Beranda</a></li>
+        <li><a href="<?php echo base_url('sa_dashboard') ?>" ><span class="fa fa-dashboard"></span>Beranda</a></li>
         <li>Santri</li>
         <li>Alumni</li>
         <li>Edit Data Alumni</li>
@@ -604,7 +616,7 @@
           <div class="form-group">
                 <label class="control-label col-md-2">ID Alumni</label>
                 <div class="col-md-6">
-                  <input type="text" name="editIDAlumni" class="form-control" value="<?php echo $edit_almn->id_santri ?>" readonly>
+                  <label class="form-control"><?php echo $edit_almn->id_santri?></label>
                 </div>
               </div>
             <div class="form-group">
@@ -688,11 +700,12 @@
                 <input type="date" name="editalumniTahunMasuk" class="form-control" value="<?php echo $edit_almn->tahun_masuk ?>">
               </div>
             </div>
+            <input type="hidden" name="editIDAlumni" class="form-control" value="<?php echo $edit_almn->id_santri ?>">
             <div class="form-group">
               <div class="col-md-2"></div>
               <div class="col-md-6">
-                <a href="<?php echo base_url('Dashboard/Alumni') ?>" class="btn btn-danger btn-flat"><span class="glyphicon glyphicon-remove"></span>&nbsp;Batal</a>
                 <button type="submit" class="btn btn-primary btn-flat"><span class="glyphicon glyphicon-refresh"></span>&nbsp;Update</button>
+                <a href="<?php echo base_url('sa_dashboard/Alumni') ?>" class="btn btn-danger btn-flat"><span class="glyphicon glyphicon-remove"></span>&nbsp;Batal</a>
               </div>
             </div>
             </form>
@@ -703,7 +716,7 @@
     <section class="content-header">
       <h1>Kamar</h1>
       <ol class="breadcrumb">
-        <li><a href="<?php echo base_url('Dashboard') ?>"><i class="fa fa-dashboard"></i> Beranda</a></li>
+        <li><a href="<?php echo base_url('sa_dashboard') ?>"><i class="fa fa-dashboard"></i> Beranda</a></li>
         <li class="active">Data Kamar</li>
       </ol>
     </section>
@@ -711,6 +724,7 @@
       <div class="box">
         <div class="box-header with-border">
           <h1 class="box-title">Aset Kamar</h1>
+          <button class="btn btn-primary btn-flat pull-right" data-toggle="modal" data-target="#tambahKamar"><i class="fa fa-plus"></i>&nbsp;Tambah Kamar</button>
         </div>
         <div class="box-body">
         <div class="alert alert-success" style="display: none;"></div>
@@ -722,6 +736,7 @@
                 <td>Nama Kamar</td>
                 <td>Sisa kuota Kamar</td>
                 <td>Keterangan</td>
+                <td><i class="fa fa-gears"></i></td>
               </tr>
             </thead>
             <tbody id="showKamar">
@@ -746,6 +761,10 @@
                   <td><?php echo $rows->nama_kamar ?></td>
                   <td><?php echo $rows->kuota_kamar ?></td>
                   <td><label class="label <?php echo $kelas ?>"><?php echo $keterangan_kmr ?></label></td>
+                  <td>
+                    <a href="javascript:;" data="<?php echo $rows->id_kamar ?>" class="btn btn-info btn-xs btn-flat btnEditKamar"><i class="fa fa-pencil"></i></a>
+                    <a href="<?php echo base_url('Admin/Kamar/HapusKamar/'.$rows->id_kamar) ?>" class="btn btn-danger btn-flat btn-xs" onclick="return confirm('apakah anda yakin akan menghapus data kamar <?php echo $rows->nama_kamar ?> ?')"><i class="fa fa-trash"></i></a>
+                  </td>
                 </tr>
               <?php endforeach ?>
             </tbody>
@@ -786,11 +805,9 @@
                   </label>
                 </div>
               </div>
-              <div class="form-group">
-                <div class="col-md-3"></div>
-                <div class="col-md-8">
-                  <button class="btn btn-danger btn-flat" data-dismiss="modal"><i class="fa fa-remove"></i>&nbsp;Batal</button>
+              <div class="modal-footer">
                   <button class="btn btn-info btn-flat" type="submit"><i class="fa fa-save"></i>&nbsp;Simpan</button>
+                  <button class="btn btn-danger btn-flat" data-dismiss="modal"><i class="fa fa-remove"></i>&nbsp;Batal</button>
                 </div>
               </div>
             </form>
@@ -836,11 +853,11 @@
                   </label>
                 </div>
               </div>
-              <div class="form-group">
+              <div class="modal-footer">
                 <div class="col-md-3"></div>
                 <div class="col-md-8">
-                  <button class="btn btn-danger btn-flat" data-dismiss="modal"><i class="fa fa-remove"></i>&nbsp;Batal</button>
                   <button class="btn btn-info btn-flat" type="submit"><i class="fa fa-refresh"></i>&nbsp;Update</button>
+                  <button class="btn btn-danger btn-flat" data-dismiss="modal"><i class="fa fa-remove"></i>&nbsp;Batal</button>
                 </div>
               </div>
             </form>
@@ -852,7 +869,7 @@
     <section class="content-header">
       <h1>Personil Kamar</h1>
       <ol class="breadcrumb">
-        <li><a href="<?php echo base_url('Dashboard') ?>"><i class="fa fa-dashboard"></i> Beranda</a></li>
+        <li><a href="<?php echo base_url('sa_dashboard') ?>"><i class="fa fa-dashboard"></i> Beranda</a></li>
         <li class="active">Data Anggota Kamar</li>
       </ol>
     </section>
@@ -863,26 +880,28 @@
         </div>
         <div class="box-body">
         <div class="alert alert-success" style="display: none;"></div>
+          <button class="btn btn-primary btn-flat" data-toggle="modal" data-target="#tambahAnggotaKamar"><i class="fa fa-plus"></i>&nbsp;Tambah Anggota Kamar</button>
           <table class="table table-hover table-striped table-bordered tabel-responsive" id="tabelPersonil">
           <thead>
             <tr>
-              <td>No</td>
               <td>Nama Kamar</td>
               <td>Nama Santri</td>
               <td>Nomor HP Santri</td>
               <td>Keterangan</td>
+              <td><i class="fa fa-gears"></i></td>
             </tr>
           </thead>
           <tbody id="tabelPersonil">
-            <?php 
-            $hit=1;
-            foreach ($list_personil as $lPersonil): ?>
+            <?php foreach ($list_personil as $lPersonil): ?>
               <tr>
-                <td><?php echo $hit++ ?></td>
                 <td><?php echo $lPersonil['nama_kamar'] ?></td>
                 <td><?php echo $lPersonil['nama_santri'] ?></td>
                 <td><?php echo $lPersonil['noTelpon_santri'] ?></td>
                 <td><?php echo $lPersonil['keterangan'] ?></td>
+                <td>
+                  <a href="javascript:;" class="btn btn-info btn-flat btn-xs btnEditPersonil" data="<?php echo $lPersonil['id_trans'] ?>"><i class="fa fa-pencil"></i></a>
+                  <a href="<?php echo base_url('Admin/Kamar/HapusPersonil/'.$lPersonil['id_trans']) ?>" class="btn btn-danger btn-xs btn-flat" onclick="return confirm('Apakah anda akan menghapus data anggota Kamar ini ?')"><i class="fa fa-trash"></i></a>
+                </td>
               </tr>
             <?php endforeach ?>
           </tbody>
@@ -936,14 +955,17 @@
     <section class="content-header">
       <h4>Pengurus Sistem</h4>
       <ol class="breadcrumb">
-        <li><a href="<?php echo base_url('Dashboard') ?>"><i class="fa fa-dashboard"></i>Beranda</a></li>
+        <li>
+          <a href="<?php echo base_url('sa_dashboard') ?>"><i class="fa fa-dashboard"></i>Beranda</a>
+        </li>
         <li class="active">Pengurus Sistem Informasi</li>
       </ol>
     </section>
     <section class="content">
       <div class="box">
         <div class="box-header with-border">
-          <h4 class="box-title">Data Pengurus pengelola sistem informasi akademik pesantren sabilurrosyad</h4>
+          <h4 class="box-title">Data Pengurus Pengelola Sistem Informasi Akademik Pesantren Sabilurrosyad</h4>
+          <button class="btn btn-primary btn-flat pull-right" data-toggle="modal" data-target="#tambahPengurus"><i class="fa fa-plus"></i>&nbsp;Tambahkan Pengurus</button>
         </div>
         <div class="box-body">
         <div class="alert alert-success" style="display: none;"></div>
@@ -955,6 +977,7 @@
                 <td>Alamat</td>
                 <td>Nomor Telepon</td>
                 <td>Level Akses</td>
+                <td><i class="fa fa-gears"></i></td>
               </tr>
             </thead>
             <tbody>
@@ -962,17 +985,22 @@
               $hit=1;
               foreach ($pengurus as $dpengurus): ?>
                 <tr>
-                  <td><?php echo $hit++?></td>
+                  <td><?php echo $hit++ ?></td>
                   <td><?php echo $dpengurus['nama_santri'] ?></td>
                   <td><?php echo $dpengurus['alamat_santri'] ?></td>
                   <td><?php echo $dpengurus['noTelpon_santri'] ?></td>
                   <td><?php echo $dpengurus['level'] ?></td>
+                  <td>
+                    <a href="javascript:;" data="<?php echo $dpengurus['idLog'] ?>" class="btn btn-info btn-flat btn-xs editPengurus"><i class="fa fa-pencil"></i></a>
+                    <a href="<?php echo base_url('Admin/Santri/hapusPengurus/'.$dpengurus['idLog']) ?>" class="btn btn-danger btn-flat btn-xs editPengurus" onclick="return confirm('apakah anda yakin akan mengeluarkan <?php echo $dpengurus['nama_santri'] ?> dari kepengurusan ?')"><i class="fa fa-remove"></i></a>
+                  </td>
                 </tr>
               <?php endforeach ?>
             </tbody>
           </table>
         </div>
-      </div> 
+      </div>
+     </section>  
     <div class="modal fade" tabindex="-1" role="dialog" id="tambahPengurus">
       <div class="modal-dialog" role="document">
         <div class="modal-content">
@@ -1004,21 +1032,20 @@
                   <option value="superadmin">Pengasuh</option>
                 </select>
               </div>
-              <div class="form-group">
-                <button class="btn btn-danger btn-flat" data-dismiss="modal"><i class="fa fa-remove"></i> Batal</button>
+              <div class="modal-footer">
                 <button class="btn btn-primary btn-flat" type="submit"><i class="fa fa-save"></i> Tambahkah</button>
+                <button class="btn btn-danger btn-flat" data-dismiss="modal"><i class="fa fa-remove"></i> Batal</button>
               </div>
             </form>
           </div>
         </div>
       </div>
     </div>
-    </section>
     <?php }else if((isset($page))AND($page=='profileDiri')){ ?>
     <section class="content-header">
       <h1>Data Diri</h1>
       <ol class="breadcrumb">
-        <li><a href="<?php echo base_url('Dashboard') ?>"><i class="fa fa-dashboard"></i> Beranda</a></li>
+        <li><a href="<?php echo base_url('sa_dashboard') ?>"><i class="fa fa-dashboard"></i> Beranda</a></li>
         <li class="active">Data identititas diri</li>
       </ol>
     </section>
@@ -1220,7 +1247,7 @@
     <section class="content-header">
       <h1>Kotak Saran</h1>
       <ol class="breadcrumb">
-        <li><a href="<?php echo base_url('Dashboard') ?>"><i class="fa fa-dashboard"></i>Beranda</a></li>
+        <li><a href="<?php echo base_url('sa_dashboard') ?>"><i class="fa fa-dashboard"></i>Beranda</a></li>
         <li class="active">Kotak Saran</li>
       </ol>
     </section>
@@ -1231,18 +1258,16 @@
           <table class="table table-bordered table-striped table-hover" id="TabelSaran">
             <thead class="bg-info">
               <tr>
-                <td>No</td>
                 <td>Pengirim</td>
                 <td>Email</td>
                 <td>Konten</td>
                 <td>Tanggal Pengiriman</td>
                 <td>Tanggapan</td>
+                <td><i class="fa fa-gears"></i></td>
               </tr>
             </thead>
             <tbody id="ShowSaran">
-              <?php 
-              $hit=1;
-              foreach ($saranku as $rowsSaran): ?>
+              <?php foreach ($saranku as $rowsSaran): ?>
                 <?php if ($rowsSaran['status']==0) {
                   $ketSaran ='Belum ditanggapi';
                   $kelas = 'label-warning';
@@ -1255,12 +1280,15 @@
                 }
                  ?>
                 <tr>
-                  <td><?php echo $hit++?></td>
                   <td><?php echo $rowsSaran['nama_pengirim'] ?></td>
                   <td><?php echo $rowsSaran['email_pengirim'] ?></td>
                   <td><?php echo $rowsSaran['konten_saran'] ?></td>
                   <td><?php echo $rowsSaran['tanggal_masuk'] ?></td>
                   <td><label class="label <?php echo $kelas ?>"><i class="fa <?php echo $ikon ?>"></i> <?php echo $ketSaran ?></label></td>
+                  <td>
+                    <a href="javascript:;" class="btn btn-info btn-flat btn-xs btnSaran" data="<?php echo $rowsSaran['id_masukan'] ?>"><i class="fa fa-paper-plane"></i></a>
+                    <a href="<?php echo base_url('Admin/Santri/HapusSaran/'.$rowsSaran['id_masukan']) ?>" onclick="return confirm('Apakah anda yakin akan menghapus saran dari <?php echo $rowsSaran['nama_pengirim'] ?> ?')" class="btn btn-danger btn-flat btn-xs"><i class="fa fa-remove"></i></a>
+                  </td>
                 </tr>
               <?php endforeach ?>
             </tbody>
@@ -1307,23 +1335,19 @@
     <section class="content-header">
       <h3>Berita</h3>
       <ol class="breadcrumb">
-        <li><a href="<?php echo base_url('Dashboard') ?>"><i class="fa fa-dashboard"></i>Beranda</a></li>
+        <li><a href="<?php echo base_url('sa_dashboard') ?>"><i class="fa fa-dashboard"></i>Beranda</a></li>
         <li class="active">Laman Berita</li>
       </ol>
     </section>
     <section class="content">
       <div class="box">
-        <div class="box-header with-border">
-          <h3 class="box-title">LAMAN BERITA</h3>
-          <button class="btn btn-primary btn-flat pull-right" data-toggle="modal" data-target="#beritaBaru"><i class="fa fa-plus"></i> Tambah Informasi Terbaru</button>
-        </div>
         <div class="box-body">
         <div class="alert alert-success"  style="display: none;"></div>
+          <button class="btn btn-primary btn-flat" data-toggle="modal" data-target="#beritaBaru"><i class="fa fa-plus"></i> Tambah Informasi Terbaru</button>
           <table class="table table-hover table-striped table-bordered tabel-responsive" id="tabelInfo">
             <thead class="bg-info">
               <tr>
-                <td>No</td>
-                <td>ID info</td>
+                <td>#</td>
                 <td>Judul Informasi</td>
                 <td>Pengirim</td>
                 <td>Tanggal Dibuat</td>
@@ -1332,18 +1356,16 @@
               </tr>
             </thead>
             <tbody>
-              <?php 
-              $hit=1;
-              foreach ($datainfo as $datainf): ?>
+              <?php foreach ($datainfo as $datainf): ?>
                 <tr>
-                  <td><?php echo $hit++?></td>
                   <td><?php echo $datainf['idInfo'] ?></td>
                   <td><?php echo $datainf['judulInfo'] ?></td>
                   <td><?php echo $datainf['penulisInfo'] ?></td>
                   <td><?php echo $datainf['tanggalInput'] ?></td>
                   <td><?php echo $datainf['kontentInfo'] ?></td>
                   <td>
-                    <a href="<?php echo base_url('Dashboard/hapusInformasi/'.$datainf['idInfo']) ?>" class="btn btn-danger btn-flat btn-xs" onclick="return confirm('apakah anda yakin akan menghapus data informasi <?php echo $datainf['judulInfo'] ?> ?')"><i class="fa fa-trash"></i></a>
+                    <a href="" class="btn btn-info btn-flat btn-xs editInformasi"><i class="fa fa-pencil"></i></a>
+                    <a href="<?php echo base_url('sa_dashboard/hapusInformasi/'.$datainf['idInfo']) ?>" class="btn btn-danger btn-flat btn-xs" onclick="return confirm('apakah anda yakin akan menghapus data informasi <?php echo $datainf['judulInfo'] ?> ?')"><i class="fa fa-trash"></i></a>
                   </td>
                 </tr>
               <?php endforeach ?>
@@ -1359,7 +1381,7 @@
               <h4>Tambah Informasi Baru</h4>
             </div>
             <div class="modal-body">
-              <form method="POST" action="<?php echo base_url('Dashboard/tambahInfo') ?>" class="form-vertical">
+              <form method="POST" action="<?php echo base_url('sa_dashboard/tambahInfo') ?>" class="form-vertical">
                 <div class="form-group">
                   <label>Informasi terkait</label>
                   <input type="text" name="judulInfo" class="form-control" placeholder="Masukan Judul sebagai penanda">
@@ -1368,9 +1390,9 @@
                   <label>Isi Informasi</label>
                   <textarea class="form-control" name="isiInfo" rows="8"></textarea>
                 </div>
-                <div class="modal-footer">
-                  <button class="btn btn-primary btn-flat" type="submit"><i class="fa fa-paper-plane"></i> Kirim informasi</button>
+                <div class="form-group">
                   <button class="btn btn-danger btn-flat" data-dismiss="modal"><i class="fa fa-remove"></i> Batal</button>
+                  <button class="btn btn-primary btn-flat" type="submit"><i class="fa fa-paper-plane"></i> Kirim informasi</button>
                 </div>
               </form>
             </div>
@@ -1401,7 +1423,7 @@
             <div class="icon">
               <i class="fa fa-users"></i>
             </div>
-            <a href="<?php echo base_url('Dashboard/SantriBaru') ?>" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+            <a href="<?php echo base_url('sa_dashboard/SantriBaru') ?>" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
           </div>
         </div>
         <!-- ./col -->
@@ -1416,7 +1438,7 @@
             <div class="icon">
               <i class="fa fa-users"></i>
             </div>
-            <a href="<?php echo base_url('Dashboard/Alumni') ?>" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+            <a href="<?php echo base_url('sa_dashboard/Alumni') ?>" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
           </div>
         </div>
         <!-- ./col -->
@@ -1541,6 +1563,7 @@
           $('input[name=editIdKamar]').val(data.id_kamar);
           $('input[name=editnamaKamar]').val(data.nama_kamar);
           $('input[name=editkuotakamar]').val(data.kuota_kamar);
+          $('input[name=editmodulKamar]').val(data.ket_kamar);
         },
         error: function(xx){
           alert(xx);
