@@ -42,11 +42,13 @@
  			$data['ac1']="";
         $data['ac2']="";
         $data['ac2_1']="";$data['ac2_2']="";$data['ac2_3']="";
-        $data['ac3']="active";
-        $data['ac3_1']="active";$data['ac3_2']="";
-        $data['ac4']="";
-        $data['ac4_1']="";$data['ac4_2']="";
-        $data['ac5']="";$data['ac6']="";$data['ac7']="";
+        $data['ac3']="";
+        $data['ac3_1']="";$data['ac3_2']="";
+        $data['ac4']="active";
+        $data['ac4_1']="";$data['ac4_2']="active";
+        $data['ac5']="";
+        $data['ac6']="";
+        $data['ac7']="";
  			$this->load->view('sa_dashboard', $data);
  			unset($data);
  		}

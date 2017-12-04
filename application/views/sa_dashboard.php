@@ -168,7 +168,7 @@
             </span>
           </a>
           <ul class="treeview-menu">
-            <li class="<?php echo $ac4_1;?>"><a href="#"><i class="fa fa-circle-o"></i> Kelas Diniyah</a></li>
+            <li class="<?php echo $ac4_1;?>"><a href="<?php echo base_url('Admin/kelas') ?>"><i class="fa fa-circle-o"></i> Kelas Diniyah</a></li>
             <li class="<?php echo $ac4_2;?>"><a href="#"><i class="fa fa-circle-o"></i> Kelas Santri</a></li>
           </ul>
         </li>
@@ -1395,6 +1395,186 @@
                   <button class="btn btn-primary btn-flat" type="submit"><i class="fa fa-paper-plane"></i> Kirim informasi</button>
                 </div>
               </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <?php } else if((isset($page))and($page=='data-kelas')){ ?>
+    <section class="content-header">
+      <h1>Data Kelas</h1>
+      <ol class="breadcrumb">
+        <li><a><i class="fa fa-dashboard"></i> Beranda</a></li>
+        <li class="active">Data Kelas</li>
+      </ol>
+    </section>
+    <section class="content">
+      <div class="box">
+        <div class="box-header with-border">
+          <a href="#tambahKelas" class="btn btn-success btn-sm btn-flat" data-toggle="modal"><i class="fa fa-plus-circle"></i> Tambah Kelas</a>
+        </div>
+        <div class="box-body">
+          <div class="alert alert-success" style="display: none;"></div>
+          <table class="table table-bordered table-responsive table-condensed table-hover table-striped">
+            <thead>
+              <tr>
+                <td>#</td>
+                <td>Nama Kelas</td>
+                <td>Wali Kelas</td>
+                <td>Nomor HP</td>
+                <td>Kuota Kelas</td>
+                <td>Lokasi Kelas</td>
+                <td>Keterangan</td>
+                <td>Status</td>
+                <td><i class="fa fa-cogs"> Aksi</i></td>
+              </tr>
+            </thead>
+            <tbody>
+              <?php $no=1; ?>
+              <?php foreach ($kelasMadin as $dataKelas): ?>
+                <?php $class = $dataKelas->status_kelas=='aktif'?$class='label-success':$class='label-warning' ?>
+                <tr>
+                  <td><?php echo $no ?></td>
+                  <td><?php echo $dataKelas->nama_kelas ?></td>
+                  <td><?php echo $dataKelas->nama_santri ?></td>
+                  <td><?php echo $dataKelas->noTelpon_santri ?></td>
+                  <td><?php echo $dataKelas->kuota_kelas ?></td>
+                  <td><?php echo $dataKelas->lokasi_kelas ?></td>
+                  <td><?php echo $dataKelas->keterangan_kelas ?></td>
+                  <td><label class="label <?php echo $class ?>"><?php echo $dataKelas->status_kelas ?></label></td>
+                  <td>
+                    <a href="<?php echo base_url('admin/kelas/detail?detail='.$dataKelas->id_kelas) ?>" class="btn btn-info btn-flat btn-xs"><i class="fa fa-search"></i></a>
+                  </td>
+                </tr>
+                <?php $no++; ?>
+              <?php endforeach ?>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+    <div class="modal fade" tabindex="-1" role="dialog" id="tambahKelas">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header bg-orange">
+            <button type="button" class="close" data-dismiss="modal"><i>&times;</i></button>
+            <h2 class="modal-title">Tambah Kelas</h2>
+          </div>
+          <div class="modal-body">
+            <form class="form-vertical"  method="post" action="<?php echo base_url('admin/kelas/tambahKelas') ?>">
+              <div class="form-group">
+                <label>Nama Kelas</label>
+                <div class="input-group">
+                  <input type="text" name="namaKelas" class="form-control" placeholder="nama kelas">
+                  <span class="input-group-addon"><i class="glyphicon glyphicon-home"></i></span>
+                </div>
+              </div>
+              <div class="form-group">
+                <label>Kuota Kelas</label>
+                <div class="input-group">
+                  <input type="text" name="kuotaKelas" class="form-control" placeholder="kuota kelas">
+                  <span class="input-group-addon"><i class="glyphicon glyphicon-cloud"></i></span>
+                </div>
+              </div>
+              <div class="form-group">
+                <label>lokasi kelas</label>
+                <div class="input-group">
+                  <input type="text" name="lokasiKelas" class="form-control" placeholder="lokasi pelaksanaan kelas diniyah">
+                  <span class="input-group-addon"><i class="glyphicon glyphicon-map-marker"></i></span>
+                </div>
+              </div>
+              <div class="form-group">
+                <label>Penanggung Jawab Kelas</label>
+                <div class="input-group">
+                  <select class="form-control" name="waliKelas">
+                    <option value="0">Pilih Wali Kelas</option>
+                    <?php foreach ($waliSantri as $dataWali): ?>
+                      <option value="<?php echo $dataWali->id_santri ?>"><?php echo $dataWali->nama_santri ?></option>
+                    <?php endforeach ?>
+                  </select>
+                  <span class="input-group-addon"><i class="glyphicon glyphicon-fire"></i></span>
+                </div>
+              </div>
+              <div class="form-group">
+                <label>Keterangan kelas</label>
+                <div class="input-group">
+                  <textarea class="form-control" name="keteranganKelas" placeholder="Keterangan pelaksanaan kelas"></textarea>
+                  <span class="input-group-addon"><i class="glyphicon glyphicon-certificate"></i></span>
+                </div>
+              </div>
+              <div class="form-group">
+                <button type="button" class="btn btn-danger btn-flat" data-dismiss="modal"><i class="fa fa-remove"></i> Batal</button>
+                <button type="submit" class="btn btn-success btn-flat"><i class="glyphicon glyphicon-save"></i> Tambahkan Kelas</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+    <?php } else if((isset($page))AND($page=='detailKelas')) {?>
+    <section class="content-header">
+      <h1>Detail kelas</h1>
+    </section>
+    <section class="content">
+      <div class="row">
+        <div class="col-md-3">
+          <div class="box">
+        <div class="box-header with-border">
+          <a href="#tambahPersonil" class="btn btn-sm btn-success btn-flat"><i class="fa fa-plus"></i> Tambah Personil</a>
+        </div>
+        <div class="box-body">
+          <ul class="list-group list-group-unbordered">
+            <li class="list-group-item"><b>Nama Kelas</b><a class="pull-right"><?php echo $datakelas->nama_kelas ?></a></li>
+            <li class="list-group-item"><b>Wali Kelas</b><a class="pull-right"><?php echo $datakelas->nama_santri ?></a></li>
+            <li class="list-group-item"><b>Kuota Kelas</b><a class="pull-right"><?php echo $datakelas->kuota_kelas ?></a></li>
+            <li class="list-group-item"><b>Detail Kelas</b><a class="pull-right"><?php echo $datakelas->keterangan_kelas ?></a></li
+          </ul>
+        </div>
+      </div>
+        </div>
+        <div class="col-md-9">
+          <div class="box">
+            <div class="box-header with-border">
+              <h1 class="box-title">Data Personil Kelas</h1>
+            </div>
+            <div class="box-body">
+              <table class="table table-responsive table-condensed table-striped">
+                <thead>
+                  <tr>
+                    <td>#</td>
+                    <td>Nama Santri</td>
+                    <td>Alamat Santri</td>
+                    <td>Nomor HP</td>
+                    <td>Keterangan</td>
+                    <td><i class="fa fa-cogs"></i> Operasi</td>
+                  </tr>
+                </thead>
+                <tbody>
+                  <?php $no=1; ?>
+                  <?php foreach ($detailAnggota as $anggotaKelas): ?>
+                    <?php if ($anggotaKelas->status_aktif=='open') {
+                      $icon = 'fa-info-circle';
+                      $classLabel = 'label-success';
+                      $ket = 'santri aktif';
+                    }else{
+                      $icon = 'fa fa-warning';
+                      $classLabel = 'label-danger';
+                      $ket = 'santri kalong';
+                    } ?>
+                    <tr>
+                      <td><?php echo $no ?></td>
+                      <td><?php echo $anggotaKelas->nama_santri ?></td>
+                      <td><?php echo $anggotaKelas->alamat_santri ?></td>
+                      <td><?php echo $anggotaKelas->noTelpon_santri ?></td>
+                      <td><label class="label <?php echo $classLabel ?>"><i class=" fa <?php echo $icon ?>"></i> <?php echo $ket ?></label></td>
+                      <td>
+                        <a href="<?php echo base_url('admin/kelas/tutup?idkelas='.$anggotaKelas->id_transkelas) ?>" class="btn btn-info btn-xs btn-flat"><i class="fa fa-remove"></i></a>
+                      </td>
+                    </tr>
+                    <?php $no++; ?>
+                  <?php endforeach ?>
+                </tbody>
+              </table>
             </div>
           </div>
         </div>
