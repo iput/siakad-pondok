@@ -61,6 +61,9 @@
 
  	public function HapusSantri($id)
  	{
+
+ 		$this->db->where('id_santri', $id);
+ 		$this->db->delete('userlog');
  		$this->db->where('id_santri', $id);
  		$this->db->delete('master_santri');
  		if ($this->db->affected_rows()>0) {

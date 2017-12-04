@@ -177,7 +177,7 @@
 
  	public function UpdatePersonil($id, $data)
  	{
- 		$this->db->query("UPDATE trans_kamar set id_kamar=?, id_santri=?, keterangan=? where id_trans=?",array($data['idkamar'], $data['idsantri'], $data['ket'], $id));
+ 		$this->db->query("UPDATE trans_kamar set id_kamar=?, keterangan=? where id_trans=?",array($data['idkamar'], $data['ket'], $id));
  		unset($id,$data);
  	}
 

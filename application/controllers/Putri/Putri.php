@@ -119,8 +119,8 @@
  	public function HapusDataSantri($id)
  	{
 
- 		$relasi = count($this->ModPutri->cekRelasi($id)->row());
- 		if ($relasi>0) {
+ 		$relasi = $this->ModPutri->cekRelasi($id)->num_rows();
+ 		if ($relasi>1) {
  			$this->session->set_flashdata('gagal','Data ini tidak bisa dihapus terkait relasi dengan transaksi lain');
  			redirect('Putri/Putri/dataSantri');
  		}else{
@@ -151,70 +151,87 @@
  	{
  		$personil = $this->input->post('nama_santri');
  		$idkamar = $this->input->post('listKamar');
- 		$kuota = $this->ModKamar->ambilKuota($idkamar);
- 		$sisa="";
- 		foreach ($kuota as $k) {
- 			$sisa=$k['kuota_kamar'];
- 		}
+ 		$sisa=$this->ModKamar->ambil_kuota($idkamar)->kuota_kamar;
+	 	$leng = count($personil);
+ 		if ($sisa>=$leng) {
+ 		$jum_n=0;
  		$kurangiKuota=0;
- 		if ($sisa>0) {
- 		$leng = count($personil);
- 		for ($i=0; $i < $leng; $i++) { 
- 			$kurangiKuota++;
- 			$data['idtrans']="TRAN0".$this->random(3);
- 			$data['idkmr']=$this->input->post('listKamar');
- 			$data['idstr']=$personil[$i];
- 			$data['ket']=$this->input->post('keterangan');
- 			$this->ModKamar->TambahPersonil($data);
- 		}
- 		$kuotabaru = $sisa - $kurangiKuota;
- 		$datakuota['kuota']=$kuotabaru;
- 		$this->ModKamar->updateKuotaKamar($idkamar, $datakuota);
- 		$this->session->set_flashdata('sukses','Data personil Kamar Berhasil Di tambahkan');
- 		redirect('Putri/Putri/AnggotaKamar');
- 		}else if ($sisa<=0) {
+	 		for ($i=0; $i < $leng; $i++) {
+		 		$cek_id=$this->ModKamar->cek_id_s($personil[$i]); 
+	 			if($cek_id){	 			
+		 			$kurangiKuota+=1;
+		 			$data['idtrans']="TRAN0".$this->random(3);
+		 			$data['idkmr']=$this->input->post('listKamar');
+		 			$data['idstr']=$personil[$i];
+		 			$data['ket']=$this->input->post('keterangan');
+		 			$this->ModKamar->TambahPersonil($data);
+	 			}else{
+	 				$jum_n+=1;
+	 			}
+	 		}
+	 		$kuotabaru = $sisa - $kurangiKuota;
+	 		$this->ModKamar->update_kuota_k($idkamar, $kuotabaru);
+	 		if($kurangiKuota>0&&$jum_n>0){
+	 			$this->session->set_flashdata('sukses',$kurangiKuota.' Data personil Kamar Berhasil Di tambahkan,<br>'.$jum_n.' Data tidak bisa masuk karena sudah masuk kamar');
+	 		}else if($kurangiKuota>0){
+	 			$this->session->set_flashdata('sukses',$kurangiKuota.' Data personil Kamar Berhasil Di tambahkan');
+	 		}else if($jum_n>0){
+	 			$this->session->set_flashdata('gagal',$jum_n.' Data personil Kamar tidak Berhasil Di tambahkan karena sudah mendapatkan kamar');
+	 		}else{
+	 			echo "aaaa";
+	 		}
+ 		}else{
  			$this->session->set_flashdata('gagal','Data tidak bisa dimasukan, kuota kamar tidak memenuhi syarat');
- 			redirect('Putra/Putra/AnggotaKamar');
  		}
- 		unset($data, $personil, $idKamar, $sisa, $k, $datakuota);
+	 	redirect('Putri/Putri/AnggotaKamar');
+ 		unset($data,$personil,$idKamar, $kuota, $sisa, $k,$leng,$kuotabaru, $datakuota);
  	}
 
  	public function EditPersonilKamar()
  	{
  		$dataPersonil = $this->ModKamar->EditPersonil();
- 		echo json_encode($dataPersonil);
- 		unset($dataPersonil);
+ 		$data_san = $this->ModKamar->cari_nama($dataPersonil->id_santri);
+ 		$data_lo['id_trans']=$dataPersonil->id_trans;
+ 		$data_lo['id_kamar']=$dataPersonil->id_kamar;
+ 		$data_lo['id_santri']=$dataPersonil->id_santri;
+ 		$data_lo['nama_santri']=$data_san->nama_santri;
+ 		$data_lo['keterangan']=$dataPersonil->keterangan;
+ 		echo json_encode($data_lo);
+ 		unset($data_lo);
  	}
 
  	public function UpdatePersonil()
  	{
  		$idtransaksi = $this->input->post('idtransaksi');
+ 		$id_kamar_lama = $this->ModKamar->cek_kamar($idtransaksi)->id_kamar;
  		$data['idkamar']= $this->input->post('editlistKamar');
- 		$data['idsantri']=$this->input->post('editnama_santri');
- 		$data['ket']= $this->input->post('editketerangan');
- 		$this->ModKamar->UpdatePersonil($idtransaksi, $data);
- 		$this->session->set_flashdata('sukses','Data Personil kamar berhasil diperarui');
- 		redirect('Putri/Putri/AnggotaKamar');
- 		unset($data, $idtransaksi);
+ 		if($id_kamar_lama!=$data['idkamar']){
+ 			$kuota_lama=$this->ModKamar->ambil_kuota($id_kamar_lama)->kuota_kamar + 1;
+ 			$kuota_baru=$this->ModKamar->ambil_kuota($data['idkamar'])->kuota_kamar - 1;
+ 			$this->ModKamar->update_kuota_k($id_kamar_lama, $kuota_lama);
+ 			$this->ModKamar->update_kuota_k($data['idkamar'], $kuota_baru);
+ 		}
+ 			$data['idsantri']=$this->input->post('id_santri');
+	 		$data['ket']= $this->input->post('editketerangan');
+	 		$this->ModKamar->UpdatePersonil($idtransaksi, $data);
+	 		$this->session->set_flashdata('sukses','Data Personil kamar berhasil diperarui');
+	 		redirect('Putri/Putri/AnggotaKamar');
+	 		unset($data, $idtransaksi);
  	}
 
  	public function HapusPersonilKamar($id)
  	{
- 		$data1 = $this->ModKamar->HapusPersonil($id);
- 		if ($data1) {
- 			$idkamar = $this->input->post('idKamar');
- 			$datakuota = $this->ModKamar->AmbilKuota($idkamar);
- 			$kuota='';
- 			foreach ($datakuota as $row) {
- 				$kuota=$row['kuota_kamar'];
- 			}
- 			$newkuota = $kuota+1;
- 			$data['kuota']=$newkuota;
- 			$this->ModKamar->UpdateKuotaKamar($data, $idkamar);
+ 		$idkamar = $this->ModKamar->cek_kamar($id)->id_kamar;
+ 		$datai = $this->ModKamar->HapusPersonil($id);
+ 		if ($datai) {
+ 			$datakuota = $this->ModKamar->ambil_kuota($idkamar)->kuota_kamar + 1;
+ 			$this->ModKamar->update_kuota_k($idkamar, $datakuota);
  			$this->session->set_flashdata('sukses','Data personil Kamar berhasil dihapus.');
- 			redirect('Putri/Putri/AnggotaKamar');
+ 		}else{
+ 			$this->session->set_flashdata('gagal','Data personil Kamar gagal dihapus.');
  		}
- 		unset($data, $data1, $idkamar, $datakuota, $row, $newkuota);
+ 			redirect('Putri/Putri/AnggotaKamar');
+ 			unset($data, $datai, $datakuota, $row);
  	}
 
  	public function SaranMasukan()
