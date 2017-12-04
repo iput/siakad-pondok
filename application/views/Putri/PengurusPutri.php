@@ -160,14 +160,15 @@
       <div class="box">
         <div class="box-header with-border">
           <h4 class="box-title">Data Santri Putri</h4>
+          <a href="<?php echo base_url('Putri/Putri/TambahSantri') ?>" class="btn btn-primary btn-flat pull-right"><i class="fa fa-plus"></i>&nbsp;Tambah Data Santri</a>
         </div>
         <div class="box-body">
         <div class="alert alert-success" style="display: none;"></div>
         <div class="alert alert-danger" style="display: none;"></div>
-          <a href="<?php echo base_url('Putri/Putri/TambahSantri') ?>" class="btn btn-primary btn-flat"><i class="fa fa-plus"></i>&nbsp;Tambah Data Santri</a>
           <table class="table table-responsive table-hover table-striped table-bordered" id="tabelSantriPutri">
             <thead class="bg-primary">
               <tr>
+                <td>No</td>
                 <td>Nama Lengkap</td>
                 <td>Panggilan</td>
                 <td>Alamat</td>
@@ -176,8 +177,11 @@
               </tr>
             </thead>
             <tbody>
-              <?php foreach ($santriputri as $rputri): ?>
+              <?php 
+              $no=0;
+              foreach ($santriputri as $rputri): ?>
                 <tr>
+                  <td><?php echo ++$no; ?></td>
                   <td><?php echo $rputri['nama_santri'] ?></td>
                   <td><?php echo $rputri['nama_panggilan'] ?></td>
                   <td><?php echo $rputri['alamat_santri'] ?></td>
@@ -404,13 +408,15 @@
       <div class="box">
         <div class="box-header with-border">
           <h3 class="box-title">Data Anggota Kamar</h3>
+          <button class="btn btn-primary btn-flat pull-right" data-toggle="modal" data-target="#tambahPersonil"><i class=" fa fa-plus"></i>&nbsp;Tambah Anggota Kamar</button>
         </div>
         <div class="box-body">
         <div class="alert alert-success" style="display: none;"></div>
-          <button class="btn btn-primary btn-flat" data-toggle="modal" data-target="#tambahPersonil"><i class=" fa fa-plus"></i>&nbsp;Tambah Anggota Kamar</button>
+        <div class="alert alert-danger" style="display: none;"></div>
           <table class="table table-bordered table-striped table-hover" id="tabelPersonil">
             <thead class="bg-primary">
               <tr>
+                <td>No</td>
                 <td>ID</td>
                 <td>Nama Kamar</td>
                 <td>Nama Santri</td>
@@ -419,8 +425,11 @@
               </tr>
             </thead>
             <tbody id="showPersonil">
-              <?php foreach ($personilputri as $dataputri): ?>
+              <?php
+              $no=0;
+               foreach ($personilputri as $dataputri): ?>
                 <tr>
+                  <td><?php echo ++$no; ?></td>
                   <td><?php echo $dataputri['id_trans'] ?></td>
                   <td><?php echo $dataputri['nama_kamar'] ?></td>
                   <td><?php echo $dataputri['nama_santri'] ?></td>
@@ -469,7 +478,7 @@
               </div>
               <div class="form-group">
                 <button class="btn btn-danger btn-flat" data-dismiss="modal"><i class="fa fa-close"></i>&nbsp;Batal</button>
-                <button class="btn btn-info btn-flat" type="submit"><i class="fa fa-save"></i>&nbsp;Simpan</button>
+                <button class="btn btn-info btn-flat pull-right" type="submit"><i class="fa fa-save"></i>&nbsp;Simpan</button>
               </div>
             </form>
           </div>
@@ -496,11 +505,7 @@
               </div>
               <div class="form-group">
                 <label>Nama Santri : </label>
-                <select class="form-control" name="editnama_santri">
-                  <?php foreach ($santriPutri as $lSantri): ?>
-                    <option value="<?php echo $lSantri['id_santri'] ?>"><?php echo $lSantri['nama_santri'] ?></option>
-                  <?php endforeach ?>
-                </select>
+                <div id="editnama_santri" class="form-control"></div>
               </div>
               <div class="form-group">
               <label>Keterangan Kamar : </label>
@@ -508,8 +513,9 @@
               </div>
               <div class="form-group">
               <input type="hidden" name="idtransaksi">
+              <input type="hidden" id="id_santri" name="id_santri">
                 <button class="btn btn-danger btn-flat" data-dismiss="modal"><i class="fa fa-close"></i>&nbsp;Batal</button>
-                <button class="btn btn-info btn-flat" type="submit"><i class="fa fa-refresh"></i>&nbsp;Update</button>
+                <button class="btn btn-info btn-flat pull-right" type="submit"><i class="fa fa-refresh"></i>&nbsp;Update</button>
               </div>
             </form>
           </div>
@@ -529,14 +535,15 @@
       <div class="box">
         <div class="box-header with-border">
           <h3 class="box-title">Saran dan masukan</h3>
+          <button class="btn btn-primary btn-flat pull-right" data-toggle="modal" data-target="#tambahSaran"><i class="fa fa-plus"></i>&nbsp;Tambah Saran</button>
         </div>
         <div class="box-body">
         <div class="alert alert-success" style="display: none;"></div>
-          <button class="btn btn-primary btn-flat" data-toggle="modal" data-target="#tambahSaran"><i class="fa fa-plus"></i>&nbsp;Tambah Saran</button>
-          <h4>Saran anda</h4>
+        <div class="alert alert-danger" style="display: none;"></div>
           <table class="table table-bordered table-striped table-hover" id="tabelSaran">
             <thead class="bg-primary">
               <tr>
+              <td>No</td>  
               <td>Pengirim</td>
               <td>Email Pengirim</td>
               <td>Subjek</td>
@@ -545,7 +552,9 @@
               </tr>
             </thead>
             <tbody>
-              <?php foreach ($saranmasuk as $rowsaran): ?>
+              <?php 
+              $no=0;
+              foreach ($saranmasuk as $rowsaran): ?>
                 <?php if ($rowsaran['status']==0) {
                   $status='Belum ditanggapi';
                   $kelas="label-warning";
@@ -554,8 +563,11 @@
                   $status='Sudah ditanggapi';
                   $kelas="label-success";
                   $ikon = "fa fa-check-circle";
-                } ?>
+                }
+                $no++;
+                 ?>
                 <tr>
+                  <td><?php echo $no; ?></td>
                   <td><?php echo $rowsaran['nama_pengirim']; ?></td>
                   <td><?php echo $rowsaran['email_pengirim']; ?></td>
                   <td><?php echo $rowsaran['tentang']; ?></td>
@@ -755,13 +767,15 @@ $('#showPersonil').on('click','.btnPersonil',function(){
   $.ajax({
     type : 'ajax',
     method : 'get',
-    url : '<?php echo base_url('Putra/Putra/EditPersonilKamar') ?>',
+    url : '<?php echo base_url('Putri/Putri/EditPersonilKamar') ?>',
     data : {id : id},
     async : false,
     dataType : 'json',
     success: function(data) {
       $('select[name=editlistKamar]').val(data.id_kamar);
       $('select[name=editnama_santri]').val(data.id_santri);
+      $('#id_santri').val(data.id_santri);
+      $('#editnama_santri').html(data['nama_santri']);
       $('textarea[name=editketerangan]').val(data.keterangan);
       $('input[name=idtransaksi]').val(data.id_trans);
     },

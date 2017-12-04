@@ -122,8 +122,8 @@
  	public function HapusDataSantri($id)
  	{
 
- 		$relasi = count($this->ModPutra->cekRelasi($id)->row());
- 		if ($relasi>0) {
+ 		$relasi = $this->ModPutra->cekRelasi($id)->num_rows();
+ 		if ($relasi>1) {
  			$this->session->set_flashdata('gagal','Data ini memiliki beberapa keterkaitan terhadap beberapa operasi lain. Untuk proses penghapusan data silahakn hubungi pengelola pusat');
  			redirect('Putra/Putra/DataSantri');
  		}else{
