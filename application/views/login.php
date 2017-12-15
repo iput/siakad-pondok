@@ -26,7 +26,7 @@
   <![endif]-->
   <style type="text/css">
     .login-page{
-      background-image: url('<?php echo base_url('landing/img/bg.jpg') ?>');
+      background-image: url('<?php echo base_url('landing/img/pengurus.jpg') ?>');
       background-size: cover;
       background-repeat: no-repeat;
     }
