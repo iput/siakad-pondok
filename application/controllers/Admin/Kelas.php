@@ -7,6 +7,7 @@ class Kelas extends CI_Controller {
 	{
 		parent::__construct();
 		$this->load->model('ModKelas');
+		$this->load->model('ModSantri');
 	}
 
 	public function random($panjang) {
@@ -54,6 +55,7 @@ class Kelas extends CI_Controller {
 		$data['page'] = 'detailKelas';
 		$data['datakelas'] = $this->ModKelas->detailKelas($idKelas);
 		$data['detailAnggota'] = $this->ModKelas->personilKelas($idKelas);
+		$data['dataSantri'] = $this->ModSantri->SemuaSantri();
 		$this->load->view('sa_Dashboard', $data);
 	}
 
@@ -78,6 +80,25 @@ class Kelas extends CI_Controller {
 		$this->session->set_flashdata('sukses', 'Data Kelas berhasil ditambahkan');
 		redirect('admin/kelas','refresh');
 
+	}
+
+	public function tambahPersonil()
+	{
+		$id_kelas  = $this->input->post('id_kelas');
+		$personil = $this->input->post('personil');
+		$keterangan = $this->input->post('keterangan_personil');
+
+		$jumlah = count($personil);
+		for ($k = 0; $k <$jumlah ; $k++) {
+			$data['id_transkelas'] = $this->random(8);
+			$data['id_kelas'] = $id_kelas;
+			$data['id_santri'] = $personil[$k];
+			$data['ket'] = $keterangan;
+			$data['status_aktif'] = 'open';
+			$this->ModKelas->tambahPersonil($data);
+		}
+		$this->session->set_flashdata('sukses', 'data personil berhasil ditambahkan');
+		redirect('admin/kelas','refresh');
 	}
 
 }

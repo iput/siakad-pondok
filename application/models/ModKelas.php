@@ -59,6 +59,12 @@ class ModKelas extends CI_Model {
 		return $query;
 		unset($data, $query);
 	}
+
+	public function tambahPersonil($data)
+	{
+		$this->db->query('INSERT INTO transkelas(id_transkelas, idkelas, id_santri, ket, status_aktif) values(?,?,?,?,?)', array($data['id_transkelas'], $data['id_kelas'], $data['id_santri'], $data['ket'], $data['status_aktif']));
+		unset($data);
+	}
 	
 
 }

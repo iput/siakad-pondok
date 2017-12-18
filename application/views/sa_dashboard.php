@@ -169,7 +169,7 @@
           </a>
           <ul class="treeview-menu">
             <li class="<?php echo $ac4_1;?>"><a href="<?php echo base_url('Admin/kelas') ?>"><i class="fa fa-circle-o"></i> Kelas Diniyah</a></li>
-            <li class="<?php echo $ac4_2;?>"><a href="#"><i class="fa fa-circle-o"></i> Kelas Santri</a></li>
+            <li class="<?php echo $ac4_2;?>"><a href="<?php echo base_url('Admin/pelajaran') ?>"><i class="fa fa-circle-o"></i> Mata Pelajaran</a></li>
           </ul>
         </li>
         <li class="<?php echo $ac7;?>"><a href="<?php echo base_url('sa_dashboard/newBerita') ?>"><i class="fa fa-newspaper-o"></i><span> informasi terbaru</span></a></li>
@@ -208,6 +208,7 @@
         <div class="box-body">
         <div class="alert alert-success" style="display: none;"></div>
         <div class="alert alert-warning" style="display: none;"></div>
+        <a href="<?php echo base_url('Master_Data/Santri') ?>" class="btn btn-success btn-flat pull-right"><i class="fa fa-download"></i> Unduh Data</a>
           <table class="table table-bordered table-striped table-hover display nowrap" style="margin-top: 20px;" id="tabel_santri">
             <thead>
               <tr>
@@ -261,6 +262,7 @@
         </div>
         <div class="box-body">
         <div class="alert alert-success" style="display: none;"></div>
+        <a href="<?php echo base_url('Master_Data/Alumni') ?>" class="btn btn-success btn-flat pull-right"><i class="fa fa-download"></i> Unduh Data</a>
           <table class="table table-bordered table-striped table-hover" id="tabel_alumni" style="margin-top: 20px;">
             <thead>
               <tr>
@@ -1520,7 +1522,7 @@
         <div class="col-md-3">
           <div class="box">
         <div class="box-header with-border">
-          <a href="#tambahPersonil" class="btn btn-sm btn-success btn-flat"><i class="fa fa-plus"></i> Tambah Personil</a>
+          <a href="#tambahPersonil" class="btn btn-sm btn-success btn-flat" data-toggle="modal"><i class="fa fa-plus"></i> Tambah Personil</a>
         </div>
         <div class="box-body">
           <ul class="list-group list-group-unbordered">
@@ -1580,6 +1582,176 @@
         </div>
       </div>
     </section>
+
+    <div class="modal fade" tabindex="-1" id="tambahPersonil">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header bg-green">
+            <button class="close" data-dismiss="modal"><span>&times;</span></button>
+            <h4 class="modal-title">Tambah Personil Kelas <?php echo $datakelas->nama_kelas ?></h4>
+          </div>
+          <div class="modal-body">
+            <form class="form-vertical" method="post" action="<?php echo base_url('Admin/kelas/tambahPersonil') ?>">
+              <div class="form-group">
+                <label>Nama Kelas</label>
+                <div class="input-group">
+                  <input type="hidden" name="id_kelas" value="<?php echo $datakelas->id_kelas ?>">
+                  <input type="text" name="namaKelas" class="form-control" value="<?php echo $datakelas->nama_kelas ?>" readonly>
+                  <span class="input-group-addon"><i class="fa fa-home"></i></span>
+                </div>
+              </div>
+              <div class="form-group">
+                <label>Nama Santri</label>
+                <div class="input-group">
+                  <select class="form-control" name="personil[]" class="form-control" multiple="multiple">
+                    <?php foreach ($dataSantri as $rowSantri): ?>
+                      <option value="<?php echo $rowSantri['id_santri'] ?>"><?php echo $rowSantri['nama_santri'] ?></option>
+                    <?php endforeach ?>
+                  </select>
+                  <span class="input-group-addon"><i class="fa fa-group"></i></span>
+                </div>
+                <p class="help-block">Tekan dan tahan Crtl untuk memilih lebih dari 1</p>
+              </div>
+              <div class="form-group">
+                <label>Keterangan</label>
+                <div class="input-group">
+                  <textarea class="form-control" name="keterangan_personil" placeholder="keterangan kelas"></textarea>
+                  <span class="input-group-addon"><i class="fa fa-asterisk"></i></span>
+                </div>
+              </div>
+              <div class="form-group">
+                <button class="btn btn-warning btn-flat" data-dismiss="modal"><i class="fa fa-remove"></i> Batal</button>
+                <button type="submit" class="btn btn-success btn-flat"><i class="fa fa-save"></i> Simpan</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+    <?php }else if(isset($page)AND($page=='data_pelajaran')){ ?>
+    <section class="content-header">
+      <h1>
+        Data Mata Pelajaran Diniyah
+      </h1>
+      <ol class="breadcrumb">
+        <li><a href="#"><i class="fa fa-dashboard"></i> Beranda</a></li>
+        <li class="active">Mata pelajaran</li>
+      </ol>
+    </section>
+    <section class="content">
+      <div class="box">
+        <div class="box-header with-border">
+          <h2 class="box-title">Data Mata Pelajaran Diniyah</h2>
+          <a href="#tambahMataPelajaran" data-toggle="modal" class="btn btn-success btn-flat pull-right"><i class="fa fa-plus-circle"></i> Pelajaran Baru</a>
+        </div>
+        <div class="box-body">
+          <div class="alert alert-success" style="display: none;"></div>
+          <table class="table table-condensed table-bordered table-hover table-responsive">
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>Nama Pelajaran </th>
+                <th>Nama Pengajar</th>
+                <th>Kelas</th>
+                <th><i class="fa fa-gears"></i> Operasi</th>
+              </tr>
+            </thead>
+            <tbody id="tabel_pelajaran">
+
+              <?php $no_mp=1; ?>
+              <?php foreach ($mapel as $row_mapel): ?>
+                <tr>
+                  <td><?php echo $no_mp ?></td>
+                  <td><?php echo $row_mapel->nama_pelajaran ?></td>
+                  <td><?php echo $row_mapel->nama_santri ?></td>
+                  <td><?php echo $row_mapel->nama_kelas ?></td>
+                  <td>
+                    <a href="javascript:;" class="btn btn-info btn-flat btn-xs btn_edit_pelajaran" data="<?php echo $row_mapel->id_pelajaran ?>"><i class="fa fa-pencil"></i> Edit</a>
+                    <a href="<?php echo base_url('Admin/pelajaran/hapus?pelajaran='.$row_mapel->id_pelajaran) ?>" class="btn btn-warning btn-flat btn-xs" onclick="return confirm('apakah anda yakin akan menhapus data ini ?')"><i class="fa fa-trash"></i> hapus</a>
+                  </td>
+                </tr>
+                <?php $no_mp++ ?>
+              <?php endforeach ?>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+    <div class="modal fade" tabindex="-1" id="tambahMataPelajaran">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header bg-green">
+            <button class="close" data-dismiss="modal"><span>&times;</span></button>
+            <h4 class="modal-title">Tambah Mata Pelajaran</h4>
+          </div>
+          <div class="modal-body">
+            <form class="form-vertical" method="post" action="<?php echo base_url('Admin/pelajaran/tambah_mapel') ?>">
+              <div class="form-group">
+                <select class="form-control" name="nama_ustadz">
+                  <option value="">Pilih Pengajar</option>
+                  <?php foreach ($pengajar as $row_pengajar): ?>
+                    <option value="<?php echo $row_pengajar->id_santri ?>"><?php echo $row_pengajar->nama_santri ?></option>
+                  <?php endforeach ?>
+                </select>
+              </div>
+              <div class="form-group">
+                <select class="form-control" name="nama_kelas">
+                  <option value="">Pilih Pilih Kelas</option>
+                  <?php foreach ($kelas_umum as $row_kelas): ?>
+                    <option value="<?php echo $row_kelas->id_kelas ?>"><?php echo $row_kelas->nama_kelas ?></option>
+                  <?php endforeach ?>
+                </select>
+              </div>
+              <div class="form-group">
+                <input type="text" name="nama_pelajaran" class="form-control" placeholder="masukan nama Pelajaran">
+              </div>
+              <div class="form-group">
+                <button class="btn btn-warning btn-flat" data-dismiss="modal"><i class="fa fa-remove"></i> Batal</button>
+                <button type="submit" class="btn btn-success btn-flat"><i class="fa fa-save"></i> Simpan</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="modal fade" tabindex="-1" id="editMataPelajaran">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header bg-green">
+            <button class="close" data-dismiss="modal"><span>&times;</span></button>
+            <h4 class="modal-title">Edit Mata Pelajaran</h4>
+          </div>
+          <div class="modal-body">
+            <form class="form-vertical" method="post" action="<?php echo base_url('Admin/pelajaran/update_mapel') ?>">
+              <div class="form-group">
+                <select class="form-control" name="nama_ustadz">
+                  <option value="">Pilih Pengajar</option>
+                  <?php foreach ($pengajar as $row_pengajar): ?>
+                    <option value="<?php echo $row_pengajar->id_santri ?>"><?php echo $row_pengajar->nama_santri ?></option>
+                  <?php endforeach ?>
+                </select>
+              </div>
+              <div class="form-group">
+                <select class="form-control" name="nama_kelas">
+                  <option value="">Pilih Pilih Kelas</option>
+                  <?php foreach ($kelas_umum as $row_kelas): ?>
+                    <option value="<?php echo $row_kelas->id_kelas ?>"><?php echo $row_kelas->nama_kelas ?></option>
+                  <?php endforeach ?>
+                </select>
+              </div>
+              <div class="form-group">
+                <input type="text" name="nama_pelajaran" class="form-control" placeholder="masukan nama Pelajaran">
+              </div>
+              <div class="form-group">
+                <input type="hidden" name="id_pelajaran">
+                <button class="btn btn-warning btn-flat" data-dismiss="modal"><i class="fa fa-remove"></i> Batal</button>
+                <button type="submit" class="btn btn-success btn-flat"><i class="fa fa-save"></i> Simpan</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
     <?php } else { ?>
     <section class="content-header">
       <h1>
@@ -1772,6 +1944,28 @@
         }
       });
     });
+
+    $('#tabel_pelajaran').on('click', '.btn_edit_pelajaran', function() {
+      var id = $(this).attr('data');
+      $('#editMataPelajaran').modal('show');
+      $.ajax({
+        type: 'ajax',
+        method: 'get',
+        data: {id:id},
+        url: '<?php echo base_url('Admin/pelajaran/edit_pelajaran') ?>',
+        async: false,
+        dataType: 'json',
+        success: function(data) {
+          $('select[name=nama_ustadz]').val(data.id_pengajar);
+          $('select[name=nama_kelas]').val(data.id_kelas);
+          $('input[name=nama_pelajaran]').val(data.nama_pelajaran);
+          $('input[name=id_pelajaran]').val(data.id_pelajaran);
+        },
+        error : function() {
+          alert('data tidak bisa tampil');
+        }
+      })
+    })
   });
 </script>
 </body>
