@@ -101,7 +101,7 @@
                   <a href="<?php echo base_url('sa_dashboard/myProfile') ?>" class="btn btn-default btn-flat">Profile</a>
                 </div>
                 <div class="pull-right">
-                  <a href="<?php echo base_url('Login/Logout') ?>" class="btn btn-default btn-flat">Sign out</a>
+                  <a href="<?php echo base_url('sa_dashboard/Logout') ?>" class="btn btn-default btn-flat">Sign out</a>
                 </div>
               </li>
             </ul>
@@ -1417,7 +1417,7 @@
         </div>
         <div class="box-body">
           <div class="alert alert-success" style="display: none;"></div>
-          <table class="table table-bordered table-responsive table-condensed table-hover table-striped">
+          <table class="table table-bordered table-responsive table-condensed table-hover table-striped" id="tabel_kelas">
             <thead>
               <tr>
                 <td>#</td>
@@ -1646,7 +1646,7 @@
         </div>
         <div class="box-body">
           <div class="alert alert-success" style="display: none;"></div>
-          <table class="table table-condensed table-bordered table-hover table-responsive">
+          <table class="table table-condensed table-bordered table-hover table-responsive" id="data_pel">
             <thead>
               <tr>
                 <th>#</th>
@@ -1891,6 +1891,8 @@
   $('#tabelPengurus').DataTable();
   $('#TabelSaran').DataTable();
   $('#tabelInfo').DataTable();
+  $('#tabel_kelas').DataTable();
+  $('#data_pel').DataTable();
   <?php if ($this->session->flashdata('sukses')): ?>
     $('.alert-success').html('<?php echo $this->session->flashdata('sukses') ?>').fadeIn();
   <?php elseif($this->session->flashdata('gagal')): ?>

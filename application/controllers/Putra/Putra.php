@@ -8,11 +8,18 @@
  	function __construct()
  	{
  		parent::__construct();
+ 		if($this->session->userdata('level')!="pengurusputra"){
+ 			redirect('actLanding/Login');
+ 		}
  		$this->load->model('ModPutra');
  		$this->load->model('ModKamar');
  		$this->load->model('ModRegister');
  	}
-
+ 	public function Logout()
+ 	{
+ 		$this->session->sess_destroy();
+        redirect('actLanding');
+ 	}
  	public function random($panjang) {
         $karakter = '1234567890987654321';
         $string = '';

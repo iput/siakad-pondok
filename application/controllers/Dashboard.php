@@ -8,12 +8,19 @@
  	function __construct()
  	{
  		parent::__construct();
+        if($this->session->userdata('level')!="pengasuh"){
+            redirect('actLanding/Login');
+        }
  		$this->load->model('ModSantri');
  		$this->load->model('ModAlumni');
         $this->load->model('ModSaBa');
         $this->load->model('ModInformasi');
  	}
-
+    public function Logout()
+    {
+        $this->session->sess_destroy();
+        redirect('actLanding');
+    }
     public function random($panjang) {
         $karakter = '1234567890987654321';
         $string = '';

@@ -8,6 +8,19 @@
  	function __construct()
  	{
  		parent::__construct();
+ 		if($this->session->userdata('level')=="alumni"){
+ 			redirect('Alumni/Alumni');
+ 		}else if($this->session->userdata('level')=="santri"){
+ 			redirect('Santri/Santri');
+ 		}else if($this->session->userdata('level')=="pengurusputra"){
+ 			redirect('Putra/Putra');
+ 		}else if($this->session->userdata('level')=="pengurusputri"){
+ 			redirect('Putri/Putri');
+ 		}else if($this->session->userdata('level')=="pengasuh"){
+ 			redirect('Dashboard');
+ 		}else if($this->session->userdata('level')=="superadmin"){
+ 			redirect('Sa_Dashboard');
+ 		}
  		$this->load->model('ModLogin');
  	}
 
@@ -40,6 +53,7 @@
 	 						'iduser'=>$cek->id_santri,
 	 						'username'=>$cek->username,
 	 						'email'=>$master->email_santri,
+	 						'level'=>$cek->level,
 	 						'idLog'=>$cek->idLog,
 	 						'password'=>$cek->passwordlog);
 	 					$this->session->set_userdata($arraySession);
@@ -49,6 +63,7 @@
 	 						'iduser'=>$cek->id_santri,
 	 						'username'=>$cek->username,
 	 						'email'=>$master->email_santri,
+	 						'level'=>$cek->level,
 	 						'idLog'=>$cek->idLog,
 	 						'password'=>$cek->passwordlog);
 	 					$this->session->set_userdata($arraySession);
@@ -59,6 +74,7 @@
 	 						'iduser'=>$cek->id_santri,
 	 						'username'=>$cek->username,
 	 						'email'=>$master->email_santri,
+	 						'level'=>$cek->level,
 	 						'idLog'=>$cek->idLog,
 	 						'password'=>$cek->passwordlog);
 	 					$this->session->set_userdata($arraySession);
@@ -68,6 +84,7 @@
 	 						'iduser'=>$cek->id_santri,
 	 						'username'=>$cek->username,
 	 						'email'=>$master->email_santri,
+	 						'level'=>$cek->level,
 	 						'idLog'=>$cek->idLog,
 	 						'password'=>$cek->passwordlog);
 	 					$this->session->set_userdata($arraySession);
@@ -78,6 +95,7 @@
 	 						'iduser'=>$cek->id_santri,
 	 						'username'=>$cek->username,
 	 						'email'=>$master->email_santri,
+	 						'level'=>$cek->level,
 	 						'idLog'=>$cek->idLog,
 	 						'password'=>$cek->passwordlog);
 	 					$this->session->set_userdata($arraySession);
@@ -87,6 +105,7 @@
 	 						'iduser'=>$cek->id_santri,
 	 						'username'=>$cek->username,
 	 						'email'=>$master->email_santri,
+	 						'level'=>$cek->level,
 	 						'idLog'=>$cek->idLog,
 	 						'password'=>$cek->passwordlog);
 	 					$this->session->set_userdata($arraySession);
@@ -107,11 +126,5 @@
  			$this->session->set_flashdata('gagal','<i class="fa fa-warning"></i>&nbsp;Data tidak terdaftar');
  			redirect('actLanding/Login');
  		}
- 	}
-
- 	public function Logout()
- 	{
- 		$this->session->sess_destroy();
-        redirect('actLanding');
  	}
  } ?>
